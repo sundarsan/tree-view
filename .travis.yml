@@ -2,5 +2,12 @@ language: objective-c  #1
 osx_image: xcode7.0 #2
 xcode_project: RXTreeControl.xcodeproj #3
 xcode_scheme: RXTreeControl #4
+xcode_sdk: iphonesimulator8.1
+xcode_project: RXTreeControl.xcodeproj #3
+xcode_scheme: RXTreeControl #4
 xcode_sdk: iphonesimulator8.4
+
+before_install: gem install cocoapods -v '= 0.39.0'
+#script: "rake run:ios"
+
 #script: "rake test:ios"
