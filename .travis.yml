@@ -5,7 +5,7 @@ rvm:
 
 xcode_workspace: RXTreeControl.xcworkspace #3
 xcode_scheme: RXTreeControl #4
-xcode_sdk: iphonesimulator9.2
+xcode_sdk: iphonesimulator
 
 before_install: gem install cocoapods -v '= 0.39.0'
 #script: "rake run:ios"
