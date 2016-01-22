@@ -27,12 +27,14 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate {
    
     
     @IBOutlet weak var tableView: RXReorderTableView!
+    let treeController =                                                                                          TreeController(treeModel: TreeModel())
+       var itemTrees:Variable <[TreeModelView]>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.longPressReorderDelegate = self
         //tableView.allowsSelectionDuringEditing = true
-      let treeController =                                                                                          TreeController(treeModel: TreeModel())
+     // let treeController =                                                                                          TreeController(treeModel: TreeModel())
         
         let tree = Tree()
         tree.title = "ee"
@@ -40,7 +42,7 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate {
         let treeModelView = TreeModelView()
         treeModelView.treeObject = tree
         
-        let itemTrees = Variable(treeController.treeArray as [TreeModelView])
+        itemTrees = Variable(treeController.treeArray as [TreeModelView])
         
 
         
@@ -61,15 +63,15 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate {
         tableView
             .rx_modelSelected(TreeModelView)
             .subscribeNext {value in
-                treeController.openOrCloseSubasset(value)
-                itemTrees.value = treeController.treeArray as [TreeModelView]
+                self.treeController.openOrCloseSubasset(value)
+                self.itemTrees.value = self.treeController.treeArray as [TreeModelView]
                 self.tableView.reloadData()
                // DefaultWireframe.presentAlert("Tapped `\(value)`")
             }
             .addDisposableTo(disposeBag)
         
         tableView.rx_itemMoved.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
-            treeController.moveInTreeFromAssetIndex(sourceIndex.row,toIndex:destinationIndex.row)
+          //  self.treeController.moveInTreeFromAssetIndex(sourceIndex.row,toIndex:destinationIndex.row)
             
         }.addDisposableTo(disposeBag)
         //tableView.rx_itemMoved(String).r
@@ -90,7 +92,9 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate {
     }
     
     func tableView(tableView: UITableView,openSubAssetAtIndexPath sourceIndexPath: NSIndexPath){
-    
+        treeController.openTreeByIndex(sourceIndexPath.row)
+        self.itemTrees.value = self.treeController.treeArray as [TreeModelView]
+        
     }
     
     func tableView(tableView: UITableView,closeSubAssetAtIndexPath sourceIndexPath: NSIndexPath){

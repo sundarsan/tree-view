@@ -361,8 +361,10 @@ public class RXReorderTableView: UITableView {
                                     UIView.beginAnimations("Scale", context: nil)
                                     movedView.transform = CGAffineTransformMakeScale(0.6, 0.6)
                                     reorderingState = .Submenu
-                                    longPressReorderDelegate.tableView?(self, openSubAssetAtIndexPath: indexPath)
                                     UIView.commitAnimations()
+                                    //self.beginUpdates()
+                                    longPressReorderDelegate.tableView?(self, openSubAssetAtIndexPath: indexPath)
+                                    //self.endUpdates()
                                     
                                 }else{
                                     selectionView.frame.origin.x = 0

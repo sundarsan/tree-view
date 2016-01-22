@@ -173,6 +173,13 @@ class TreeController {
         
     }
     
+    func openTreeByIndex(index:Int){
+        var tree = self.treeArray[index]
+        if !tree.isTreeOpen {
+            self.openSubasset(tree)
+        }
+    }
+    
      func removeAssetsTrees(assetTrees:[TreeModelView], fromArray:[TreeModelView]) -> [TreeModelView]{
         var array:[TreeModelView] =  fromArray
         for treeAsset in fromArray {
