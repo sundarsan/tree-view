@@ -286,6 +286,7 @@
 				TargetAttributes = {
 					6AB502571C1FFCAA00ECADC3 = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = U4CFHCYFQ5;
 					};
 					6AB5026B1C1FFCAB00ECADC3 = {
 						CreatedOnToolsVersion = 7.0;
@@ -550,9 +551,10 @@
 			baseConfigurationReference = 27298827C3ED8EFA70D0F656 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RXTreeControl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Arcilite.RXTreeControl;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ramotion.RXTreeControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -562,9 +564,10 @@
 			baseConfigurationReference = C0BE87E779AA888D54853D0C /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RXTreeControl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Arcilite.RXTreeControl;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ramotion.RXTreeControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
