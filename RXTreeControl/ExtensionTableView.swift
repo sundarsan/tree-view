@@ -24,6 +24,38 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
+
+public typealias ItemSelectedViewEvent = (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> UIView
+
+
+
+
+extension RxTableViewDataSourceProxy{
+    
+}
+
+public class RxLongPressTableViewDelegateProxy
+    : RxScrollViewDelegateProxy
+, UITableViewDelegate, RXReorderTableViewDelegate {
+    
+    
+    /**
+     Typed parent object.
+     */
+    public weak private(set) var tableView: RXReorderTableView?
+    
+    /**
+     Initializes `RxTableViewDelegateProxy`
+     
+     - parameter parentObject: Parent object for delegate proxy.
+     */
+    public required init(parentObject: AnyObject) {
+        self.tableView = (parentObject as! RXReorderTableView)
+        super.init(parentObject: parentObject)
+    }
+}
 
 extension UITableView{
     //var k:Int!
@@ -35,11 +67,109 @@ extension UITableView{
         return view
     }
     
-    func tableView(tableView: UITableView, moveSubRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexSubRowPath destinationSubRowIndexPath: NSIndexPath){
+   
+    public override func rx_createDelegateProxy() -> RxScrollViewDelegateProxy {
+        return RxTableViewDelegateProxy(parentObject: self)
+    }
+
+
+    
+   
+    
+    public var rx_itemSubRowOpen: ControlEvent<ItemMovedEvent> {
+        let source: Observable<ItemMovedEvent> = rx_dataSource.observe("tableView:openSubAssetAtIndexPath:toIndexSubRowPath:")
+            .map { a in
+                return ((a[1] as! NSIndexPath), (a[2] as! NSIndexPath))
+        }
         
+        return ControlEvent(events: source)
     }
     
-    func tableView(tableView: UITableView, moveSubRowAtIndexPath sourceIndexPath: NSIndexPath, toRootRowPath destinationSubRowIndexPath: NSIndexPath){
+    
+    public var rx_itemSubRowClosed: ControlEvent<ItemMovedEvent> {
+        let source: Observable<ItemMovedEvent> = rx_dataSource.observe("tableView:closeSubAssetAtIndexPath:toIndexSubRowPath:")
+            .map { a in
+                return ((a[1] as! NSIndexPath), (a[2] as! NSIndexPath))
+        }
         
+        return ControlEvent(events: source)
     }
+    
+    
+    
+    /*
+    Reactive wrapper for `delegate` message `tableView:moveRowAtIndexPath:toIndexPath:`.
+    func tableView(tableView: UITableView,movedRowAtIndexPath sourceIndexPath: NSIndexPath,toIndexRowPath destinationRowIndexPath: NSIndexPath)     */
+    
+    public var rx_itemRowMoved: ControlEvent<ItemMovedEvent> {
+        let source: Observable<ItemMovedEvent> = rx_dataSource.observe("tableView:movedRowAtIndexPath:toIndexSubRowPath:")
+            .map { a in
+                return ((a[1] as! NSIndexPath), (a[2] as! NSIndexPath))
+        }
+        
+        return ControlEvent(events: source)
+    }
+    
+    /*
+    Reactive wrapper for `delegate` message `tableView:movedRowAtIndexPath:toIndexPath:`.
+    */
+    
+    public var rx_itemSubRowMovedToRoot: ControlEvent<ItemMovedEvent> {
+        let source: Observable<ItemMovedEvent> = rx_dataSource.observe("tableView:movedRowAtIndexPath:toRootRowPath:")
+            .map { a in
+                return ((a[1] as! NSIndexPath), (a[2] as! NSIndexPath))
+        }
+        
+        return ControlEvent(events: source)
+    }
+
+    
+    
+    /*
+    func tableView(tableView: UITableView, movedSubRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexSubRowPath destinationSubRowIndexPath: NSIndexPath)
+    */
+    
+    
+    public var rx_itemSubRowMoved: ControlEvent<ItemMovedEvent> {
+        let source: Observable<ItemMovedEvent> = rx_dataSource.observe("tableView:movedSubRowAtIndexPath:toIndexSubRowPath:")
+            .map { a in
+                return ((a[1] as! NSIndexPath), (a[2] as! NSIndexPath))
+        }
+        
+        return ControlEvent(events: source)
+    }
+    
+    
+    /*
+    Reactive wrapper for `delegate` message  func tableView(tableView: UITableView, moveSubRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexSubRowPath destinationSubRowIndexPath: NSIndexPath).
+    */
+    
+    public var rx_itemSubRowMove: ControlEvent<ItemMovedEvent> {
+        let source: Observable<ItemMovedEvent> = rx_dataSource.observe("tableView:moveSubRowAtIndexPath:toIndexSubRowPath:")
+            .map { a in
+                return ((a[1] as! NSIndexPath), (a[2] as! NSIndexPath))
+        }
+        
+        return ControlEvent(events: source)
+    }
+    // func tableView(tableView: UITableView, moveSubRowAtIndexPath sourceIndexPath: NSIndexPath, toRootRowPath destinationSubRowIndexPath: NSIndexPath)
+    public var rx_itemMoveToRoot: ControlEvent<ItemMovedEvent> {
+        let source: Observable<ItemMovedEvent> = rx_dataSource.observe("tableView:moveSubRowAtIndexPath:toRootRowPath:")
+            .map { a in
+                return ((a[1] as! NSIndexPath), (a[2] as! NSIndexPath))
+        }
+        
+        return ControlEvent(events: source)
+    }
+    
+    
+//    public var rx_itemSelected: ControlEvent<ItemMovedEvent> {
+//        let source: Observable<ItemSelectedViewEvent> = rx_dataSource.observe("tableView:moveSubRowAtIndexPath:toIndexSubRowPath:")
+//            .map { a in
+//                return ((a[1] as! NSIndexPath), (a[2] as! NSIndexPath)  )//; -> (a[3] as! UIView)
+//        }
+//        
+//        return ControlEvent(events: source)
+//    }
+    
 }

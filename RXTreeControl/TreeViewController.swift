@@ -33,9 +33,7 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.longPressReorderDelegate = self
-        //tableView.allowsSelectionDuringEditing = true
-     // let treeController =                                                                                          TreeController(treeModel: TreeModel())
-        
+      
         let tree = Tree()
         tree.title = "ee"
         
@@ -74,6 +72,10 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate {
           //  self.treeController.moveInTreeFromAssetIndex(sourceIndex.row,toIndex:destinationIndex.row)
             
         }.addDisposableTo(disposeBag)
+        
+        tableView.rx_itemSubRowOpen.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
+            
+        }.addDisposableTo(disposeBag)
         //tableView.rx_itemMoved(String).r
     }
     
@@ -95,7 +97,7 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate {
        
         let indexRows = treeController.openTreeByIndex(sourceIndexPath.row)
         let indexesPaths = NSIndexPath.indexPathsFromSection(0,indexesArray:indexRows)
-        self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Left)
+        self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
         self.tableView.reloadData()
         self.itemTrees.value = self.treeController.treeArray as [TreeModelView]
        
@@ -115,6 +117,7 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate {
     }
     
     func tableView(tableView: UITableView,movedRowAtIndexPath sourceIndexPath: NSIndexPath,toIndexRowPath destinationRowIndexPath: NSIndexPath) {
+         self.treeController.moveInTreeFromAssetIndex(sourceIndexPath.row,toIndex:destinationRowIndexPath.row)
     
      }
     
