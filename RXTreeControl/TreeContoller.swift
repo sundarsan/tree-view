@@ -156,7 +156,7 @@ class TreeController {
             
             if let index = self.treeArray.indexOf(asset){
                 self.treeArray.insertContentsOf(asset.subobjects,at: index+1)
-                 let startIndex = index+1
+                let startIndex = index+1
                 for var idx = startIndex; idx < asset.subobjects.count+startIndex; idx++ {
                    indexes.append(idx)
                 }
@@ -180,11 +180,12 @@ class TreeController {
         
     }
     
-    func openTreeByIndex(index:Int){
+    func openTreeByIndex(index:Int) -> [Int]{
         let tree = self.treeArray[index]
         if !tree.isTreeOpen {
-            self.openSubasset(tree)
+           return self.openSubasset(tree)
         }
+        return [];
     }
     
      func removeAssetsTrees(assetTrees:[TreeModelView], fromArray:[TreeModelView]) -> [TreeModelView]{
