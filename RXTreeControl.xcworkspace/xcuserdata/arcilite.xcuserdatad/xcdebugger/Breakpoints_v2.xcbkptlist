@@ -20,16 +20,31 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "RXTreeControl.TreeViewController.init (RXTreeControl.TreeViewController.Type)(nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.NSBundle&gt;) -&gt; RXTreeControl.TreeViewController"
+                  symbolName = "RXTreeControl.TreeViewController.__deallocating_deinit"
                   moduleName = "RXTreeControl"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/arcilite/tree-view/RXTreeControl/TreeViewController.swift"
-                  timestampString = "475167393.031093"
+                  timestampString = "475404046.788259"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "67">
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RXTreeControl.TreeViewController.init (RXTreeControl.TreeViewController.Type)(nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.NSBundle&gt;) -&gt; RXTreeControl.TreeViewController"
+                  moduleName = "RXTreeControl"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/arcilite/tree-view/RXTreeControl/TreeViewController.swift"
+                  timestampString = "475404046.788432"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "58">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -39,12 +54,12 @@
                   moduleName = "RXTreeControl"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/arcilite/tree-view/RXTreeControl/TreeViewController.swift"
-                  timestampString = "475167393.031687"
+                  timestampString = "475404046.788549"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "27">
+                  offsetFromSymbolStart = "16">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -216,12 +231,12 @@
                   moduleName = "RXTreeControl"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/arcilite/tree-view/RXTreeControl/RXReorderTableView.swift"
-                  timestampString = "475167393.038509"
+                  timestampString = "475404046.812493"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "197"
                   endingLineNumber = "197"
-                  offsetFromSymbolStart = "6464">
+                  offsetFromSymbolStart = "5741">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -231,12 +246,12 @@
                   moduleName = "RXTreeControl"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/arcilite/tree-view/RXTreeControl/RXReorderTableView.swift"
-                  timestampString = "475167393.039073"
+                  timestampString = "475404046.812726"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "198"
                   endingLineNumber = "198"
-                  offsetFromSymbolStart = "36">
+                  offsetFromSymbolStart = "23">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -248,11 +263,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RXTreeControl/TreeViewController.swift"
-            timestampString = "475167392.007062"
+            timestampString = "475403104.854032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
             landmarkName = "tableView(_:closeSubAssetAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -312,12 +327,12 @@
                   moduleName = "RXTreeControl"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/arcilite/tree-view/RXTreeControl/TreeViewController.swift"
-                  timestampString = "475167393.043563"
+                  timestampString = "475404046.844568"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "18">
+                  offsetFromSymbolStart = "12">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -327,12 +342,12 @@
                   moduleName = "RXTreeControl"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/arcilite/tree-view/RXTreeControl/TreeViewController.swift"
-                  timestampString = "475167393.04383"
+                  timestampString = "475404046.844827"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "26">
+                  offsetFromSymbolStart = "16">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -342,12 +357,12 @@
                   moduleName = "RXTreeControl"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/arcilite/tree-view/RXTreeControl/TreeViewController.swift"
-                  timestampString = "475167393.044088"
+                  timestampString = "475404046.845117"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "28">
+                  offsetFromSymbolStart = "12">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -357,12 +372,12 @@
                   moduleName = "RXTreeControl"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/arcilite/tree-view/RXTreeControl/TreeViewController.swift"
-                  timestampString = "475167393.044353"
+                  timestampString = "475404046.845276"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "31"
                   endingLineNumber = "31"
-                  offsetFromSymbolStart = "199">
+                  offsetFromSymbolStart = "217">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -372,14 +387,30 @@
                   moduleName = "RXTreeControl"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/arcilite/tree-view/RXTreeControl/TreeViewController.swift"
-                  timestampString = "475167393.045649"
+                  timestampString = "475404046.845487"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "31"
                   endingLineNumber = "31"
-                  offsetFromSymbolStart = "143">
+                  offsetFromSymbolStart = "134">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RXTreeControl/TreeContoller.swift"
+            timestampString = "475404046.67276"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
+            landmarkName = "openSubasset(_:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

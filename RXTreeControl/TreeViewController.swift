@@ -93,8 +93,10 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate {
     
     func tableView(tableView: UITableView,openSubAssetAtIndexPath sourceIndexPath: NSIndexPath){
         treeController.openTreeByIndex(sourceIndexPath.row)
+        self.tableView.insertRowsAtIndexPaths([], withRowAnimation: .Left)
+         self.tableView.reloadData()
         self.itemTrees.value = self.treeController.treeArray as [TreeModelView]
-        
+       
     }
     
     func tableView(tableView: UITableView,closeSubAssetAtIndexPath sourceIndexPath: NSIndexPath){

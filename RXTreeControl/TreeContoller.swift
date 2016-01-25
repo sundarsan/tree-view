@@ -150,16 +150,23 @@ class TreeController {
         asset.isTreeOpen = false
     }
     
-     func openSubasset(asset:TreeModelView){
+     func openSubasset(asset:TreeModelView)-> [Int]{
+        var indexes = [Int]()
         if asset.subobjects.count > 0 {
             
             if let index = self.treeArray.indexOf(asset){
                 self.treeArray.insertContentsOf(asset.subobjects,at: index+1)
+                 let startIndex = index+1
+                for var idx = startIndex; idx < asset.subobjects.count+startIndex; idx++ {
+                   indexes.append(idx)
+                }
+                
                 asset.isTreeOpen = true
             }
             
             
         }
+        return indexes
     }
     
      func openOrCloseSubasset(asset:TreeModelView){
@@ -174,7 +181,7 @@ class TreeController {
     }
     
     func openTreeByIndex(index:Int){
-        var tree = self.treeArray[index]
+        let tree = self.treeArray[index]
         if !tree.isTreeOpen {
             self.openSubasset(tree)
         }
@@ -283,7 +290,7 @@ class TreeController {
                 movedParent.subobjects.removeAtIndex(index)
             }
         }else{
-            self.reoderInSameParent(targetParent, movedObject: movedObject, targetObject: targetObject)
+          //  self.reoderInSameParent(targetParent, movedObject: movedObject, targetObject: targetObject)
             
         }
         
