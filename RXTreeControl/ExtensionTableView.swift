@@ -28,68 +28,169 @@ import RxSwift
 import RxCocoa
 
 public typealias ItemSelectedViewEvent = (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> UIView
+public typealias ItemSubRowEvent = (NSIndexPath)
+
+//public class RxReorderTableViewDelegateProxy
+//    : RxScrollViewDelegateProxy
+//, UITableViewDelegate ,RXReorderTableViewDelegate{
+//    
+//    
+//    /**
+//     Typed parent object.
+//     */
+//    public weak private(set) var tableView: UITableView?
+//    
+//    /**
+//     Initializes `RxTableViewDelegateProxy`
+//     
+//     - parameter parentObject: Parent object for delegate proxy.
+//     */
+//    public required init(parentObject: AnyObject) {
+//        self.tableView = (parentObject as! UITableView)
+//        super.init(parentObject: parentObject)
+//    }
+//}
 
 
-
-
-extension RxTableViewDataSourceProxy{
-    
-}
-
-public class RxLongPressTableViewDelegateProxy
-    : RxScrollViewDelegateProxy
-, UITableViewDelegate, RXReorderTableViewDelegate {
-    
+//extension RxTableViewDataSourceProxy{
+//    
+//}
+//
+//public class RxLongPressTableViewDelegateProxy
+//    : RxScrollViewDelegateProxy, RXReorderTableViewDelegate{
+//    
+//    
+//    /**
+//     Typed parent object.
+//     */
+//    public weak private(set) var tableView: UITableView?
+//    
+//    /**
+//     Initializes `RxTableViewDelegateProxy`
+//     
+//     - parameter parentObject: Parent object for delegate proxy.
+//     */
+//    public required init(parentObject: AnyObject) {
+//        self.tableView = (parentObject as! RXReorderTableView)
+//        super.init(parentObject: parentObject)
+//    }
+//}
+public class RxReorderTableViewDelegateProxy: RxTableViewDelegateProxy,RXReorderTableViewDelegate {
+    //We need a way to read the current delegate
+    override public class func currentDelegateFor(object: AnyObject) -> AnyObject? {
+        let tableView: RXReorderTableView = object as! RXReorderTableView
+        return tableView.longPressReorderDelegate
+    }
+    //We need a way to set the current delegate
+    override public class func setCurrentDelegate(delegate: AnyObject?, toObject object: AnyObject) {
+        let tableView: RXReorderTableView = object as! RXReorderTableView
+        tableView.delegate = (delegate as! UITableViewDelegate)
+        tableView.longPressReorderDelegate = delegate as! RXReorderTableViewDelegate
+    }
     
     /**
      Typed parent object.
      */
-    public weak private(set) var tableView: RXReorderTableView?
-    
-    /**
-     Initializes `RxTableViewDelegateProxy`
-     
-     - parameter parentObject: Parent object for delegate proxy.
-     */
-    public required init(parentObject: AnyObject) {
-        self.tableView = (parentObject as! RXReorderTableView)
-        super.init(parentObject: parentObject)
-    }
 }
-
-extension UITableView{
-    //var k:Int!
-    
-    
-    public func selectionViewForTableView(tableView: UITableView,destinitionCell cell:UITableViewCell,toIndexRowPath destinationRowIndexPath: NSIndexPath) -> UIView{
-        let view = UIView()
-        view.backgroundColor = UIColor.blueColor()
-        return view
-    }
-    
-   
+extension RXReorderTableView{
+  
+//    public override  var  rx_delegate: DelegateProxy {
+//        return RxReorderTableViewDelegateProxy(parentObject: self) //proxyForObject(RxReorderTableViewDelegateProxy.self,self as! RXReorderTableView  )
+//    }
+//    
     public override func rx_createDelegateProxy() -> RxScrollViewDelegateProxy {
-        return RxTableViewDelegateProxy(parentObject: self)
+        return RxReorderTableViewDelegateProxy(parentObject: self)
     }
 
-
     
+//    /**
+//     Factory method that enables subclasses to implement their own `rx_delegate`.
+//     
+//     - returns: Instance of delegate proxy that wraps `delegate`.
+//     */
+//    public override func rx_createDelegateProxy() -> RxScrollViewDelegateProxy {
+//        return RxTableViewDelegateProxy(parentObject: self)
+//    }
+//    
+//    /**
+//     Factory method that enables subclasses to implement their own `rx_dataSource`.
+//     
+//     - returns: Instance of delegate proxy that wraps `dataSource`.
+//     */
+//    public func rx_createDataSourceProxy() -> RxTableViewDataSourceProxy {
+//        return RxTableViewDataSourceProxy(parentObject: self)
+//    }
+//    
+//    /**
+//     Reactive wrapper for `dataSource`.
+//     
+//     For more information take a look at `DelegateProxyType` protocol documentation.
+//     */
+//    public var rx_dataSource: DelegateProxy {
+//        return proxyForObject(RxTableViewDataSourceProxy.self, self)
+//    }
+//    
+//    /**
+//     Installs data source as forwarding delegate on `rx_dataSource`.
+//     
+//     It enables using normal delegate mechanism with reactive delegate mechanism.
+//     
+//     - parameter dataSource: Data source object.
+//     - returns: Disposable object that can be used to unbind the data source.
+//     */
+//    public func rxrsetDataSource(d: UITableViewDataSource)
+//        -> Disposable {
+//            let proxy = proxyForObject(RxTableViewDataSourceProxy.self, self)
+//            
+//            return installDelegate(proxy, delegate: d, retainDelegate: false, onProxyForObject: self)
+//    }
+//    
+//    
+    
+//    public func selectionViewForTableView(tableView: UITableView,destinitionCell cell:UITableViewCell,toIndexRowPath destinationRowIndexPath: NSIndexPath) -> UIView{
+//        let view = UIView()
+//        view.backgroundColor = UIColor.blueColor()
+//        
+//    
+//        return view
+//    }
+//    
    
+//    public override func rx_createDelegateProxy() -> RxTableViewDelegateProxy {
+//        return RxTableViewDelegateProxy(parentObject: self)
+//    }
+//
+    public override var rx_delegate: DelegateProxy {
+        return proxyForObject(RxReorderTableViewDelegateProxy.self, self)//RxReorderTableViewDelegateProxy(parentObject: self)//
+    }
+//
+//    public  func rx_setDataSource(dataSource: UITableViewDataSource)
+//        -> Disposable {
+//            let proxy = proxyForObject(RxReorderTableViewDelegateProxy.self, self)
+//            
+//            return installDelegate(proxy, delegate: dataSource, retainDelegate: false, onProxyForObject: self)
+//    }
+//    
+//   
     
-    public var rx_itemSubRowOpen: ControlEvent<ItemMovedEvent> {
-        let source: Observable<ItemMovedEvent> = rx_dataSource.observe("tableView:openSubAssetAtIndexPath:toIndexSubRowPath:")
+  
+    
+    
+    
+    public var rx_itemSubRowOpen: ControlEvent<ItemSubRowEvent> {
+        let source: Observable<ItemSubRowEvent> = rx_delegate.observe("tableView:openSubAssetAtIndexPath:")
             .map { a in
-                return ((a[1] as! NSIndexPath), (a[2] as! NSIndexPath))
+                return ((a[1] as! NSIndexPath))
         }
         
         return ControlEvent(events: source)
     }
     
     
-    public var rx_itemSubRowClosed: ControlEvent<ItemMovedEvent> {
-        let source: Observable<ItemMovedEvent> = rx_dataSource.observe("tableView:closeSubAssetAtIndexPath:toIndexSubRowPath:")
+    public var rx_itemSubRowClosed: ControlEvent<ItemSubRowEvent> {
+        let source: Observable<ItemSubRowEvent> = rx_delegate.observe("tableView:closeSubAssetAtIndexPath:")
             .map { a in
-                return ((a[1] as! NSIndexPath), (a[2] as! NSIndexPath))
+                return ((a[1] as! NSIndexPath))
         }
         
         return ControlEvent(events: source)
@@ -102,7 +203,7 @@ extension UITableView{
     func tableView(tableView: UITableView,movedRowAtIndexPath sourceIndexPath: NSIndexPath,toIndexRowPath destinationRowIndexPath: NSIndexPath)     */
     
     public var rx_itemRowMoved: ControlEvent<ItemMovedEvent> {
-        let source: Observable<ItemMovedEvent> = rx_dataSource.observe("tableView:movedRowAtIndexPath:toIndexSubRowPath:")
+        let source: Observable<ItemMovedEvent> = rx_delegate.observe("tableView:movedRowAtIndexPath:toIndexRowPath:")
             .map { a in
                 return ((a[1] as! NSIndexPath), (a[2] as! NSIndexPath))
         }
@@ -115,7 +216,7 @@ extension UITableView{
     */
     
     public var rx_itemSubRowMovedToRoot: ControlEvent<ItemMovedEvent> {
-        let source: Observable<ItemMovedEvent> = rx_dataSource.observe("tableView:movedRowAtIndexPath:toRootRowPath:")
+        let source: Observable<ItemMovedEvent> = rx_delegate.observe("tableView:movedRowAtIndexPath:toRootRowPath:")
             .map { a in
                 return ((a[1] as! NSIndexPath), (a[2] as! NSIndexPath))
         }
@@ -131,7 +232,7 @@ extension UITableView{
     
     
     public var rx_itemSubRowMoved: ControlEvent<ItemMovedEvent> {
-        let source: Observable<ItemMovedEvent> = rx_dataSource.observe("tableView:movedSubRowAtIndexPath:toIndexSubRowPath:")
+        let source: Observable<ItemMovedEvent> = rx_delegate.observe("tableView:movedSubRowAtIndexPath:toIndexSubRowPath:")
             .map { a in
                 return ((a[1] as! NSIndexPath), (a[2] as! NSIndexPath))
         }
@@ -145,7 +246,7 @@ extension UITableView{
     */
     
     public var rx_itemSubRowMove: ControlEvent<ItemMovedEvent> {
-        let source: Observable<ItemMovedEvent> = rx_dataSource.observe("tableView:moveSubRowAtIndexPath:toIndexSubRowPath:")
+        let source: Observable<ItemMovedEvent> = rx_delegate.observe("tableView:moveSubRowAtIndexPath:toIndexSubRowPath:")
             .map { a in
                 return ((a[1] as! NSIndexPath), (a[2] as! NSIndexPath))
         }
@@ -154,19 +255,19 @@ extension UITableView{
     }
     // func tableView(tableView: UITableView, moveSubRowAtIndexPath sourceIndexPath: NSIndexPath, toRootRowPath destinationSubRowIndexPath: NSIndexPath)
     public var rx_itemMoveToRoot: ControlEvent<ItemMovedEvent> {
-        let source: Observable<ItemMovedEvent> = rx_dataSource.observe("tableView:moveSubRowAtIndexPath:toRootRowPath:")
+        let source: Observable<ItemMovedEvent> = rx_delegate.observe("tableView:moveSubRowAtIndexPath:toRootRowPath:")
             .map { a in
-                return ((a[1] as! NSIndexPath), (a[2] as! NSIndexPath))
+                return ((a[1] as! NSIndexPath), (a[2] as! NSIndexPath) ) //; (a[3] as! UIView)
         }
         
         return ControlEvent(events: source)
     }
     
     
-//    public var rx_itemSelected: ControlEvent<ItemMovedEvent> {
-//        let source: Observable<ItemSelectedViewEvent> = rx_dataSource.observe("tableView:moveSubRowAtIndexPath:toIndexSubRowPath:")
-//            .map { a in
-//                return ((a[1] as! NSIndexPath), (a[2] as! NSIndexPath)  )//; -> (a[3] as! UIView)
+//    public var rx_itemSelected: ControlEvent<ItemSelectedViewEvent> {
+//        let source: Observable<ItemSelectedViewEvent> = rx_delegate.observe("tableView:moveSubRowAtIndexPath:toIndexSubRowPath:")
+//            .map { a -> UIView in
+//                return ((a[1] as! NSIndexPath), (a[2] as! NSIndexPath) ) //; -> (a[3] as! UIView)
 //        }
 //        
 //        return ControlEvent(events: source)

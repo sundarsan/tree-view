@@ -53,7 +53,7 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate {
                 tcell.setNeedsLayout()
             }
             .addDisposableTo(disposeBag)
-        
+         self.tableView.reloadData()
         
 //         let treeItems = Variable(treeController.treeaArray)
 //        treeItems
@@ -73,9 +73,38 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate {
             
         }.addDisposableTo(disposeBag)
         
-        tableView.rx_itemSubRowOpen.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
+        tableView.rx_itemSubRowOpen.subscribeNext { (sourceIndex: NSIndexPath) -> Void in
+            print("Opeben")
+        }.addDisposableTo(disposeBag)
+        
+        tableView.rx_itemSubRowClosed.subscribeNext { (sourceIndex: NSIndexPath) -> Void in
+            print("Closed")
+            }.addDisposableTo(disposeBag)
+        
+        tableView.rx_itemRowMoved.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
             
         }.addDisposableTo(disposeBag)
+        
+        tableView.rx_itemSubRowMovedToRoot.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
+            
+            }.addDisposableTo(disposeBag)
+        
+        
+        tableView.rx_itemSubRowMoved.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
+            
+            }.addDisposableTo(disposeBag)
+        
+        
+        tableView.rx_itemSubRowMove.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
+            
+            }.addDisposableTo(disposeBag)
+        
+        
+        tableView.rx_itemMoveToRoot.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
+            
+            }.addDisposableTo(disposeBag)
+        
+       // tableView.rx_
         //tableView.rx_itemMoved(String).r
     }
     
