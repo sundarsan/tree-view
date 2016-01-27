@@ -176,7 +176,6 @@ extension RXReorderTableView{
   
     
     
-    
     public var rx_itemSubRowOpen: ControlEvent<ItemSubRowEvent> {
         let source: Observable<ItemSubRowEvent> = rx_delegate.observe("tableView:openSubAssetAtIndexPath:")
             .map { a in
@@ -246,7 +245,7 @@ extension RXReorderTableView{
     */
     
     public var rx_itemSubRowMove: ControlEvent<ItemMovedEvent> {
-        let source: Observable<ItemMovedEvent> = rx_delegate.observe("tableView:moveSubRowAtIndexPath:toIndexSubRowPath:")
+        let source: Observable<ItemMovedEvent> = rx_delegate.observe("tableView:movingSubRowAtIndexPath:toIndexSubRowPath:")
             .map { a in
                 return ((a[1] as! NSIndexPath), (a[2] as! NSIndexPath))
         }
@@ -255,7 +254,7 @@ extension RXReorderTableView{
     }
     // func tableView(tableView: UITableView, moveSubRowAtIndexPath sourceIndexPath: NSIndexPath, toRootRowPath destinationSubRowIndexPath: NSIndexPath)
     public var rx_itemMoveToRoot: ControlEvent<ItemMovedEvent> {
-        let source: Observable<ItemMovedEvent> = rx_delegate.observe("tableView:moveSubRowAtIndexPath:toRootRowPath:")
+        let source: Observable<ItemMovedEvent> = rx_delegate.observe("tableView:movingRowAtIndexPath:toRootRowPath:")
             .map { a in
                 return ((a[1] as! NSIndexPath), (a[2] as! NSIndexPath) ) //; (a[3] as! UIView)
         }
