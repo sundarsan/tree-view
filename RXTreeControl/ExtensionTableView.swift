@@ -27,7 +27,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-public typealias ItemSelectedViewEvent = (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> UIView
+public typealias ItemSelectedViewEvent = (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath)
 public typealias ItemSubRowEvent = (NSIndexPath)
 
 //public class RxReorderTableViewDelegateProxy
@@ -263,13 +263,23 @@ extension RXReorderTableView{
     }
     
     
-//    public var rx_itemSelected: ControlEvent<ItemSelectedViewEvent> {
-//        let source: Observable<ItemSelectedViewEvent> = rx_delegate.observe("tableView:moveSubRowAtIndexPath:toIndexSubRowPath:")
-//            .map { a -> UIView in
-//                return ((a[1] as! NSIndexPath), (a[2] as! NSIndexPath) ) //; -> (a[3] as! UIView)
-//        }
-//        
-//        return ControlEvent(events: source)
-//    }
+    public func rx_itemSelectedView(view:UIView) -> ControlEvent<ItemSelectedViewEvent> {
+        
+//        let clos1 = ({
+//            (sourceIndex:NSIndexPath,destinationIndex:NSIndexPath) -> UIView in
+//            return UIView()
+//           
+//        })
+        
+//
+        let source: Observable<ItemSelectedViewEvent> = rx_delegate.observe("tableView:moveSubRowAtIndexPath:toIndexSubRowPath:")
+            .map { a  in
+               return ((a[1] as! NSIndexPath), (a[2] as! NSIndexPath))
+               
+          }
+        return ControlEvent(events: source)
+   }
+//    
     
+   
 }

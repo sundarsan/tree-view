@@ -70,6 +70,16 @@ class TreeModel {
         
         let dbAssetSix =  Tree()
         dbAssetSix.title = "6"
+        
+        let dbAssetSeven =  Tree()
+        dbAssetSeven.title = "7"
+        dbAssetSix.subtrees = []
+        dbAssetSix.subtrees.append(dbAssetSeven)
+       
+        let dbAssetEight =  Tree()
+        dbAssetEight.title = "8"
+        dbAssetSeven.subtrees = []
+        dbAssetSeven.subtrees.append(dbAssetEight)
        
         subassetsThird.append(dbAssetSix)
         

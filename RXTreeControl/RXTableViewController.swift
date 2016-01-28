@@ -74,5 +74,40 @@ public class  RXReorderTableViewController: UITableViewController, RXReorderTabl
     public func tableView(tableView: UITableView, hideDraggingView view: UIView, atIndexPath indexPath: NSIndexPath) {
         // Empty implementation, just to simplify overriding (and to show up in code completion).
     }
+    //    func tableView(tableView: UITableView, moveSubRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexSubRowPath destinationSubRowIndexPath: NSIndexPath){
+    //
+    //    }
+    //
+    //    func tableView(tableView: UITableView, moveSubRowAtIndexPath sourceIndexPath: NSIndexPath, toRootRowPath destinationSubRowIndexPath: NSIndexPath){
+    //
+    //    }
+    //
+    //    func tableView(tableView: UITableView,openSubAssetAtIndexPath sourceIndexPath: NSIndexPath){
+    //
+    //        let indexRows = treeController.openTreeByIndex(sourceIndexPath.row)
+    //        let indexesPaths = NSIndexPath.indexPathsFromSection(0,indexesArray:indexRows)
+    //        self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
+    //        self.tableView.reloadData()
+    //        self.itemTrees.value = self.treeController.treeArray as [TreeModelView]
+    //
+    //
+    //    }
     
+    //    func tableView(tableView: UITableView,closeSubAssetAtIndexPath sourceIndexPath: NSIndexPath){
+    //
+    //    }
+    //
+    //    func tableView(tableView: UITableView, movedSubRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexSubRowPath destinationSubRowIndexPath: NSIndexPath){
+    //
+    //    }
+    //
+    //    func tableView(tableView: UITableView, movedRowAtIndexPath sourceIndexPath: NSIndexPath, toRootRowPath destinationSubRowIndexPath: NSIndexPath){
+    //
+    //    }
+    //
+    //    func tableView(tableView: UITableView,movedRowAtIndexPath sourceIndexPath: NSIndexPath,toIndexRowPath destinationRowIndexPath: NSIndexPath) {
+    //         self.treeController.moveInTreeFromAssetIndex(sourceIndexPath.row,toIndex:destinationRowIndexPath.row)
+    //    
+    //     }
+
 }

@@ -80,14 +80,16 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate {
             let indexRows = self.treeController.openTreeByIndex(sourceIndex.row)
             let indexesPaths = NSIndexPath.indexPathsFromSection(0,indexesArray:indexRows)
             self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
-            self.itemTrees.value = self.treeController.treeArray as [TreeModelView]
+            
+            
             self.tableView.reloadData()
             
         }.addDisposableTo(disposeBag)
         
         tableView.rx_itemSubRowClosed.subscribeNext { (sourceIndex: NSIndexPath) -> Void in
             print("Closed")
-            }.addDisposableTo(disposeBag)
+           
+        }.addDisposableTo(disposeBag)
         
         tableView.rx_itemRowMoved.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
               self.treeController.moveInTreeFromAssetIndex(sourceIndex.row,toIndex:destinationIndex.row)
@@ -105,12 +107,12 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate {
         
         tableView.rx_itemSubRowMove.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
             
-            }.addDisposableTo(disposeBag)
+        }.addDisposableTo(disposeBag)
         
         
         tableView.rx_itemMoveToRoot.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
             
-            }.addDisposableTo(disposeBag)
+        }.addDisposableTo(disposeBag)
         
        // tableView.rx_
         //tableView.rx_itemMoved(String).r
@@ -122,40 +124,5 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate {
         return view
     }
     
-//    func tableView(tableView: UITableView, moveSubRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexSubRowPath destinationSubRowIndexPath: NSIndexPath){
-//        
-//    }
-//    
-//    func tableView(tableView: UITableView, moveSubRowAtIndexPath sourceIndexPath: NSIndexPath, toRootRowPath destinationSubRowIndexPath: NSIndexPath){
-//        
-//    }
-//    
-//    func tableView(tableView: UITableView,openSubAssetAtIndexPath sourceIndexPath: NSIndexPath){
-//       
-//        let indexRows = treeController.openTreeByIndex(sourceIndexPath.row)
-//        let indexesPaths = NSIndexPath.indexPathsFromSection(0,indexesArray:indexRows)
-//        self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
-//        self.tableView.reloadData()
-//        self.itemTrees.value = self.treeController.treeArray as [TreeModelView]
-//       
-//       
-//    }
-    
-//    func tableView(tableView: UITableView,closeSubAssetAtIndexPath sourceIndexPath: NSIndexPath){
-//        
-//    }
-//    
-//    func tableView(tableView: UITableView, movedSubRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexSubRowPath destinationSubRowIndexPath: NSIndexPath){
-//        
-//    }
-//    
-//    func tableView(tableView: UITableView, movedRowAtIndexPath sourceIndexPath: NSIndexPath, toRootRowPath destinationSubRowIndexPath: NSIndexPath){
-//        
-//    }
-//    
-//    func tableView(tableView: UITableView,movedRowAtIndexPath sourceIndexPath: NSIndexPath,toIndexRowPath destinationRowIndexPath: NSIndexPath) {
-//         self.treeController.moveInTreeFromAssetIndex(sourceIndexPath.row,toIndex:destinationRowIndexPath.row)
-//    
-//     }
     
 }
