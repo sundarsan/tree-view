@@ -30,15 +30,17 @@ import RxCocoa
 public typealias ItemSelectedViewEvent = (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath)
 public typealias ItemSubRowEvent = (NSIndexPath)
 
-//public class RxReorderTableViewDelegateProxy
-//    : RxScrollViewDelegateProxy
-//, UITableViewDelegate ,RXReorderTableViewDelegate{
-//    
-//    
-//    /**
-//     Typed parent object.
-//     */
-//    public weak private(set) var tableView: UITableView?
+
+
+//public class  RxReorderTableViewDatasourceProxy:RxTableViewDataSourceProxy
+// {
+    
+    /**
+     Typed parent object.
+     */
+   // public weak private(set) var tableView: UITableView?
+    
+//    private weak var _requiredMethodsDataSource: UITableViewDataSource? = tableViewDataSourceNotSet
 //    
 //    /**
 //     Initializes `RxTableViewDelegateProxy`
@@ -49,32 +51,75 @@ public typealias ItemSubRowEvent = (NSIndexPath)
 //        self.tableView = (parentObject as! UITableView)
 //        super.init(parentObject: parentObject)
 //    }
-//}
-
-
-//extension RxTableViewDataSourceProxy{
 //    
-//}
-//
-//public class RxLongPressTableViewDelegateProxy
-//    : RxScrollViewDelegateProxy, RXReorderTableViewDelegate{
-//    
+//    // MARK: delegate
 //    
 //    /**
-//     Typed parent object.
-//     */
-//    public weak private(set) var tableView: UITableView?
+//    Required delegate method implementation.
+//    */
+//    public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+//        return (_requiredMethodsDataSource ?? tableViewDataSourceNotSet).numberOfSectionsInTableView?(tableView) ?? 1
+//    }
 //    
 //    /**
-//     Initializes `RxTableViewDelegateProxy`
-//     
-//     - parameter parentObject: Parent object for delegate proxy.
+//     Required delegate method implementation.
 //     */
-//    public required init(parentObject: AnyObject) {
-//        self.tableView = (parentObject as! RXReorderTableView)
-//        super.init(parentObject: parentObject)
+//    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return (_requiredMethodsDataSource ?? tableViewDataSourceNotSet).tableView(tableView, numberOfRowsInSection: section)
+//    }
+//    
+//    /**
+//     Required delegate method implementation.
+//     */
+//    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+//        return (_requiredMethodsDataSource ?? tableViewDataSourceNotSet).tableView(tableView, cellForRowAtIndexPath: indexPath)
+//    }
+//    
+//    // MARK: proxy
+//    
+//    /**
+//    For more information take a look at `DelegateProxyType`.
+//    */
+//    public override class func createProxyForObject(object: AnyObject) -> AnyObject {
+//        let tableView = (object as! UITableView)
+//        
+//        return castOrFatalError(tableView.rx_createDataSourceProxy())
+//    }
+//    
+//    /**
+//     For more information take a look at `DelegateProxyType`.
+//     */
+//    public override class func delegateAssociatedObjectTag() -> UnsafePointer<Void> {
+//        return _pointer(&dataSourceAssociatedTag)
+//    }
+//    
+    /**
+     For more information take a look at `DelegateProxyType`.
+     */
+//    public class func setCurrentDelegate(delegate: AnyObject?, toObject object: AnyObject) {
+//        let collectionView: UITableView = castOrFatalError(object)
+//        collectionView.dataSource = castOptionalOrFatalError(delegate)
+//    }
+//    
+//    /**
+//     For more information take a look at `DelegateProxyType`.
+//     */
+//    public class func currentDelegateFor(object: AnyObject) -> AnyObject? {
+//        let collectionView: UITableView = castOrFatalError(object)
+//        return collectionView.dataSource
+//    }
+//    
+//    /**
+//     For more information take a look at `DelegateProxyType`.
+//     */
+//    public override func setForwardToDelegate(forwardToDelegate: AnyObject?, retainDelegate: Bool) {
+//        let requiredMethodsDataSource: UITableViewDataSource? = castOptionalOrFatalError(forwardToDelegate)
+//        _requiredMethodsDataSource = requiredMethodsDataSource ?? tableViewDataSourceNotSet
+//        super.setForwardToDelegate(forwardToDelegate, retainDelegate: retainDelegate)
 //    }
 //}
+//
+
 public class RxReorderTableViewDelegateProxy: RxTableViewDelegateProxy,RXReorderTableViewDelegate {
     //We need a way to read the current delegate
     override public class func currentDelegateFor(object: AnyObject) -> AnyObject? {
@@ -92,6 +137,7 @@ public class RxReorderTableViewDelegateProxy: RxTableViewDelegateProxy,RXReorder
      Typed parent object.
      */
 }
+    
 extension RXReorderTableView{
   
 //    public override  var  rx_delegate: DelegateProxy {

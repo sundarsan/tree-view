@@ -23,7 +23,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class TreeViewController: BaseViewController,RXReorderTableViewDelegate {
+class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorderTableViewDatasource {
    
     
     @IBOutlet weak var tableView: RXReorderTableView!
@@ -33,7 +33,7 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.longPressReorderDelegate = self
-      
+        tableView.longPressReorderDatasource = self
         let tree = Tree()
         tree.title = "ee"
         

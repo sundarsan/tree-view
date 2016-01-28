@@ -44,11 +44,20 @@ public protocol RXReorderTableViewDelegate: NSObjectProtocol {
     
     optional func tableView(tableView: UITableView,movedRowAtIndexPath sourceIndexPath: NSIndexPath,toIndexRowPath destinationRowIndexPath: NSIndexPath) 
     
-    optional func selectionViewForTableView(tableView: UITableView,destinitionCell cell:UITableViewCell,toIndexRowPath destinationRowIndexPath: NSIndexPath) -> UIView
+//    optional func selectionViewForTableView(tableView: UITableView,destinitionCell cell:UITableViewCell,toIndexRowPath destinationRowIndexPath: NSIndexPath) -> UIView
     
     optional func tableView(tableView: UITableView,openSubAssetAtIndexPath sourceIndexPath: NSIndexPath)
     
     optional func tableView(tableView: UITableView,closeSubAssetAtIndexPath sourceIndexPath: NSIndexPath)
+    
+    
+}
+
+@objc
+public protocol RXReorderTableViewDatasource: NSObjectProtocol {
+    
+    
+   optional func selectionViewForTableView(tableView: UITableView,destinitionCell cell:UITableViewCell,toIndexRowPath destinationRowIndexPath: NSIndexPath) -> UIView
     
     
 }
@@ -74,6 +83,8 @@ public class RXReorderTableView: UITableView {
     
    
     public var longPressReorderDelegate: RXReorderTableViewDelegate!
+    
+    public var longPressReorderDatasource: RXReorderTableViewDatasource!
     
     private var longPressGestureRecognizer: UILongPressGestureRecognizer!
     
@@ -344,7 +355,7 @@ public class RXReorderTableView: UITableView {
                         //moveRowAtIndexPath(clIndexPath, toIndexPath: indexPath)
                         selectionView?.removeFromSuperview()
                         selectionView = nil
-                        if let cell = cellForRowAtIndexPath(indexPath),selectionView =  self.longPressReorderDelegate?.selectionViewForTableView?(self, destinitionCell: cell, toIndexRowPath: indexPath),movedView = self.movedView{
+                        if let cell = cellForRowAtIndexPath(indexPath),selectionView =  self.longPressReorderDatasource?.selectionViewForTableView?(self, destinitionCell: cell, toIndexRowPath: indexPath),movedView = self.movedView{
                             self.selectionView = selectionView
                             if movedView.frame.origin.y <= 0{
                                 self.movedView?.removeFromSuperview()
