@@ -26,16 +26,17 @@ import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
-
-public typealias ItemSelectedViewEvent = ( cell:UITableViewCell, destinationIndex: NSIndexPath,viewBlock:(view:UIView)->Void)
+public typealias ItemSelectedViewEventBlock = ( cell:UITableViewCell, destinationIndex: NSIndexPath) ->Void
+public typealias ItemSelectedViewEvent = ( cell:UITableViewCell, destinationIndex: NSIndexPath,viewBlock:()->UIView)
 public typealias ItemSubRowEvent = (NSIndexPath)
 
 
 
 public class  RxReorderTableViewDataSourceProxy:RxTableViewDataSourceProxy,RXReorderTableViewDatasource{
     
-    var selectionView :ItemSelectedViewEvent!
-    let dataSourceObject :RXReorderDataSource =  RXReorderDataSource()
+    var selectionViewBlock :ItemSelectedViewEventBlock!
+    var viewBlock : (()->UIView)!
+    //let dataSourceObject :RXReorderDataSource =  RXReorderDataSource()
     
     
     public required init(parentObject: AnyObject) {
@@ -46,12 +47,11 @@ public class  RxReorderTableViewDataSourceProxy:RxTableViewDataSourceProxy,RXReo
     }
 
     public func selectionViewForTableView(tableView: UITableView,destinitionCell cell:UITableViewCell,toIndexRowPath destinationRowIndexPath: NSIndexPath) -> UIView{
-        let viewBlock :(view:UIView)->Void = { view in
-            return view
-        }
-        self.selectionView = (cell,destinationRowIndexPath,viewBlock)
+       
+        self.selectionViewBlock!(cell: cell,destinationIndex: destinationRowIndexPath)
+        //self.selectionView = (cell,destinationRowIndexPath,viewBlock)
         
-        return UIView()
+        return self.viewBlock()
     }
     
     /**
@@ -102,20 +102,20 @@ public class  RxReorderTableViewDataSourceProxy:RxTableViewDataSourceProxy,RXReo
 
 }
 
-public class RXReorderDataSource:NSObject,RXReorderTableViewDatasource{
-    
-    var selectionView :ItemSelectedViewEvent!
-    
-    public func selectionViewForTableView(tableView: UITableView,destinitionCell cell:UITableViewCell,toIndexRowPath destinationRowIndexPath: NSIndexPath) -> UIView{
-        let viewBlock :(view:UIView)->Void = { view in
-            return view
-        }
-        self.selectionView = (cell,destinationRowIndexPath,viewBlock)
-       
-        return UIView()
-    }
-
-}
+//public class RXReorderDataSource:NSObject,RXReorderTableViewDatasource{
+//    
+//    var selectionView :ItemSelectedViewEvent!
+//    
+//    public func selectionViewForTableView(tableView: UITableView,destinitionCell cell:UITableViewCell,toIndexRowPath destinationRowIndexPath: NSIndexPath) -> UIView{
+//        let viewBlock :(view:UIView)->Void = { view in
+//            return view
+//        }
+//     //   self.selectionView = (cell,destinationRowIndexPath,viewBlock)
+//       
+//        return UIView()
+//    }
+//
+//}
 
 
 public class RxReorderTableViewDelegateProxy: RxTableViewDelegateProxy,RXReorderTableViewDelegate {
@@ -317,9 +317,12 @@ extension RXReorderTableView{
 
         let source: Observable<ItemSelectedViewEvent> = create { (observer) in
             
-            if  let selectionView = self.rx_dataSource.selectionView{
-                observer.onNext(selectionView)
+            let selectViewBlock = { (cell:UITableViewCell, destinationIndex: NSIndexPath) in
+            
+              observer.onNext((cell,destinationIndex,self.rx_dataSource.viewBlock))
             }
+            
+            self.rx_dataSource.selectionViewBlock = selectViewBlock
          
             //      Some other condition
             observer.onCompleted()
@@ -335,25 +338,5 @@ extension RXReorderTableView{
    }
 //    
     
-    func selectedObserver() -> Observable<ItemSelectedViewEvent> {
-      //  let selectionView :((sourceIndex: NSIndexPath, destinationIndex: NSIndexPath,) -> UIView)!
-        
-        return create({ (observer) -> Disposable in
-            //      Some condition
-            
-           // observer.onNext( selectionView)
-            observer.onNext(self.rx_dataSource.selectionView)
-            //      Some other condition
-            observer.onCompleted()
-            
-            return AnonymousDisposable {
-                //         Dispose resources here
-            }
-            //      If u have nothing to dipose use NopDisposable.instance
-            
-            
-        })
-    }
-    
-   
+      
 }

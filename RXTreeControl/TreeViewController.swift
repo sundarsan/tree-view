@@ -123,10 +123,14 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
             
         }.addDisposableTo(disposeBag)
         
-        tableView.rx_itemSelectedView().subscribeNext { (cell: UITableViewCell, destinationIndex: NSIndexPath, viewBlock: (view: UIView) -> Void) -> Void in
-            let view = UIView(frame: CGRectMake(0,cell.frame.height - 2 ,self.tableView.frame.width,2))
-            view.backgroundColor = UIColor.blueColor();
-            viewBlock(view: view)
+        
+        let bl:() -> UIView = {() -> UIView in
+                let view = UIView(frame: CGRectMake(0,cell.frame.height - 2 ,self.tableView.frame.width,2))
+                view.backgroundColor = UIColor.blueColor();
+                return view
+        }
+        tableView.rx_itemSelectedView().subscribeNext { (cell: UITableViewCell, destinationIndex: NSIndexPath, viewBlock: ) -> Void in
+          
         }.addDisposableTo(disposeBag)
 //        tableView.rx_itemSelectedView().subscribeNext { (cell: UITableViewCell, destinationIndex: NSIndexPath, viewBlock: (view: UIView) -> Void)) in
 //            
