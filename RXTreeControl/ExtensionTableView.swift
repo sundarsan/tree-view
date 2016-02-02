@@ -27,111 +27,115 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-public typealias ItemSelectedViewEvent = (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath)
+public typealias ItemSelectedViewEvent = ( cell:UITableViewCell, destinationIndex: NSIndexPath,viewBlock:(view:UIView)->Void)
 public typealias ItemSubRowEvent = (NSIndexPath)
 
 
 
-//public class  RxReorderTableViewDatasourceProxy:RxTableViewDataSourceProxy
-// {
+public class  RxReorderTableViewDataSourceProxy:RxTableViewDataSourceProxy,RXReorderTableViewDatasource{
+    
+    var selectionView :ItemSelectedViewEvent!
+    let dataSourceObject :RXReorderDataSource =  RXReorderDataSource()
+    
+    
+    public required init(parentObject: AnyObject) {
+       
+        super.init(parentObject: parentObject)
+        (self.tableView as! RXReorderTableView).longPressReorderDatasource = self
+       
+    }
+
+    public func selectionViewForTableView(tableView: UITableView,destinitionCell cell:UITableViewCell,toIndexRowPath destinationRowIndexPath: NSIndexPath) -> UIView{
+        let viewBlock :(view:UIView)->Void = { view in
+            return view
+        }
+        self.selectionView = (cell,destinationRowIndexPath,viewBlock)
+        
+        return UIView()
+    }
     
     /**
      Typed parent object.
      */
    // public weak private(set) var tableView: UITableView?
     
-//    private weak var _requiredMethodsDataSource: UITableViewDataSource? = tableViewDataSourceNotSet
-//    
-//    /**
-//     Initializes `RxTableViewDelegateProxy`
-//     
-//     - parameter parentObject: Parent object for delegate proxy.
-//     */
+   // private weak var _requiredMethodsDataSource: UITableViewDataSource? = tableViewDataSourceNotSet
+    
+    /**
+     Initializes `RxTableViewDelegateProxy`
+     
+     - parameter parentObject: Parent object for delegate proxy.
+     */
 //    public required init(parentObject: AnyObject) {
 //        self.tableView = (parentObject as! UITableView)
 //        super.init(parentObject: parentObject)
 //    }
 //    
-//    // MARK: delegate
-//    
-//    /**
-//    Required delegate method implementation.
-//    */
-//    public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//        return (_requiredMethodsDataSource ?? tableViewDataSourceNotSet).numberOfSectionsInTableView?(tableView) ?? 1
+    // MARK: delegate
+    
+
+  
+    //We need a way to set the current delegate
+    override public class func setCurrentDelegate(delegate: AnyObject?, toObject object: AnyObject) {
+        let tableView: RXReorderTableView = object as! RXReorderTableView
+      //  let dataSourceObject :RXReorderDataSource =  RXReorderDataSource()
+        //tableView.longPressReorderDatasource =  (self.dataSourceObject as RXReorderTableViewDatasource)
+        super.setCurrentDelegate(delegate, toObject: object)
+        
+    }
+    
+    
+//    public func selectionViewForTableView(tableView: UITableView,destinitionCell cell:UITableViewCell,toIndexRowPath destinationRowIndexPath: NSIndexPath) -> UIView{
+//        let viewBlock :(view:UIView)->Void = { view in
+//            return view
+//        }
+//        self.selectionView = (cell,destinationRowIndexPath,viewBlock)
+////        self.selectionView!(cell:cell,destinationIndex:destinationRowIndexPath,viewBlock:{ view in
+////            return view
+////        })
+//        return UIView()
 //    }
-//    
-//    /**
-//     Required delegate method implementation.
-//     */
-//    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return (_requiredMethodsDataSource ?? tableViewDataSourceNotSet).tableView(tableView, numberOfRowsInSection: section)
-//    }
-//    
-//    /**
-//     Required delegate method implementation.
-//     */
-//    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        return (_requiredMethodsDataSource ?? tableViewDataSourceNotSet).tableView(tableView, cellForRowAtIndexPath: indexPath)
-//    }
-//    
-//    // MARK: proxy
-//    
-//    /**
-//    For more information take a look at `DelegateProxyType`.
-//    */
-//    public override class func createProxyForObject(object: AnyObject) -> AnyObject {
-//        let tableView = (object as! UITableView)
-//        
-//        return castOrFatalError(tableView.rx_createDataSourceProxy())
-//    }
-//    
-//    /**
-//     For more information take a look at `DelegateProxyType`.
-//     */
-//    public override class func delegateAssociatedObjectTag() -> UnsafePointer<Void> {
-//        return _pointer(&dataSourceAssociatedTag)
-//    }
-//    
-    /**
-     For more information take a look at `DelegateProxyType`.
-     */
-//    public class func setCurrentDelegate(delegate: AnyObject?, toObject object: AnyObject) {
-//        let collectionView: UITableView = castOrFatalError(object)
-//        collectionView.dataSource = castOptionalOrFatalError(delegate)
-//    }
-//    
-//    /**
-//     For more information take a look at `DelegateProxyType`.
-//     */
-//    public class func currentDelegateFor(object: AnyObject) -> AnyObject? {
-//        let collectionView: UITableView = castOrFatalError(object)
-//        return collectionView.dataSource
-//    }
-//    
-//    /**
-//     For more information take a look at `DelegateProxyType`.
-//     */
-//    public override func setForwardToDelegate(forwardToDelegate: AnyObject?, retainDelegate: Bool) {
-//        let requiredMethodsDataSource: UITableViewDataSource? = castOptionalOrFatalError(forwardToDelegate)
-//        _requiredMethodsDataSource = requiredMethodsDataSource ?? tableViewDataSourceNotSet
-//        super.setForwardToDelegate(forwardToDelegate, retainDelegate: retainDelegate)
-//    }
-//}
-//
+//  
+    
+    //func selectionViewForTableView(tableView: RXReorderTableView,destinitionCell cell:UITableViewCell,toIndexRowPath destinationRowIndexPath: NSIndexPath) -> UIView{
+      
+
+}
+
+public class RXReorderDataSource:NSObject,RXReorderTableViewDatasource{
+    
+    var selectionView :ItemSelectedViewEvent!
+    
+    public func selectionViewForTableView(tableView: UITableView,destinitionCell cell:UITableViewCell,toIndexRowPath destinationRowIndexPath: NSIndexPath) -> UIView{
+        let viewBlock :(view:UIView)->Void = { view in
+            return view
+        }
+        self.selectionView = (cell,destinationRowIndexPath,viewBlock)
+       
+        return UIView()
+    }
+
+}
+
 
 public class RxReorderTableViewDelegateProxy: RxTableViewDelegateProxy,RXReorderTableViewDelegate {
-    //We need a way to read the current delegate
+    
+       //We need a way to read the current delegate
     override public class func currentDelegateFor(object: AnyObject) -> AnyObject? {
         let tableView: RXReorderTableView = object as! RXReorderTableView
         return tableView.longPressReorderDelegate
     }
+    
     //We need a way to set the current delegate
     override public class func setCurrentDelegate(delegate: AnyObject?, toObject object: AnyObject) {
         let tableView: RXReorderTableView = object as! RXReorderTableView
         tableView.delegate = (delegate as! UITableViewDelegate)
         tableView.longPressReorderDelegate = delegate as! RXReorderTableViewDelegate
+        
+      
     }
+    
+  
     
     /**
      Typed parent object.
@@ -172,10 +176,10 @@ extension RXReorderTableView{
 //     
 //     For more information take a look at `DelegateProxyType` protocol documentation.
 //     */
-//    public var rx_dataSource: DelegateProxy {
-//        return proxyForObject(RxTableViewDataSourceProxy.self, self)
-//    }
-//    
+     public override  var rx_dataSource: RxReorderTableViewDataSourceProxy {
+         return RxReorderTableViewDataSourceProxy(parentObject: self)
+     }
+//
 //    /**
 //     Installs data source as forwarding delegate on `rx_dataSource`.
 //     
@@ -309,23 +313,47 @@ extension RXReorderTableView{
     }
     
     
-    public func rx_itemSelectedView(view:UIView) -> ControlEvent<ItemSelectedViewEvent> {
-        
-//        let clos1 = ({
-//            (sourceIndex:NSIndexPath,destinationIndex:NSIndexPath) -> UIView in
-//            return UIView()
-//           
-//        })
-        
-//
-        let source: Observable<ItemSelectedViewEvent> = rx_delegate.observe("tableView:moveSubRowAtIndexPath:toIndexSubRowPath:")
-            .map { a  in
-               return ((a[1] as! NSIndexPath), (a[2] as! NSIndexPath))
-               
-          }
+    public func rx_itemSelectedView() -> ControlEvent<ItemSelectedViewEvent> {
+
+        let source: Observable<ItemSelectedViewEvent> = create { (observer) in
+            
+            if  let selectionView = self.rx_dataSource.selectionView{
+                observer.onNext(selectionView)
+            }
+         
+            //      Some other condition
+            observer.onCompleted()
+            
+            return AnonymousDisposable {
+                //         Dispose resources here
+            }
+        }
+   
+
+       // let source: Observable<ItemSelectedViewEvent> = selectedObserver()
         return ControlEvent(events: source)
    }
 //    
+    
+    func selectedObserver() -> Observable<ItemSelectedViewEvent> {
+      //  let selectionView :((sourceIndex: NSIndexPath, destinationIndex: NSIndexPath,) -> UIView)!
+        
+        return create({ (observer) -> Disposable in
+            //      Some condition
+            
+           // observer.onNext( selectionView)
+            observer.onNext(self.rx_dataSource.selectionView)
+            //      Some other condition
+            observer.onCompleted()
+            
+            return AnonymousDisposable {
+                //         Dispose resources here
+            }
+            //      If u have nothing to dipose use NopDisposable.instance
+            
+            
+        })
+    }
     
    
 }
