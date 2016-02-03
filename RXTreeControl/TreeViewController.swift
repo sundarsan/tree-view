@@ -45,7 +45,7 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
 
         
         itemTrees
-            .bindTo(tableView.rx_itemsWithCellIdentifier("Cell")) { (row, element, cell) in
+            .bindTo(tableView.rx_itemsWithCellIdentifier("Cell0")) { (row, element, cell) in
                 let tcell = cell as! TableViewCell
                 tcell.titleLabel?.text = "\(element.treeObject.title ) @ Level \(element.level)"
                 let colorRed = CGFloat(200 - element.level*10  ) / CGFloat(255.0)
@@ -128,6 +128,13 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
         
         
 }
+    
+//    func selectionViewForTableView(tableView: UITableView,destinitionCell cell:UITableViewCell,toIndexRowPath destinationRowIndexPath: NSIndexPath) -> UIView{
+//        let view = UIView(frame: CGRectMake(0,cell.frame.height - 2 ,self.tableView.frame.width,2))
+//        view.backgroundColor = UIColor.blueColor();
+//        return view
+//    }
+
     
 
     

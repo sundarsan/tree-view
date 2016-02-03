@@ -64,7 +64,7 @@ public class RxReorderTableViewDelegateProxy: RxTableViewDelegateProxy,RXReorder
         let tableView: RXReorderTableView = object as! RXReorderTableView
         tableView.delegate = (delegate as! UITableViewDelegate)
         tableView.longPressReorderDelegate = delegate as! RXReorderTableViewDelegate
-        
+        super.setCurrentDelegate(delegate, toObject: object)
       
     }
     
@@ -78,6 +78,10 @@ public class RxReorderTableViewDelegateProxy: RxTableViewDelegateProxy,RXReorder
 extension RXReorderTableView{
   
 
+    public override func rx_createDataSourceProxy() -> RxReorderTableViewDataSourceProxy {
+        return RxReorderTableViewDataSourceProxy(parentObject: self)
+    }
+    
     public override func rx_createDelegateProxy() -> RxScrollViewDelegateProxy {
         return RxReorderTableViewDelegateProxy(parentObject: self)
     }
@@ -85,14 +89,13 @@ extension RXReorderTableView{
     
 
      public override  var rx_dataSource: RxReorderTableViewDataSourceProxy {
-         return RxReorderTableViewDataSourceProxy(parentObject: self)
+         return  proxyForObject(RxReorderTableViewDataSourceProxy.self, self)//RxReorderTableViewDataSourceProxy(parentObject: self)
      }
 
     public override var rx_delegate: DelegateProxy {
         return proxyForObject(RxReorderTableViewDelegateProxy.self, self)//RxReorderTableViewDelegateProxy(parentObject: self)//
     }
 
-    
     
     public var rx_itemSubRowOpen: ControlEvent<ItemSubRowEvent> {
         let source: Observable<ItemSubRowEvent> = rx_delegate.observe("tableView:openSubAssetAtIndexPath:")
@@ -114,10 +117,6 @@ extension RXReorderTableView{
     }
     
     
-    
-    /*
-    Reactive wrapper for `delegate` message `tableView:moveRowAtIndexPath:toIndexPath:`.
-    func tableView(tableView: UITableView,movedRowAtIndexPath sourceIndexPath: NSIndexPath,toIndexRowPath destinationRowIndexPath: NSIndexPath)     */
     
     public var rx_itemRowMoved: ControlEvent<ItemMovedEvent> {
         let source: Observable<ItemMovedEvent> = rx_delegate.observe("tableView:movedRowAtIndexPath:toIndexRowPath:")
