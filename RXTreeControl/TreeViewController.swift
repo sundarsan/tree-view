@@ -47,9 +47,7 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
         itemTrees
             .bindTo(tableView.rx_itemsWithCellIdentifier("Cell")) { (row, element, cell) in
                 let tcell = cell as! TableViewCell
-               // tcell.indentationLevel = element.level
                 tcell.titleLabel?.text = "\(element.treeObject.title ) @ Level \(element.level)"
-               // tcell.titleLabel?.frame.origin.x = CGFloat(30 + element.level * 20)
                 let colorRed = CGFloat(200 - element.level*10  ) / CGFloat(255.0)
                 let colorGreen = CGFloat(element.level*10 + 20) / CGFloat(255.0)
                 let colorBlue = CGFloat(100 - element.level*10 + 20) / CGFloat(255.0)
@@ -59,28 +57,23 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
                     blue: colorBlue,
                     alpha: CGFloat(1.0)
                 )
-                //self.tableView.reloadData()
                 tcell.setNeedsLayout()
             }
             .addDisposableTo(disposeBag)
          self.tableView.setNeedsLayout()
          self.tableView.reloadData()
         
-//         let treeItems = Variable(treeController.treeaArray)
-//        treeItems
-        //tableView.editing = true
         tableView
             .rx_modelSelected(TreeModelView)
             .subscribeNext {value in
                 self.treeController.openOrCloseSubasset(value)
                 self.itemTrees.value = self.treeController.treeArray as [TreeModelView]
                 self.tableView.reloadData()
-               // DefaultWireframe.presentAlert("Tapped `\(value)`")
+               
             }
             .addDisposableTo(disposeBag)
         
         tableView.rx_itemMoved.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
-          //  self.treeController.moveInTreeFromAssetIndex(sourceIndex.row,toIndex:destinationIndex.row)
             
         }.addDisposableTo(disposeBag)
         
@@ -133,50 +126,9 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
         }
 
         
-    
-//        let block = { (cell:UITableViewCell, destinationIndex: NSIndexPath) -> UIView in
-//            let view = UIView(frame: CGRectMake(0,cell.frame.height - 2 ,self.tableView.frame.width,2))
-//            view.backgroundColor = UIColor.blueColor();
-//            return view
-//            
-//            
-//        }
-//        
-//        tableView.rx_itemSelectedView().subscribeNext { _ in
-//            // return block
-//            
-//        }.addDisposableTo(disposeBag)
         
-//        tableView.rx_itemSelectedView().subscribeNext { (cell: UITableViewCell, destinationIndex: NSIndexPath, viewBlock: (view: UIView) -> Void)) in
-//            
-//        }
-        
-//        tableView.rx_itemSelectedView().subscribeNext { (block: (cell: UITableViewCell, destinationIndex: NSIndexPath, viewBlock: (view: UIView) -> Void) -> Void) -> Void in
-//          //  block =
-//            
-//        }.addDisposableTo(disposeBag)
-//        tableView.rx_itemSelectedView().subscribeNext { (cell: UITableViewCell, destinationIndex: NSIndexPath, viewBlock: (view: UIView) -> Void) -> Void in
-//            
-//        }
-        
-//        tableView.rx_itemSelectedView().subscribeNext { (cell: UITableViewCell, destinationIndex: NSIndexPath, viewBlock: (UIView) ) -> Void  in
-//            let view = UIView(frame: CGRectMake(0,cell.frame.height - 2 ,self.tableView.frame.width,2))
-//            view.backgroundColor = UIColor.blueColor();
-//            viewBlock(view)
-//        }.addDisposableTo(disposeBag)
-//        
-//        tableView.rx_itemSelectedView().subscribeNext {  (cell: UITableViewCell, destinationIndex: NSIndexPath, viewBlock: (UIView) )  in
-//            let view = UIView(frame: CGRectMake(0,cell.frame.height - 2 ,self.tableView.frame.width,2))
-//            view.backgroundColor = UIColor.blueColor();
-//        }.addDisposableTo(disposeBag)
-      
-    }
+}
     
-    func selectionViewForTableView(tableView: UITableView,destinitionCell cell:UITableViewCell,toIndexRowPath destinationRowIndexPath: NSIndexPath) -> UIView{
-        let view = UIView(frame: CGRectMake(0,cell.frame.height - 2 ,self.tableView.frame.width,2))
-        view.backgroundColor = UIColor.blueColor();
-        return view
-    }
-    
+
     
 }
