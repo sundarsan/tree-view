@@ -27,7 +27,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 public typealias ItemSelectedViewEventBlock = ( cell:UITableViewCell, destinationIndex: NSIndexPath) ->Void
-public typealias ItemSelectedViewEvent = ( cell:UITableViewCell, destinationIndex: NSIndexPath,viewBlock:()->UIView)
+public typealias ItemSelectedViewEvent = ( cell:UITableViewCell, destinationIndex: NSIndexPath,viewBlock:(cell:UITableViewCell, destinationIndex: NSIndexPath)->UIView)
+public typealias ItemSelectedViewBlock = (cell:UITableViewCell, destinationIndex: NSIndexPath)->UIView
 public typealias ItemSubRowEvent = (NSIndexPath)
 
 
@@ -35,7 +36,7 @@ public typealias ItemSubRowEvent = (NSIndexPath)
 public class  RxReorderTableViewDataSourceProxy:RxTableViewDataSourceProxy,RXReorderTableViewDatasource{
     
     var selectionViewBlock :ItemSelectedViewEventBlock!
-    var viewBlock : (()->UIView)!
+    var viewBlock : ((cell: UITableViewCell, destinationIndex: NSIndexPath)->UIView)!
     //let dataSourceObject :RXReorderDataSource =  RXReorderDataSource()
     
     
@@ -48,10 +49,7 @@ public class  RxReorderTableViewDataSourceProxy:RxTableViewDataSourceProxy,RXReo
 
     public func selectionViewForTableView(tableView: UITableView,destinitionCell cell:UITableViewCell,toIndexRowPath destinationRowIndexPath: NSIndexPath) -> UIView{
        
-        self.selectionViewBlock!(cell: cell,destinationIndex: destinationRowIndexPath)
-        //self.selectionView = (cell,destinationRowIndexPath,viewBlock)
-        
-        return self.viewBlock()
+        return self.viewBlock(cell: cell,destinationIndex: destinationRowIndexPath)
     }
     
     /**
@@ -77,7 +75,7 @@ public class  RxReorderTableViewDataSourceProxy:RxTableViewDataSourceProxy,RXReo
   
     //We need a way to set the current delegate
     override public class func setCurrentDelegate(delegate: AnyObject?, toObject object: AnyObject) {
-        let tableView: RXReorderTableView = object as! RXReorderTableView
+        //let tableView: RXReorderTableView = object as! RXReorderTableView
       //  let dataSourceObject :RXReorderDataSource =  RXReorderDataSource()
         //tableView.longPressReorderDatasource =  (self.dataSourceObject as RXReorderTableViewDatasource)
         super.setCurrentDelegate(delegate, toObject: object)
@@ -313,16 +311,16 @@ extension RXReorderTableView{
     }
     
     
-    public func rx_itemSelectedView() -> ControlEvent<ItemSelectedViewEvent> {
+    public func rx_itemSelectedView() -> ControlEvent<ItemSelectedViewBlock> {
 
-        let source: Observable<ItemSelectedViewEvent> = create { (observer) in
+        let source: Observable<ItemSelectedViewBlock> = create { (observer) in
             
-            let selectViewBlock = { (cell:UITableViewCell, destinationIndex: NSIndexPath) in
-            
-              observer.onNext((cell,destinationIndex,self.rx_dataSource.viewBlock))
-            }
-            
-            self.rx_dataSource.selectionViewBlock = selectViewBlock
+//            let selectViewBlock = { (cell:UITableViewCell, destinationIndex: NSIndexPath) in
+//            
+//             
+//            }
+             observer.onNext(self.rx_dataSource.viewBlock)
+            //self.rx_dataSource.selectionViewBlock = selectViewBlock
          
             //      Some other condition
             observer.onCompleted()
