@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2135E68F1ADF26832D354BE0 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E120BEF621C780A490FF0AD /* Pods.framework */; };
 		6A11E7D71C2D4D6C008DF676 /* TreeContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A11E7D61C2D4D6C008DF676 /* TreeContoller.swift */; };
+		6A2D9EC21C623B6F00AE0F21 /* RxTableViewSectionedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2D9EC11C623B6F00AE0F21 /* RxTableViewSectionedDataSource.swift */; };
+		6A2D9EC61C623CFD00AE0F21 /* SectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2D9EC51C623CFD00AE0F21 /* SectionModel.swift */; };
+		6A2D9EC81C623DDC00AE0F21 /* SectionModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2D9EC71C623DDC00AE0F21 /* SectionModelType.swift */; };
 		6A542EA61C31737D003E30FF /* TreeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A542EA51C31737D003E30FF /* TreeModel.swift */; };
 		6A6FD35F1C2005130054E15B /* TreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6FD35E1C2005130054E15B /* TreeViewController.swift */; };
 		6A6FD3621C2013680054E15B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6FD3611C2013680054E15B /* BaseViewController.swift */; };
@@ -47,6 +50,9 @@
 /* Begin PBXFileReference section */
 		27298827C3ED8EFA70D0F656 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		6A11E7D61C2D4D6C008DF676 /* TreeContoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeContoller.swift; sourceTree = "<group>"; };
+		6A2D9EC11C623B6F00AE0F21 /* RxTableViewSectionedDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxTableViewSectionedDataSource.swift; sourceTree = "<group>"; };
+		6A2D9EC51C623CFD00AE0F21 /* SectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionModel.swift; sourceTree = "<group>"; };
+		6A2D9EC71C623DDC00AE0F21 /* SectionModelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionModelType.swift; sourceTree = "<group>"; };
 		6A542EA51C31737D003E30FF /* TreeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeModel.swift; sourceTree = "<group>"; };
 		6A6FD35E1C2005130054E15B /* TreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeViewController.swift; sourceTree = "<group>"; };
 		6A6FD3611C2013680054E15B /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +122,43 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6A2D9EC01C623B4F00AE0F21 /* ReactiveReorderTableExtension */ = {
+			isa = PBXGroup;
+			children = (
+				6A86E22C1C4671A5005B766B /* ExtensionTableView.swift */,
+				6A2D9EC71C623DDC00AE0F21 /* SectionModelType.swift */,
+				6A2D9EC51C623CFD00AE0F21 /* SectionModel.swift */,
+				6A2D9EC11C623B6F00AE0F21 /* RxTableViewSectionedDataSource.swift */,
+			);
+			name = ReactiveReorderTableExtension;
+			sourceTree = "<group>";
+		};
+		6A2D9EC91C623E9E00AE0F21 /* ReorderTable */ = {
+			isa = PBXGroup;
+			children = (
+				6AE506951C5221350015026F /* RXTableViewController.swift */,
+				6A86E2501C479B7A005B766B /* RXReorderTableView.swift */,
+			);
+			name = ReorderTable;
+			sourceTree = "<group>";
+		};
+		6A2D9ECA1C6245CE00AE0F21 /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				6A542EA81C317510003E30FF /* ViewModel */,
+				6A542EA71C317506003E30FF /* Model */,
+				6A86E2291C463FA0005B766B /* Cell */,
+				6A6FD3611C2013680054E15B /* BaseViewController.swift */,
+				6A6FD35E1C2005130054E15B /* TreeViewController.swift */,
+				6AB5025B1C1FFCAA00ECADC3 /* AppDelegate.swift */,
+				6AB5025F1C1FFCAA00ECADC3 /* Main.storyboard */,
+				6AB502621C1FFCAA00ECADC3 /* Assets.xcassets */,
+				6AB502641C1FFCAA00ECADC3 /* LaunchScreen.storyboard */,
+				6AB502671C1FFCAA00ECADC3 /* Info.plist */,
+			);
+			name = Example;
+			sourceTree = "<group>";
+		};
 		6A542EA71C317506003E30FF /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,11 +180,9 @@
 		6A542EA91C31751F003E30FF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				6A2D9ECA1C6245CE00AE0F21 /* Example */,
 				6A877CEF1C561D6B003F486E /* Extensions */,
 				6A86E2521C479B82005B766B /* ReorderTableView */,
-				6A86E2291C463FA0005B766B /* Cell */,
-				6A6FD3611C2013680054E15B /* BaseViewController.swift */,
-				6A6FD35E1C2005130054E15B /* TreeViewController.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -157,9 +198,8 @@
 		6A86E2521C479B82005B766B /* ReorderTableView */ = {
 			isa = PBXGroup;
 			children = (
-				6A86E22C1C4671A5005B766B /* ExtensionTableView.swift */,
-				6A86E2501C479B7A005B766B /* RXReorderTableView.swift */,
-				6AE506951C5221350015026F /* RXTableViewController.swift */,
+				6A2D9EC91C623E9E00AE0F21 /* ReorderTable */,
+				6A2D9EC01C623B4F00AE0F21 /* ReactiveReorderTableExtension */,
 			);
 			name = ReorderTableView;
 			sourceTree = "<group>";
@@ -198,13 +238,6 @@
 			isa = PBXGroup;
 			children = (
 				6A542EA91C31751F003E30FF /* UI */,
-				6A542EA81C317510003E30FF /* ViewModel */,
-				6A542EA71C317506003E30FF /* Model */,
-				6AB5025B1C1FFCAA00ECADC3 /* AppDelegate.swift */,
-				6AB5025F1C1FFCAA00ECADC3 /* Main.storyboard */,
-				6AB502621C1FFCAA00ECADC3 /* Assets.xcassets */,
-				6AB502641C1FFCAA00ECADC3 /* LaunchScreen.storyboard */,
-				6AB502671C1FFCAA00ECADC3 /* Info.plist */,
 			);
 			path = RXTreeControl;
 			sourceTree = "<group>";
@@ -412,10 +445,13 @@
 				6A877CF11C561D7F003F486E /* NSIndexpathExtension.swift in Sources */,
 				6A6FD35F1C2005130054E15B /* TreeViewController.swift in Sources */,
 				6A86E22B1C463FFC005B766B /* TableViewCell.swift in Sources */,
+				6A2D9EC21C623B6F00AE0F21 /* RxTableViewSectionedDataSource.swift in Sources */,
 				6A6FD3641C201ABE0054E15B /* Tree.swift in Sources */,
+				6A2D9EC61C623CFD00AE0F21 /* SectionModel.swift in Sources */,
 				6A86E2511C479B7B005B766B /* RXReorderTableView.swift in Sources */,
 				6AE506961C5221350015026F /* RXTableViewController.swift in Sources */,
 				6AB5025C1C1FFCAA00ECADC3 /* AppDelegate.swift in Sources */,
+				6A2D9EC81C623DDC00AE0F21 /* SectionModelType.swift in Sources */,
 				6A6FD3621C2013680054E15B /* BaseViewController.swift in Sources */,
 				6A542EA61C31737D003E30FF /* TreeModel.swift in Sources */,
 				6A6FD3661C201B0D0054E15B /* TreeModelView.swift in Sources */,
