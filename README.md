@@ -6,8 +6,6 @@
 [![Twitter](https://img.shields.io/badge/Twitter-@Ramotion-blue.svg?style=flat)](http://twitter.com/Ramotion)
 [![Travis](https://img.shields.io/travis/Ramotion/tree-view.svg)](https://travis-ci.org/Ramotion/tree-view)
 
-[shot on dribbble](https://dribbble.com/shots/2121350-Delivery-Card):
-![Animation](Screenshots/folding-cell.gif)
 
 ## Requirements
 
@@ -20,7 +18,7 @@ Just add the FoldingCell.swift file to your project.
 
 or use [CocoaPods](https://cocoapods.org) with Podfile:
 ``` ruby
-pod 'RXTreeControl', '~> 0.1'
+pod 'RXTreeControl', '~> Not Added Yet'
 ```
     
 

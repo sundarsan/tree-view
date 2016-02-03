@@ -23,6 +23,9 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+
+
+
 class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorderTableViewDatasource {
    
     
@@ -85,12 +88,12 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
          //   ]
         //}
 
-        let itemsDatasource = tableView.rx_itemsWithDataSource(dataSource)
+      //  let itemsDatasource = tableView.rx_itemsWithDataSource(dataSource)
      
         
-        itemTreesSections
-            .bindTo(itemsDatasource)
-            .addDisposableTo(disposeBag)
+      //  itemTreesSections
+      //      .bindTo(itemsDatasource)
+      //      .addDisposableTo(disposeBag)
         
         dataSource.cellFactory = { (tv, ip, element: TreeModelView) in
             let cell = tv.dequeueReusableCellWithIdentifier("Cell")!
