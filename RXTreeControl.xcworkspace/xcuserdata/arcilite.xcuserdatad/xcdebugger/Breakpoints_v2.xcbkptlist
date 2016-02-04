@@ -24,7 +24,7 @@
                   moduleName = "RXTreeControl"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/arcilite/tree-view/RXTreeControl/TreeViewController.swift"
-                  timestampString = "476209197.520153"
+                  timestampString = "476262131.238889"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -39,7 +39,7 @@
                   moduleName = "RXTreeControl"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/arcilite/tree-view/RXTreeControl/TreeViewController.swift"
-                  timestampString = "476209197.520422"
+                  timestampString = "476262131.239075"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -120,11 +120,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RXTreeControl/TreeViewController.swift"
-            timestampString = "476209196.420528"
+            timestampString = "476268099.873372"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
@@ -136,11 +136,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RXTreeControl/TreeViewController.swift"
-            timestampString = "476209196.420528"
+            timestampString = "476261944.595669"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
@@ -152,11 +152,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RXTreeControl/TreeViewController.swift"
-            timestampString = "476209196.420528"
+            timestampString = "476268099.873372"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
@@ -248,11 +248,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RXTreeControl/TreeViewController.swift"
-            timestampString = "476209196.420528"
+            timestampString = "476261944.595669"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
             landmarkName = "TreeViewController"
             landmarkType = "3">
             <Locations>
@@ -342,11 +342,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RXTreeControl/TreeViewController.swift"
-            timestampString = "476209196.420528"
+            timestampString = "476268099.873372"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
@@ -358,11 +358,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RXTreeControl/TreeViewController.swift"
-            timestampString = "476209196.420528"
+            timestampString = "476268099.873372"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
@@ -432,7 +432,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RXTreeControl/ExtensionTableView.swift"
@@ -448,46 +448,46 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RXTreeControl/TreeViewController.swift"
-            timestampString = "476209196.420528"
+            timestampString = "476267186.562553"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "RXTreeControl.TreeViewController.viewDidLoad (RXTreeControl.TreeViewController)() -&gt; ()"
                   moduleName = "RXTreeControl"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/arcilite/tree-view/RXTreeControl/TreeViewController.swift"
-                  timestampString = "476209197.527286"
+                  timestampString = "476261945.731634"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "98"
-                  endingLineNumber = "98"
-                  offsetFromSymbolStart = "3906">
+                  startingLineNumber = "84"
+                  endingLineNumber = "84"
+                  offsetFromSymbolStart = "2306">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "RXTreeControl.TreeViewController.(viewDidLoad (RXTreeControl.TreeViewController) -&gt; () -&gt; ()).(closure #3)"
+                  symbolName = "RXTreeControl.TreeViewController.(viewDidLoad (RXTreeControl.TreeViewController) -&gt; () -&gt; ()).(closure #2)"
                   moduleName = "RXTreeControl"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/arcilite/tree-view/RXTreeControl/TreeViewController.swift"
-                  timestampString = "476209197.527701"
+                  timestampString = "476261945.73193"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "99"
-                  endingLineNumber = "99"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
                   offsetFromSymbolStart = "55">
                </Location>
             </Locations>

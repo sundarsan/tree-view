@@ -25,11 +25,11 @@ import RxSwift
 import RxCocoa
 #endif
 
-class RxTableViewSectionedReloadDataSource<S: SectionModelType> : RxTableViewSectionedDataSource<S>
+public class RxTableViewSectionedReloadDataSource<S: SectionModelType> : RxTableViewSectionedDataSource<S>
 , RxTableViewDataSourceType {
-    typealias Element = [S]
+    public typealias Element = [S]
     
-    func tableView(tableView: UITableView, observedEvent: Event<Element>) {
+    public func tableView(tableView: UITableView, observedEvent: Event<Element>) {
         switch observedEvent {
         case .Next(let element):
             setSections(element)
