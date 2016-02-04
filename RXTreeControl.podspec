@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.source_files  = 'RXTreeControl/RXTreeControl/**/*.swift'
   s.requires_arc = true
 
-  s.dependency 'RxSwift', '2.0.0-beta'
-  s.dependency 'RxCocoa', '2.0.0-beta'
-  s.dependency 'RxBlocking', '2.0.0-beta'
+  s.dependency 'RxSwift'
+  s.dependency 'RxCocoa'
+  s.dependency 'RxBlocking'
 end
