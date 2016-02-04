@@ -6,7 +6,11 @@ Pod::Spec.new do |s|
   s.license      = 'MIT'
   s.authors = { 'Juri Vasylenko' => 'juri.v@ramotion.com' }
   s.ios.deployment_target = '8.0'
-  s.source       = { :git => 'https://github.com/Ramotion/tree-view', :tag => s.version.to_s }
+  s.source       = { :git => 'https://github.com/Ramotion/tree-view.git', :tag => s.version.to_s }
   s.source_files  = 'RXTreeControl/RXTreeControl/**/*.swift'
   s.requires_arc = true
+
+  s.dependency 'RxSwift', '2.0.0-beta'
+  s.dependency 'RxCocoa', '2.0.0-beta'
+  s.dependency 'RxBlocking', '2.0.0-beta'
 end
