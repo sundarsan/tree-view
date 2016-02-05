@@ -37,8 +37,18 @@ pod 'RXTreeControl', '~> 0.0.2'
             .addDisposableTo(disposeBag)
 ``` 
 
-``` swift tableView.rx_itemMoved.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
-     }.addDisposableTo(disposeBag)```
+
+``` swift
+    tableView.rx_itemMoved.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
+	
+	
+         }.addDisposableTo(disposeBag)
+``` 
+
+
+``` swift 
+	
+```
      
 ``` swift tableView.rx_itemSubRowOpen.subscribeNext { (sourceIndex: NSIndexPath) -> Void in  
         }.addDisposableTo(disposeBag)```     
