@@ -30,70 +30,64 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
    
   
     @IBOutlet weak var tableView: RXReorderTableView!
-    typealias Section = SectionModel<String, TreeModelView>
-    let treeController =                                                                                          TreeController(treeModel: TreeModel())
-       var itemTrees:Variable <[TreeModelView]>!
+   
+    let treeController = TreeController(treeModel: TreeModel())
+    
+    //var itemTrees:Variable <[TreeModelView]>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.longPressReorderDelegate = self
-        tableView.longPressReorderDatasource = self
-        let tree = Tree()
-        tree.title = "ee"
+
         
-        let treeModelView = TreeModelView()
-        treeModelView.treeObject = tree
-        
-        itemTrees = Variable(treeController.treeArray as [TreeModelView])
+        let itemTrees:Variable  = Variable(treeController.treeArray as [TreeModelView])
         
 
         
-//        itemTrees
-//            .bindTo(tableView.rx_itemsWithCellIdentifier("Cell0")) { (row, element, cell) in
-//                let tcell = cell as! TableViewCell
-//                tcell.titleLabel?.text = "\(element.treeObject.title ) @ Level \(element.level)"
-//                let colorRed = CGFloat(200 - element.level*10  ) / CGFloat(255.0)
-//                let colorGreen = CGFloat(element.level*10 + 20) / CGFloat(255.0)
-//                let colorBlue = CGFloat(100 - element.level*10 + 20) / CGFloat(255.0)
-//              
-//                tcell.backgroundColor =  UIColor(red: colorRed,
-//                    green: colorGreen,
-//                    blue: colorBlue,
-//                    alpha: CGFloat(1.0)
-//                )
-//                tcell.setNeedsLayout()
-//            }
-//            .addDisposableTo(disposeBag)
-//         self.tableView.setNeedsLayout()
-//         self.tableView.reloadData()
+        itemTrees
+            .bindTo(tableView.rx_itemsWithCellIdentifier("Cell0")) { (row, element, cell) in
+                let tcell = cell as! TableViewCell
+                tcell.titleLabel?.text = "\(element.treeObject.title ) @ Level \(element.level)"
+                let colorRed = CGFloat(200 - element.level*10  ) / CGFloat(255.0)
+                let colorGreen = CGFloat(element.level*10 + 20) / CGFloat(255.0)
+                let colorBlue = CGFloat(100 - element.level*10 + 20) / CGFloat(255.0)
+              
+                tcell.backgroundColor =  UIColor(red: colorRed,
+                    green: colorGreen,
+                    blue: colorBlue,
+                    alpha: CGFloat(1.0)
+                )
+                tcell.setNeedsLayout()
+            }
+            .addDisposableTo(disposeBag)
+        
        
       
        
      
-        let dataSource = RxTableViewSectionedReloadDataSource< SectionModel<String, TreeModelView>>()
-      
-        dataSource.cellFactory = { (tv, ip, element: TreeModelView) in
-            let identifier = "Cell" + "\(element.level)"
-            let cell = tv.dequeueReusableCellWithIdentifier(identifier)!
-            let tcell = cell as! TableViewCell
-            tcell.titleLabel?.text = "\(element.treeObject.title ) @ Level \(element.level)"
-            let colorRed = CGFloat(200 - element.level*10  ) / CGFloat(255.0)
-            let colorGreen = CGFloat(element.level*10 + 20) / CGFloat(255.0)
-            let colorBlue = CGFloat(100 - element.level*10 + 20) / CGFloat(255.0)
-            tcell.titleLabel?.frame.origin.x = CGFloat( 10 + 10 * element.level)
-            tcell.backgroundColor =  UIColor(red: colorRed,
-                green: colorGreen,
-                blue: colorBlue,
-                alpha: CGFloat(1.0)
-            )
-            tcell.setNeedsLayout()
-            return cell
-        }
+//        let dataSource = RxTableViewSectionedReloadDataSource< SectionModel<String, TreeModelView>>()
+//      
+//        dataSource.cellFactory = { (tv, ip, element: TreeModelView) in
+//            let identifier = "Cell" + "\(element.level)"
+//            let cell = tv.dequeueReusableCellWithIdentifier(identifier)!
+//            let tcell = cell as! TableViewCell
+//            tcell.titleLabel?.text = "\(element.treeObject.title ) @ Level \(element.level)"
+//            let colorRed = CGFloat(200 - element.level*10  ) / CGFloat(255.0)
+//            let colorGreen = CGFloat(element.level*10 + 20) / CGFloat(255.0)
+//            let colorBlue = CGFloat(100 - element.level*10 + 20) / CGFloat(255.0)
+//            tcell.titleLabel?.frame.origin.x = CGFloat( 10 + 10 * element.level)
+//            tcell.backgroundColor =  UIColor(red: colorRed,
+//                green: colorGreen,
+//                blue: colorBlue,
+//                alpha: CGFloat(1.0)
+//            )
+//            tcell.setNeedsLayout()
+//            return cell
+//        }
         
-        itemTrees
-            .map { [ SectionModel(model: "ok", items: $0) ] }
-            .bindTo(tableView.rx_itemsWithDataSource(dataSource))
-            .addDisposableTo(disposeBag)
+//        itemTrees
+//            .map { [ SectionModel(model: "ok", items: $0) ] }
+//            .bindTo(tableView.rx_itemsWithDataSource(dataSource))
+//            .addDisposableTo(disposeBag)
       //  itemTreesSections
       //      .bindTo(itemsDatasource)
       //      .addDisposableTo(disposeBag)
@@ -103,7 +97,7 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
             .rx_modelSelected(TreeModelView)
             .subscribeNext {value in
                 self.treeController.openOrCloseSubasset(value)
-                self.itemTrees.value = self.treeController.treeArray as [TreeModelView]
+                itemTrees.value = self.treeController.treeArray as [TreeModelView]
                 self.tableView.reloadData()
                
             }
