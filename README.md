@@ -46,37 +46,51 @@ pod 'RXTreeControl', '~> 0.0.2'
 ``` 
 
 
-``` swift 
-	
-```
      
-``` swift tableView.rx_itemSubRowOpen.subscribeNext { (sourceIndex: NSIndexPath) -> Void in  
-        }.addDisposableTo(disposeBag)```     
-``` swift tableView.rx_itemSubRowClosed.subscribeNext { (sourceIndex: NSIndexPath) -> Void in
-        }.addDisposableTo(disposeBag)```
+``` swift
+    tableView.rx_itemSubRowOpen.subscribeNext { (sourceIndex: NSIndexPath) -> Void in  
+    
+        }.addDisposableTo(disposeBag)
+```     
+
+```swift tableView.rx_itemSubRowClosed.subscribeNext { (sourceIndex: NSIndexPath) -> Void in
+
+}.addDisposableTo(disposeBag)
+```
         
-        
-  ``` swift tableView.rx_itemRowMoved.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
-                      }.addDisposableTo(disposeBag)```
+``` swift tableView.rx_itemRowMoved.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
+
+                      }.addDisposableTo(disposeBag)
+```
  
- ``` swift tableView.rx_itemSubRowMovedToRoot.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
-            }.addDisposableTo(disposeBag)```
+``` swift tableView.rx_itemSubRowMovedToRoot.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
+
+}.addDisposableTo(disposeBag)
+            ```
         
  ``` swift tableView.rx_itemSubRowMoved.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
-            }.addDisposableTo(disposeBag)```
+ 
+            }.addDisposableTo(disposeBag)
+```
         
         
  ``` swift tableView.rx_itemSubRowMove.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
-        }.addDisposableTo(disposeBag)```
+ 
+        }.addDisposableTo(disposeBag)
+ ```
  
  
 ``` swift tableView.rx_itemMoveToRoot.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in  
-        }.addDisposableTo(disposeBag)```
+
+        }.addDisposableTo(disposeBag)
+```
         
 ``` swift tableView.rx_dataSource.viewBlock =  { (cell:UITableViewCell, destinationIndex: NSIndexPath) -> UIView in
+
             let view = UIView(frame: CGRectMake(0,cell.frame.height - 2 ,self.tableView.frame.width,2))
             view.backgroundColor = UIColor.blueColor();
             return view
+            
 }```
 
 ## Licence
