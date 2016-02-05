@@ -158,14 +158,6 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
         
         
 }
-    
-//    func selectionViewForTableView(tableView: UITableView,destinitionCell cell:UITableViewCell,toIndexRowPath destinationRowIndexPath: NSIndexPath) -> UIView{
-//        let view = UIView(frame: CGRectMake(0,cell.frame.height - 2 ,self.tableView.frame.width,2))
-//        view.backgroundColor = UIColor.blueColor();
-//        return view
-//    }
-
-    
 
     
 }
