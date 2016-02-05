@@ -63,10 +63,11 @@ pod 'RXTreeControl', '~> 0.0.2'
                       }.addDisposableTo(disposeBag)
 ```
  
-``` swift tableView.rx_itemSubRowMovedToRoot.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
+``` swift 
+	tableView.rx_itemSubRowMovedToRoot.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
 
 }.addDisposableTo(disposeBag)
-            ```
+```
         
  ``` swift tableView.rx_itemSubRowMoved.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
  
@@ -74,10 +75,10 @@ pod 'RXTreeControl', '~> 0.0.2'
 ```
         
         
- ``` swift tableView.rx_itemSubRowMove.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
+``` swift tableView.rx_itemSubRowMove.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
  
         }.addDisposableTo(disposeBag)
- ```
+```
  
  
 ``` swift tableView.rx_itemMoveToRoot.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in  
@@ -89,9 +90,10 @@ pod 'RXTreeControl', '~> 0.0.2'
 
             let view = UIView(frame: CGRectMake(0,cell.frame.height - 2 ,self.tableView.frame.width,2))
             view.backgroundColor = UIColor.blueColor();
-            return view
-            
-}```
+            return view           
+}
+```
+
 
 ## Licence
 
