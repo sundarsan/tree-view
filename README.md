@@ -64,26 +64,30 @@ pod 'RXTreeControl', '~> 0.0.2'
 ```
  
 ``` swift 
-	tableView.rx_itemSubRowMovedToRoot.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
+tableView.rx_itemSubRowMovedToRoot.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
 
 }.addDisposableTo(disposeBag)
+
 ```
         
- ``` swift tableView.rx_itemSubRowMoved.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
+ ``` 
+swift tableView.rx_itemSubRowMoved.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
  
             }.addDisposableTo(disposeBag)
 ```
         
         
-``` swift tableView.rx_itemSubRowMove.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
+``` swift 
+	tableView.rx_itemSubRowMove.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
  
-        }.addDisposableTo(disposeBag)
+    }.addDisposableTo(disposeBag)
 ```
  
  
-``` swift tableView.rx_itemMoveToRoot.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in  
+``` swift 
+		tableView.rx_itemMoveToRoot.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in  
 
-        }.addDisposableTo(disposeBag)
+       }.addDisposableTo(disposeBag)
 ```
         
 ``` swift tableView.rx_dataSource.viewBlock =  { (cell:UITableViewCell, destinationIndex: NSIndexPath) -> UIView in
