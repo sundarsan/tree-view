@@ -149,6 +149,7 @@ This block return custom view which highlight selected cell for reordering
 }
 ```
 ## Snapshots
+![Solution](/tutorial/reordercontrol1.jpg)
 ![Solution](/tutorial/reordercontrol2.jpg)
 ![Solution](/tutorial/reordercontrol3.jpg)
 ## Licence
