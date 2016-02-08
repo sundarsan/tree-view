@@ -35,59 +35,59 @@ You can call this method for reactive filling cell
      
  ``` swift       
  	     itemTrees
-    	   .bindTo(tableView.rx_itemsWithCellIdentifier("Cell0")) { (row, element, cell) in
-                let tcell = cell as! TableViewCell
-                tcell.titleLabel?.text = "\(element.treeObject.title ) @ Level \(element.level)"
-                let colorRed = CGFloat(200 - element.level*10  ) / CGFloat(255.0)
-                let colorGreen = CGFloat(element.level*10 + 20) / CGFloat(255.0)
-                let colorBlue = CGFloat(100 - element.level*10 + 20) / CGFloat(255.0)
+       .bindTo(tableView.rx_itemsWithCellIdentifier("Cell0")) { (row, element, cell) in
+             let tcell = cell as! TableViewCell
+             tcell.titleLabel?.text = "\(element.treeObject.title ) @ Level \(element.level)"
+             let colorRed = CGFloat(200 - element.level*10  ) / CGFloat(255.0)
+             let colorGreen = CGFloat(element.level*10 + 20) / CGFloat(255.0)
+             let colorBlue = CGFloat(100 - element.level*10 + 20) / CGFloat(255.0)
               
-                tcell.backgroundColor =  UIColor(red: colorRed,
-                    green: colorGreen,
-                    blue: colorBlue,
-                    alpha: CGFloat(1.0)
-                )
-                tcell.setNeedsLayout()
-            }
-            .addDisposableTo(disposeBag)
+             tcell.backgroundColor =  UIColor(red: colorRed,
+                 green: colorGreen,
+                 blue: colorBlue,
+                 alpha: CGFloat(1.0)
+             )
+            tcell.setNeedsLayout()
+          }
+       .addDisposableTo(disposeBag)
 ```         
        
 
 This listener change when you select table view cell and put to value your model view
 
 ``` swift
-    	 tableView
-        	    .rx_modelSelected(TreeModelView)
-            	.subscribeNext {value in
+       tableView
+      .rx_modelSelected(TreeModelView)
+      .subscribeNext {value in
                
-               }	
-            	.addDisposableTo(disposeBag)
+      }	
+     .addDisposableTo(disposeBag)
 ``` 
 
 This listener change when you open subrow by index     
 
 ``` swift
-  	    tableView.rx_itemSubRowOpen.subscribeNext { (sourceIndex: NSIndexPath) -> Void in  
+  	 tableView.rx_itemSubRowOpen.subscribeNext { (sourceIndex: NSIndexPath) -> Void in  
     
-        }.addDisposableTo(disposeBag)
+    }.addDisposableTo(disposeBag)
 ```     
 
 This listener change when you close subrow by index  
 
 ```swift 
-  		tableView.rx_itemSubRowClosed
-		.subscribeNext { (sourceIndex: NSIndexPath) -> Void in
+  	tableView.rx_itemSubRowClosed
+	.subscribeNext { (sourceIndex: NSIndexPath) -> Void in
 
-		}.addDisposableTo(disposeBag)
+	}.addDisposableTo(disposeBag)
 
 ```
 This listener change when you close subrow by index       
 
 ``` swift 
-		tableView.rx_itemRowMoved
-		.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
+	 tableView.rx_itemRowMoved
+	 .subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
 
-        }.addDisposableTo(disposeBag)
+     }.addDisposableTo(disposeBag)
 ```
 
 This listener change when  subrow move to root 
@@ -103,19 +103,19 @@ This listener change when  subrow move to root
 This listener show changing position  when  row move to subrow
 
  ``` swift
- 			 tableView.rx_itemSubRowMoved
-			.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
+ 	   tableView.rx_itemSubRowMoved
+	  .subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
  
-            }.addDisposableTo(disposeBag)
+     }.addDisposableTo(disposeBag)
 ```
         
 This listener returned last changed reorder row to subrow
        
 ``` swift 
-			tableView.rx_itemSubRowMove
-			.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
+	 tableView.rx_itemSubRowMove
+	 .subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
  
-    		}.addDisposableTo(disposeBag)
+    }.addDisposableTo(disposeBag)
 ```
 
 
@@ -123,29 +123,29 @@ This listener show changing position  when  row move to root
 
  
 ``` swift 
-			tableView.rx_itemMoveToRoot
-			.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in  
+	   tableView.rx_itemMoveToRoot
+	  .subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in  
 
-     	  }.addDisposableTo(disposeBag)
+    .addDisposableTo(disposeBag)
 ```
 
 This listener returned last changed reorder row to root
 
 ``` swift 
-			tableView.rx_itemMovedToRoot
-			.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in  
-
-     	  }.addDisposableTo(disposeBag)
+	tableView.rx_itemMovedToRoot
+   .subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in  
+   
+   }.addDisposableTo(disposeBag)
 ```
 
 
 This block return custom view which highlight selected cell for reordering
 
 ``` swift 
-			tableView.rx_dataSource.viewBlock =  { (cell:UITableViewCell, destinationIndex: NSIndexPath) -> UIView in
-            let view = UIView(frame: CGRectMake(0,cell.frame.height - 2 ,self.tableView.frame.width,2))
-            view.backgroundColor = UIColor.blueColor();
-            return view           
+	tableView.rx_dataSource.viewBlock =  { (cell:UITableViewCell, destinationIndex: NSIndexPath) -> UIView in
+    let view = UIView(frame: CGRectMake(0,cell.frame.height - 2 ,self.tableView.frame.width,2))
+    view.backgroundColor = UIColor.blueColor();
+    return view           
 }
 ```
 ## Snapshots
