@@ -22,9 +22,6 @@ pod 'RXTreeControl', '~> 0.0.2'
 ```
     
 
-## Solution
-![Solution](/tutorial/reordercontrol1.png)
-
 ## Usage
 For using this library you need   install 'RxSwift',  'RxCocoa', 'RxBlocking', 
 
@@ -152,8 +149,8 @@ This block return custom view which highlight selected cell for reordering
 }
 ```
 ## Snapshots
-![Solution](/tutorial/reordercontrol2.png)
-![Solution](/tutorial/reordercontrol3.png)
+![Solution](/tutorial/reordercontrol2.jpg)
+![Solution](/tutorial/reordercontrol3.jpg)
 ## Licence
 
 Adaptive tab bar is released under the MIT license.
