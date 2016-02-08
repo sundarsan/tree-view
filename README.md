@@ -152,8 +152,8 @@ This block return custom view which highlight selected cell for reordering
 }
 ```
 ## Snapshots
-![Snapshots](/tutorial/reordercontrol2.png)
-![Snapshots](/tutorial/reordercontrol3.png)
+![Solution](/tutorial/reordercontrol2.png)
+![Solution](/tutorial/reordercontrol3.png)
 ## Licence
 
 Adaptive tab bar is released under the MIT license.
