@@ -61,9 +61,7 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
             .addDisposableTo(disposeBag)
         
        
-      
-       
-     
+   
 //        let dataSource = RxTableViewSectionedReloadDataSource< SectionModel<String, TreeModelView>>()
 //      
 //        dataSource.cellFactory = { (tv, ip, element: TreeModelView) in
@@ -129,7 +127,7 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
         
         tableView.rx_itemSubRowMovedToRoot.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
             
-            }.addDisposableTo(disposeBag)
+        }.addDisposableTo(disposeBag)
         
         
         tableView.rx_itemSubRowMoved.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in

@@ -23,7 +23,8 @@ pod 'RXTreeControl', '~> 0.0.2'
     
 
 ## Solution
-![Solution](/tutorial/reordercontrol.png)
+![Solution](/tutorial/reordercontrol1.png)
+
 ## Usage
 For using this library you need   install 'RxSwift',  'RxCocoa', 'RxBlocking', 
 
@@ -77,10 +78,10 @@ This listener change when you open subrow by index
 This listener change when you close subrow by index  
 
 ```swift 
-	tableView.rx_itemSubRowClosed
-	.subscribeNext { (sourceIndex: NSIndexPath) -> Void in
+  		tableView.rx_itemSubRowClosed
+		.subscribeNext { (sourceIndex: NSIndexPath) -> Void in
 
-	}.addDisposableTo(disposeBag)
+		}.addDisposableTo(disposeBag)
 
 ```
 This listener change when you close subrow by index       
@@ -95,14 +96,14 @@ This listener change when you close subrow by index
 This listener change when  subrow move to root 
 
 ``` swift 
-	tableView.rx_itemSubRowMovedToRoot
-	.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
+		tableView.rx_itemSubRowMovedToRoot
+		.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
 
-	}.addDisposableTo(disposeBag)
+		}.addDisposableTo(disposeBag)
 
 ```
 
-This listener change when  row move to subrow
+This listener show changing position  when  row move to subrow
 
  ``` swift
  			 tableView.rx_itemSubRowMoved
@@ -111,7 +112,7 @@ This listener change when  row move to subrow
             }.addDisposableTo(disposeBag)
 ```
         
-This listener returned last changed reorder row 
+This listener returned last changed reorder row to subrow
        
 ``` swift 
 			tableView.rx_itemSubRowMove
@@ -121,11 +122,20 @@ This listener returned last changed reorder row
 ```
 
 
-This block return custom view which highlight selected cell while you reorder cells
+This listener show changing position  when  row move to root
 
  
 ``` swift 
 			tableView.rx_itemMoveToRoot
+			.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in  
+
+     	  }.addDisposableTo(disposeBag)
+```
+
+This listener returned last changed reorder row to root
+
+``` swift 
+			tableView.rx_itemMovedToRoot
 			.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in  
 
      	  }.addDisposableTo(disposeBag)
@@ -141,8 +151,9 @@ This block return custom view which highlight selected cell for reordering
             return view           
 }
 ```
-
-
+## Snapshots
+![Snapshots](/tutorial/reordercontrol2.png)
+![Snapshots](/tutorial/reordercontrol3.png)
 ## Licence
 
 Adaptive tab bar is released under the MIT license.
