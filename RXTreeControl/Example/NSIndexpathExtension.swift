@@ -14,6 +14,7 @@ extension NSIndexPath {
         var inexPaths = [NSIndexPath]()
         
         for index in indexesArray {
+            print(index)
             let indexPath = NSIndexPath(forRow: index, inSection: section)
             inexPaths.append(indexPath)
         }

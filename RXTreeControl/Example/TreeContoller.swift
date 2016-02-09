@@ -145,9 +145,14 @@ class TreeController {
         return indexes
     }
     
-    func closeSubasset(asset:TreeModelView){
-        self.treeArray  = removeAssetTree(asset,fromArray: self.treeArray)
+    func closeSubasset(asset:TreeModelView)->[Int]{
+        let  closedArray = removeAssetTree(asset,fromArray: self.treeArray)
+        let indexes =  self.indexesOfDeletedObjectsArray(self.treeArray, objects: closedArray)
+        self.treeArray  = closedArray
+     
         asset.isTreeOpen = false
+        print(indexes)
+        return indexes
     }
     
      func openSubasset(asset:TreeModelView)-> [Int]{
@@ -166,15 +171,17 @@ class TreeController {
             
             
         }
+        
+        print(indexes)
         return indexes
     }
     
-     func openOrCloseSubasset(asset:TreeModelView){
+    func openOrCloseSubasset(asset:TreeModelView) -> [Int]{
         
         if(asset.isTreeOpen){
-            closeSubasset(asset)
+          return  closeSubasset(asset)
         }else{
-            openSubasset(asset)
+          return  openSubasset(asset)
             
         }
         

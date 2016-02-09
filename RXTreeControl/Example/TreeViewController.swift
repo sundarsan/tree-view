@@ -94,9 +94,23 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
         tableView
             .rx_modelSelected(TreeModelView)
             .subscribeNext {value in
-                self.treeController.openOrCloseSubasset(value)
+               let indexRows =  self.treeController.openOrCloseSubasset(value)
+               
+                let indexesPaths = NSIndexPath.indexPathsFromSection(0,indexesArray:indexRows)
+                print(indexesPaths)
+               
+               // self.tableView.beginUpdates()
+                if value.isTreeOpen{
+                      //self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
+                }else{
+                  ///self.tableView.deleteRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
+                   
+                }
+                
+             //   self.tableView.endUpdates()
+              
                 itemTrees.value = self.treeController.treeArray as [TreeModelView]
-                self.tableView.reloadData()
+              //  self.tableView.reloadData()
                
             }
             .addDisposableTo(disposeBag)

@@ -23,7 +23,7 @@ pod 'RXTreeControl', '~> 0.0.2'
     
 
 ## Usage
-For using this library you need   install 'RxSwift',  'RxCocoa', 'RxBlocking', 
+For using this library you have  to install 'RxSwift',  'RxCocoa', 'RxBlocking', 
 
 Create reactive observing variable and add to them your custom model view 
 
