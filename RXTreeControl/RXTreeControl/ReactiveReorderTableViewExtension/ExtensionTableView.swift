@@ -29,7 +29,7 @@ import RxCocoa
 
 public typealias ItemSelectedViewBlock = (cell:UITableViewCell, destinationIndex: NSIndexPath)->UIView
 public typealias ItemSubRowEvent = (NSIndexPath)
-public typealias ItemCellOpenedChangeStateEvent = (UITableViewCell,NSIndexPath?)
+public typealias ItemCellOpenedChangeStateEvent = (UITableViewCell,NSIndexPath?,AnyObject)
 
 
 
@@ -179,14 +179,16 @@ extension RXReorderTableView{
         }
                return ControlEvent(events: source)
     }
+    
+   // typealias  SelType = (UITableViewCell,NSIndexPath?,T)
     // public func rx_changeOpenStateByCell <T> (modelType:T.Type) -> ControlEvent<ItemCellOpenedChangeStateEvent>
-    public func rx_changeOpenStateByCell () -> ControlEvent<ItemCellOpenedChangeStateEvent> {
-        
-        let source: Observable<ItemCellOpenedChangeStateEvent> = rx_delegate.observe("changeOpenStateByCell:")
+    public func rx_changeOpenStateByCell <T>(modelType:T.Type) -> ControlEvent<(UITableViewCell,NSIndexPath?,T)> {
+       
+        let source: Observable<(UITableViewCell,NSIndexPath?,T)> = rx_delegate.observe("changeOpenStateByCell:")
             .map { a in
-              //  let indexPath = self.indexPathForCell(a[0] as! UITableViewCell)!
+                let indexPath = self.indexPathForCell(a[0] as! UITableViewCell)!
                 //let object = just(try self.rx_modelAtIndexPath(indexPath))
-                return ((a[0] as! UITableViewCell),self.indexPathForCell(a[0] as! UITableViewCell) )
+                return ((a[0] as! UITableViewCell),self.indexPathForCell(a[0] as! UITableViewCell), try self.rx_modelAtIndexPath(indexPath) )
         }
         
         return ControlEvent(events: source)

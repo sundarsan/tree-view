@@ -96,27 +96,6 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
         tableView
             .rx_modelSelected(TreeModelView)
             .subscribeNext {value in
-               let indexRows =  self.treeController.openOrCloseSubasset(value)
-               
-                let indexesPaths = NSIndexPath.indexPathsFromSection(0,indexesArray:indexRows)
-                print(indexesPaths)
-//               (tableView.rx_dataSource as? RxTableViewReactiveArrayDataSource<TreeModelView>).itemModels = self.treeController.treeArray
-                itemTrees.value = self.treeController.treeArray as [TreeModelView]
-                //self.tableView.beginUpdates()
-                if value.isTreeOpen{
-                  //self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
-          
-                }else{
-                  //self.tableView.insertRowsAtIndexPaths([], withRowAnimation: .Automatic)
-                  //self.tableView.deleteRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
-                    
-                  // self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
-                }
-                
-              // self.tableView.endUpdates()
-              
-               
-              //  self.tableView.reloadData()
                
             }
             .addDisposableTo(disposeBag)
@@ -165,18 +144,20 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
         }.addDisposableTo(disposeBag)
         
         
-        tableView.rx_changeOpenStateByCell().subscribeNext { (cell,indexPath) -> Void in
-            let indexRows =  self.treeController.openOrCloseSubassetByIndex(indexPath!.row)
+        tableView.rx_changeOpenStateByCell(TreeModelView).subscribeNext { (cell,indexPath,value) -> Void in
+            let indexRows =  self.treeController.openOrCloseSubasset(value)
+            let indexesPaths = NSIndexPath.indexPathsFromSection(0,indexesArray:indexRows)
+            print(indexesPaths)
 //            
-//            if value.isTreeOpen{
-//                //self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
-//                
-//            }else{
-//                //self.tableView.insertRowsAtIndexPaths([], withRowAnimation: .Automatic)
-//                //self.tableView.deleteRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
-//                
-//                // self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
-//            }
+            if value.isTreeOpen{
+              //  self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
+                
+            }else{
+                //self.tableView.insertRowsAtIndexPaths([], withRowAnimation: .Automatic)
+                //self.tableView.deleteRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
+                
+                // self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
+            }
             itemTrees.value = self.treeController.treeArray as [TreeModelView]
             
         }.addDisposableTo(disposeBag)
