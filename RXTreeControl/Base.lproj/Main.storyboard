@@ -36,10 +36,27 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GSm-97-p1A">
+                                                    <rect key="frame" x="552" y="9" width="29" height="34"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="34" id="Sev-7n-dWr"/>
+                                                        <constraint firstAttribute="width" constant="29" id="rq6-es-lnu"/>
+                                                    </constraints>
+                                                    <state key="normal" image="folderClosed"/>
+                                                    <state key="selected" image="folderOpened"/>
+                                                    <connections>
+                                                        <action selector="openAction:" destination="1lD-Ks-LmY" eventType="touchUpInside" id="4F9-iP-nC7"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="GSm-97-p1A" secondAttribute="trailing" constant="11" id="Fqk-Xi-Qp3"/>
+                                                <constraint firstItem="GSm-97-p1A" firstAttribute="top" secondItem="epX-XJ-2D7" secondAttribute="topMargin" constant="1" id="mx5-fa-9Rp"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.95294117649999999" green="0.78823529410000004" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
+                                            <outlet property="openButton" destination="GSm-97-p1A" id="SCq-xv-XII"/>
                                             <outlet property="titleLabel" destination="cid-yk-HOG" id="Olm-BE-fzr"/>
                                         </connections>
                                     </tableViewCell>
@@ -443,4 +460,8 @@
             <point key="canvasLocation" x="340" y="351"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="folderClosed" width="5" height="7"/>
+        <image name="folderOpened" width="7" height="5"/>
+    </resources>
 </document>

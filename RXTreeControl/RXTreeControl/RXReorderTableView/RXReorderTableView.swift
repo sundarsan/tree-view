@@ -24,7 +24,12 @@
 
 import UIKit
 @objc
-public protocol RXReorderTableViewDelegate: NSObjectProtocol {
+public protocol RXReorderTableViewCellDelegate: NSObjectProtocol {
+    optional func changeOpenStateByCell(cell:UITableViewCell)
+}
+
+@objc
+public protocol RXReorderTableViewDelegate: NSObjectProtocol,RXReorderTableViewCellDelegate {
     
 
     optional func tableView(tableView: UITableView, movedCell cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) -> UITableViewCell
@@ -52,6 +57,9 @@ public protocol RXReorderTableViewDelegate: NSObjectProtocol {
     
     
 }
+
+
+
 
 @objc
 public protocol RXReorderTableViewDatasource: NSObjectProtocol {

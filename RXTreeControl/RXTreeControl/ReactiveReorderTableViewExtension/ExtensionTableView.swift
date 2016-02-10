@@ -29,6 +29,7 @@ import RxCocoa
 
 public typealias ItemSelectedViewBlock = (cell:UITableViewCell, destinationIndex: NSIndexPath)->UIView
 public typealias ItemSubRowEvent = (NSIndexPath)
+public typealias ItemCellOpenedChangeStateEvent = (UITableViewCell,NSIndexPath?)
 
 
 
@@ -51,7 +52,7 @@ public class  RxReorderTableViewDataSourceProxy:RxTableViewDataSourceProxy,RXReo
     
 }
 
-public class RxReorderTableViewDelegateProxy: RxTableViewDelegateProxy,RXReorderTableViewDelegate {
+public class RxReorderTableViewDelegateProxy: RxTableViewDelegateProxy,RXReorderTableViewDelegate,RXReorderTableViewCellDelegate {
     
        //We need a way to read the current delegate
     override public class func currentDelegateFor(object: AnyObject) -> AnyObject? {
@@ -106,6 +107,7 @@ extension RXReorderTableView{
         return ControlEvent(events: source)
     }
     
+  
     
     public var rx_itemSubRowClosed: ControlEvent<ItemSubRowEvent> {
         let source: Observable<ItemSubRowEvent> = rx_delegate.observe("tableView:closeSubAssetAtIndexPath:")
@@ -174,6 +176,17 @@ extension RXReorderTableView{
         let source: Observable<ItemMovedEvent> = rx_delegate.observe("tableView:movingRowAtIndexPath:toRootRowPath:")
             .map { a in
                 return ((a[1] as! NSIndexPath), (a[2] as! NSIndexPath) ) //; (a[3] as! UIView)
+        }
+               return ControlEvent(events: source)
+    }
+    // public func rx_changeOpenStateByCell <T> (modelType:T.Type) -> ControlEvent<ItemCellOpenedChangeStateEvent>
+    public func rx_changeOpenStateByCell () -> ControlEvent<ItemCellOpenedChangeStateEvent> {
+        
+        let source: Observable<ItemCellOpenedChangeStateEvent> = rx_delegate.observe("changeOpenStateByCell:")
+            .map { a in
+              //  let indexPath = self.indexPathForCell(a[0] as! UITableViewCell)!
+                //let object = just(try self.rx_modelAtIndexPath(indexPath))
+                return ((a[0] as! UITableViewCell),self.indexPathForCell(a[0] as! UITableViewCell) )
         }
         
         return ControlEvent(events: source)

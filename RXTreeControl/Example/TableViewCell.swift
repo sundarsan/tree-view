@@ -24,11 +24,18 @@ import UIKit
 class TableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var openButton: UIButton!
+    var delegate:RXReorderTableViewCellDelegate!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
+    @IBAction func openAction(sender: AnyObject) {
+       delegate?.changeOpenStateByCell!(self)
+    }
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

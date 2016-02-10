@@ -176,6 +176,17 @@ class TreeController {
         return indexes
     }
     
+    func openOrCloseSubassetByIndex(index:Int) -> [Int]{
+        let asset  =  self.treeArray[index]
+        if(asset.isTreeOpen){
+            return  closeSubasset(asset)
+        }else{
+            return  openSubasset(asset)
+            
+        }
+        
+    }
+    
     func openOrCloseSubasset(asset:TreeModelView) -> [Int]{
         
         if(asset.isTreeOpen){

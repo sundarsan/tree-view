@@ -50,12 +50,14 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
                 let colorRed = CGFloat(200 - element.level*10  ) / CGFloat(255.0)
                 let colorGreen = CGFloat(element.level*10 + 20) / CGFloat(255.0)
                 let colorBlue = CGFloat(100 - element.level*10 + 20) / CGFloat(255.0)
-              
+             //   tcell.delegate = self
+                tcell.delegate = self.tableView.longPressReorderDelegate
                 tcell.backgroundColor =  UIColor(red: colorRed,
                     green: colorGreen,
                     blue: colorBlue,
                     alpha: CGFloat(1.0)
                 )
+                tcell.openButton.selected  = element.isTreeOpen
                 tcell.setNeedsLayout()
             }
             .addDisposableTo(disposeBag)
@@ -98,18 +100,22 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
                
                 let indexesPaths = NSIndexPath.indexPathsFromSection(0,indexesArray:indexRows)
                 print(indexesPaths)
-               
-               // self.tableView.beginUpdates()
+//               (tableView.rx_dataSource as? RxTableViewReactiveArrayDataSource<TreeModelView>).itemModels = self.treeController.treeArray
+                itemTrees.value = self.treeController.treeArray as [TreeModelView]
+                //self.tableView.beginUpdates()
                 if value.isTreeOpen{
-                      //self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
+                  //self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
+          
                 }else{
-                  ///self.tableView.deleteRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
-                   
+                  //self.tableView.insertRowsAtIndexPaths([], withRowAnimation: .Automatic)
+                  //self.tableView.deleteRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
+                    
+                  // self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
                 }
                 
-             //   self.tableView.endUpdates()
+              // self.tableView.endUpdates()
               
-                itemTrees.value = self.treeController.treeArray as [TreeModelView]
+               
               //  self.tableView.reloadData()
                
             }
@@ -136,7 +142,7 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
         }.addDisposableTo(disposeBag)
         
         tableView.rx_itemRowMoved.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
-              self.treeController.moveInTreeFromAssetIndex(sourceIndex.row,toIndex:destinationIndex.row)
+             // self.treeController.moveInTreeFromAssetIndex(sourceIndex.row,toIndex:destinationIndex.row)
         }.addDisposableTo(disposeBag)
         
         tableView.rx_itemSubRowMovedToRoot.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
@@ -158,6 +164,22 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
             
         }.addDisposableTo(disposeBag)
         
+        
+        tableView.rx_changeOpenStateByCell().subscribeNext { (cell,indexPath) -> Void in
+            let indexRows =  self.treeController.openOrCloseSubassetByIndex(indexPath!.row)
+//            
+//            if value.isTreeOpen{
+//                //self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
+//                
+//            }else{
+//                //self.tableView.insertRowsAtIndexPaths([], withRowAnimation: .Automatic)
+//                //self.tableView.deleteRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
+//                
+//                // self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
+//            }
+            itemTrees.value = self.treeController.treeArray as [TreeModelView]
+            
+        }.addDisposableTo(disposeBag)
         
         tableView.rx_dataSource.viewBlock =  { (cell:UITableViewCell, destinationIndex: NSIndexPath) -> UIView in
             let view = UIView(frame: CGRectMake(0,cell.frame.height - 2 ,self.tableView.frame.width,2))
