@@ -4,6 +4,7 @@
 [![CocoaPods](https://img.shields.io/cocoapods/p/RXTreeControl.svg)](https://cocoapods.org/pods/RXTreeControl)
 [![CocoaPods](https://img.shields.io/cocoapods/v/RXTreeControl.svg)](http://cocoapods.org/pods/RXTreeControl)
 [![codebeat badge](https://codebeat.co/badges/81d1ed3e-068a-48b5-842d-d4477344d205)](https://codebeat.co/projects/github-com-ramotion-tree-view)
+[![Swift 2.2](https://img.shields.io/badge/Swift-2.1-orange.svg?style=flat)](https://developer.apple.com/swift/)
 [![Twitter](https://img.shields.io/badge/Twitter-@Ramotion-blue.svg?style=flat)](http://twitter.com/Ramotion)
 [![Travis](https://img.shields.io/travis/Ramotion/tree-view.svg)](https://travis-ci.org/Ramotion/tree-view)
 
