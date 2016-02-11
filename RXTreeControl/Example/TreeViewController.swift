@@ -58,6 +58,7 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
                     alpha: CGFloat(1.0)
                 )
                 tcell.openButton.selected  = element.isTreeOpen
+                tcell.openButton.hidden = element.subobjects.count == 0
                 tcell.setNeedsLayout()
             }
             .addDisposableTo(disposeBag)
