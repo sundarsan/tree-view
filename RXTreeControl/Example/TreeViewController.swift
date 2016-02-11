@@ -151,11 +151,11 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
             print(indexesPaths)
 //            
             if value.isTreeOpen{
-                self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
+               // self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
                 
             }else{
                 //self.tableView.insertRowsAtIndexPaths([], withRowAnimation: .Automatic)
-                self.tableView.deleteRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
+               // self.tableView.deleteRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
                 
                 // self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
             }
