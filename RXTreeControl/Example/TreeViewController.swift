@@ -107,15 +107,15 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
         
         tableView.rx_itemSubRowOpen.subscribeNext { (sourceIndex: NSIndexPath) -> Void in
             print("Opeben")
-            self.tableView.reloadData()
+            //self.tableView.reloadData()
             let indexRows = self.treeController.openTreeByIndex(sourceIndex.row)
             let indexesPaths = NSIndexPath.indexPathsFromSection(0,indexesArray:indexRows)
             self.tableView.beginUpdates()
-            self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
+            self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Fade)
             self.tableView.endUpdates()
-            
-            
-           // self.tableView.reloadData()
+             //self.tableView.reloadData()
+             itemTrees.value = self.treeController.treeArray
+             //self.tableView.reloadData()
             
         }.addDisposableTo(disposeBag)
         
@@ -149,28 +149,19 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
         
         
         tableView.rx_changeOpenStateByCell(TreeModelView).subscribeNext { (cell,indexPath,value) -> Void in
-            self.tableView.reloadData()
             let indexRows =  self.treeController.openOrCloseSubasset(value)
             let indexesPaths = NSIndexPath.indexPathsFromSection(0,indexesArray:indexRows)
-            print(indexesPaths)
-            // self.tableView.reloadData()
-            itemTrees  = Variable(self.treeController.treeArray as [TreeModelView])
-            self.tableView.reloadData()
-            print(self.tableView.dataSource?.tableView( self.tableView, numberOfRowsInSection: 0))
-            //itemTrees.value = self.treeController.treeArray
-            
+ 
             if value.isTreeOpen{
-               self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
-                
+                itemTrees.value = self.treeController.treeArray
+                self.tableView.reloadRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
             }else{
-                //self.tableView.insertRowsAtIndexPaths([], withRowAnimation: .Automatic)
-              print(self.tableView.dataSource?.tableView( self.tableView, numberOfRowsInSection: 0))
-              self.tableView.deleteRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
-                
-                // self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
+                self.tableView.reloadRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
+                itemTrees.value = self.treeController.treeArray
             }
-            itemTrees.value = self.treeController.treeArray as [TreeModelView]
-            
+           
+           
+
         }.addDisposableTo(disposeBag)
         
         tableView.rx_dataSource.viewBlock =  { (cell:UITableViewCell, destinationIndex: NSIndexPath) -> UIView in
