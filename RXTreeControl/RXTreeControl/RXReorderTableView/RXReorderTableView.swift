@@ -379,12 +379,13 @@ public class RXReorderTableView: UITableView {
                                     
                                     CATransaction.begin()
                                     let pulseAnimation:CABasicAnimation = CABasicAnimation(keyPath: "transform.scale");
-                                    pulseAnimation.duration = 300.0;
+                                    pulseAnimation.duration =  25.5;
+                                    pulseAnimation.repeatDuration = 0.5
                                     pulseAnimation.toValue = NSNumber(float: 1.0);
                                     pulseAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut);
                                     pulseAnimation.autoreverses = true;
-                                    pulseAnimation.repeatCount = 2;
-                                    selectionView.layer.addAnimation(pulseAnimation, forKey: "ann")
+                                    pulseAnimation.repeatCount = 30;
+                                    cell.layer.addAnimation(pulseAnimation, forKey: "ann")
                                     
                                     CATransaction.setCompletionBlock({ () -> Void in
                                        self.longPressReorderDelegate.tableView?(self, openSubAssetAtIndexPath: indexPath)
