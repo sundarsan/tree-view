@@ -39,7 +39,7 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
         super.viewDidLoad()
 
         
-        var itemTrees:Variable  = Variable(treeController.treeArray as [TreeModelView])
+        let itemTrees:Variable  = Variable(treeController.treeArray as [TreeModelView])
         
         
         
@@ -50,7 +50,7 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
                 let colorRed = CGFloat(200 - element.level*10  ) / CGFloat(255.0)
                 let colorGreen = CGFloat(element.level*10 + 20) / CGFloat(255.0)
                 let colorBlue = CGFloat(100 - element.level*10 + 20) / CGFloat(255.0)
-             //   tcell.delegate = self
+
                 tcell.delegate = self.tableView.longPressReorderDelegate
                 tcell.backgroundColor =  UIColor(red: colorRed,
                     green: colorGreen,
@@ -107,15 +107,13 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
         
         tableView.rx_itemSubRowOpen.subscribeNext { (sourceIndex: NSIndexPath) -> Void in
             print("Opeben")
-            //self.tableView.reloadData()
             let indexRows = self.treeController.openTreeByIndex(sourceIndex.row)
             let indexesPaths = NSIndexPath.indexPathsFromSection(0,indexesArray:indexRows)
             self.tableView.beginUpdates()
             self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Fade)
             self.tableView.endUpdates()
-             //self.tableView.reloadData()
-             itemTrees.value = self.treeController.treeArray
-             //self.tableView.reloadData()
+            itemTrees.value = self.treeController.treeArray
+            
             
         }.addDisposableTo(disposeBag)
         
@@ -125,7 +123,7 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
         }.addDisposableTo(disposeBag)
         
         tableView.rx_itemRowMoved.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in
-             // self.treeController.moveInTreeFromAssetIndex(sourceIndex.row,toIndex:destinationIndex.row)
+            
         }.addDisposableTo(disposeBag)
         
         tableView.rx_itemSubRowMovedToRoot.subscribeNext { (sourceIndex: NSIndexPath, destinationIndex: NSIndexPath) -> Void in

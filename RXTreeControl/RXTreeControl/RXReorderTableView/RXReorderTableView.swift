@@ -49,13 +49,10 @@ public protocol RXReorderTableViewDelegate: NSObjectProtocol,RXReorderTableViewC
     
     optional func tableView(tableView: UITableView,movedRowAtIndexPath sourceIndexPath: NSIndexPath,toIndexRowPath destinationRowIndexPath: NSIndexPath) 
     
-//    optional func selectionViewForTableView(tableView: UITableView,destinitionCell cell:UITableViewCell,toIndexRowPath destinationRowIndexPath: NSIndexPath) -> UIView
-    
     optional func tableView(tableView: UITableView,openSubAssetAtIndexPath sourceIndexPath: NSIndexPath)
     
     optional func tableView(tableView: UITableView,closeSubAssetAtIndexPath sourceIndexPath: NSIndexPath)
-    
-    
+
 }
 
 
@@ -171,8 +168,7 @@ public class RXReorderTableView: UITableView {
         // Started.
         if gesture.state == .Began {
             if let indexPath = indexPath,var cell = cellForRowAtIndexPath(indexPath)  {
-                //   if var cell = cellForRowAtIndexPath(indexPath) {
-                
+            
                 cell.setSelected(false, animated: false)
                 cell.setHighlighted(false, animated: false)
                 
@@ -191,7 +187,6 @@ public class RXReorderTableView: UITableView {
                     
                 }
                 
-                //cell.hidden = true
                 currentLocationIndexPath = indexPath
                 fromIndexPath = indexPath
                 
@@ -360,7 +355,6 @@ public class RXReorderTableView: UITableView {
                     (gesture.locationInView(cellForRowAtIndexPath(indexPath)).y > (newHeight - oldHeight))) &&
                     canMoveRowAt(indexPath: indexPath) {
                         beginUpdates()
-                        //moveRowAtIndexPath(clIndexPath, toIndexPath: indexPath)
                         selectionView?.removeFromSuperview()
                         selectionView = nil
                         if let cell = cellForRowAtIndexPath(indexPath),selectionView =  self.longPressReorderDatasource?.selectionViewForTableView?(self, destinitionCell: cell, toIndexRowPath: indexPath),movedView = self.movedView{
@@ -381,9 +375,17 @@ public class RXReorderTableView: UITableView {
                                     movedView.transform = CGAffineTransformMakeScale(0.6, 0.6)
                                     reorderingState = .Submenu
                                     UIView.commitAnimations()
-                                    //self.beginUpdates()
+                                    
+                                    let pulseAnimation:CABasicAnimation = CABasicAnimation(keyPath: "transform.scale");
+                                    pulseAnimation.duration = 3.0;
+                                    pulseAnimation.toValue = NSNumber(float: 1.0);
+                                    pulseAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut);
+                                    pulseAnimation.autoreverses = true;
+                                    pulseAnimation.repeatCount = 2;
+                                    cell.layer.addAnimation(pulseAnimation, forKey: nil)
+                                    
                                     longPressReorderDelegate.tableView?(self, openSubAssetAtIndexPath: indexPath)
-                                    //self.endUpdates()
+                                   
                                     
                                 }else{
                                     selectionView.frame.origin.x = 0

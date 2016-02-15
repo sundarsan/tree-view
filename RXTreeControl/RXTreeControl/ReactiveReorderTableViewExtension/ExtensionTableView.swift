@@ -180,8 +180,7 @@ extension RXReorderTableView{
                return ControlEvent(events: source)
     }
     
-   // typealias  SelType = (UITableViewCell,NSIndexPath?,T)
-    // public func rx_changeOpenStateByCell <T> (modelType:T.Type) -> ControlEvent<ItemCellOpenedChangeStateEvent>
+ 
     public func rx_changeOpenStateByCell <T>(modelType:T.Type) -> ControlEvent<(UITableViewCell,NSIndexPath?,T)> {
        
         let source: Observable<(UITableViewCell,NSIndexPath?,T)> = rx_delegate.observe("changeOpenStateByCell:")
