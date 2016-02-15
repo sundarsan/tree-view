@@ -370,21 +370,29 @@ public class RXReorderTableView: UITableView {
                             }else{
                                 
                                 if movedView.frame.origin.x > 20 {
+                                    
                                     selectionView.frame.origin.x = 30
                                     UIView.beginAnimations("Scale", context: nil)
                                     movedView.transform = CGAffineTransformMakeScale(0.6, 0.6)
                                     reorderingState = .Submenu
                                     UIView.commitAnimations()
                                     
+                                    CATransaction.begin()
                                     let pulseAnimation:CABasicAnimation = CABasicAnimation(keyPath: "transform.scale");
-                                    pulseAnimation.duration = 3.0;
+                                    pulseAnimation.duration = 300.0;
                                     pulseAnimation.toValue = NSNumber(float: 1.0);
                                     pulseAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut);
                                     pulseAnimation.autoreverses = true;
                                     pulseAnimation.repeatCount = 2;
-                                    cell.layer.addAnimation(pulseAnimation, forKey: nil)
+                                    selectionView.layer.addAnimation(pulseAnimation, forKey: "ann")
                                     
-                                    longPressReorderDelegate.tableView?(self, openSubAssetAtIndexPath: indexPath)
+                                    CATransaction.setCompletionBlock({ () -> Void in
+                                       self.longPressReorderDelegate.tableView?(self, openSubAssetAtIndexPath: indexPath)
+                                    })
+                                    
+                                    CATransaction.flush()
+                                   
+                                  
                                    
                                     
                                 }else{
