@@ -197,7 +197,7 @@ extension RXReorderTableView{
     
     
     public var rx_viewWillDisplayCell: ControlEvent<ItemWillViewCellBlock> {
-        let source: Observable<ItemWillViewCellBlock> = rx_delegate.observe("tableView:willDisplayCell:willDisplayCell:")
+        let source: Observable<ItemWillViewCellBlock> = rx_delegate.observe("tableView:willDisplayCell:forRowAtIndexPath:")
             .map { a in
                 return ((a[1] as! UITableViewCell), (a[2] as! NSIndexPath) ) 
         }
