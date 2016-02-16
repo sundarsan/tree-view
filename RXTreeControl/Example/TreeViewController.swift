@@ -107,8 +107,9 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
         
         tableView.rx_itemSubRowOpen.subscribeNext { (sourceIndex: NSIndexPath) -> Void in
             print("Opeben")
-            let indexRows = self.treeController.openTreeByIndex(sourceIndex.row)
-            let indexesPaths = NSIndexPath.indexPathsFromSection(0,indexesArray:indexRows)
+            //let indexRows =
+            self.treeController.openTreeByIndex(sourceIndex.row)
+           // let indexesPaths = NSIndexPath.indexPathsFromSection(0,indexesArray:indexRows)
            // self.tableView.beginUpdates()
             //self.tableView.insertRowsAtIndexPaths(indexesPaths, withRowAnimation: .Fade)
            // self.tableView.endUpdates()

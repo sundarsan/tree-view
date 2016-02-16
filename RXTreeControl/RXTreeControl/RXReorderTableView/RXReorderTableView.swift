@@ -389,16 +389,16 @@ public class RXReorderTableView: UITableView {
                                     pulseAnimation.repeatCount = 30;
                                     movedView.layer.addAnimation(pulseAnimation, forKey: "animateOpacity")
                                     
-                                    
-                                    
                                     let pulseAnimationCell:CABasicAnimation = CABasicAnimation(keyPath: "opacityCell");
-                                    pulseAnimationCell.duration =  5.0;
-                                    pulseAnimationCell.repeatDuration = 0.5
+                                    pulseAnimationCell.duration =  10.0;
+                                    pulseAnimationCell.repeatDuration = 0.1
                                     pulseAnimationCell.fromValue = NSNumber(float: 1.0);
                                     pulseAnimationCell.toValue = NSNumber(float: 0.0);
                                     pulseAnimationCell.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut);
                                     pulseAnimationCell.autoreverses = true;
                                     pulseAnimationCell.repeatCount = 30;
+                                    
+                                    
                                     cell.layer.addAnimation(pulseAnimation, forKey: "pulseAnimationCell")
                                     
                                     CATransaction.setCompletionBlock({ () -> Void in

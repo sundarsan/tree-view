@@ -31,6 +31,8 @@ public typealias ItemSelectedViewBlock = (cell:UITableViewCell, destinationIndex
 public typealias ItemSubRowEvent = (NSIndexPath)
 public typealias ItemCellOpenedChangeStateEvent = (UITableViewCell,NSIndexPath?,AnyObject)
 
+public typealias ItemWillViewCellBlock = (cell:UITableViewCell, destinationIndex: NSIndexPath)
+
 
 
 public class  RxReorderTableViewDataSourceProxy:RxTableViewDataSourceProxy,RXReorderTableViewDatasource{
@@ -194,5 +196,15 @@ extension RXReorderTableView{
     }
     
     
-      
+    public var rx_viewWillDisplayCell: ControlEvent<ItemWillViewCellBlock> {
+        let source: Observable<ItemWillViewCellBlock> = rx_delegate.observe("tableView:willDisplayCell:willDisplayCell:")
+            .map { a in
+                return ((a[1] as! UITableViewCell), (a[2] as! NSIndexPath) ) 
+        }
+        return ControlEvent(events: source)
+    }
+    
+
+    
+    
 }
