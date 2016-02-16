@@ -378,23 +378,25 @@ public class RXReorderTableView: UITableView {
                                     UIView.commitAnimations()
                                     
                                     CATransaction.begin()
-                                    let pulseAnimation:CABasicAnimation = CABasicAnimation(keyPath: "transform.scale");
-                                    pulseAnimation.duration =  25.5;
+                                    
+                                    let pulseAnimation:CABasicAnimation = CABasicAnimation(keyPath: "opacity");
+                                    pulseAnimation.duration =  1.0;
                                     pulseAnimation.repeatDuration = 0.5
-                                    pulseAnimation.toValue = NSNumber(float: 1.0);
+                                    pulseAnimation.fromValue = NSNumber(float: 1.0);
+                                    pulseAnimation.toValue = NSNumber(float: 0.0);
                                     pulseAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut);
                                     pulseAnimation.autoreverses = true;
                                     pulseAnimation.repeatCount = 30;
-                                    cell.layer.addAnimation(pulseAnimation, forKey: "ann")
+                                    cell.layer.addAnimation(pulseAnimation, forKey: "animateOpacity")
+                                    
+                                    
                                     
                                     CATransaction.setCompletionBlock({ () -> Void in
                                        self.longPressReorderDelegate.tableView?(self, openSubAssetAtIndexPath: indexPath)
                                     })
                                     
                                     CATransaction.flush()
-                                   
-                                  
-                                   
+        
                                     
                                 }else{
                                     selectionView.frame.origin.x = 0
@@ -403,7 +405,7 @@ public class RXReorderTableView: UITableView {
                                     reorderingState = .Flat
                                     
                                    longPressReorderDelegate.tableView?(self, closeSubAssetAtIndexPath: indexPath)
-                                    UIView.commitAnimations()
+                                   UIView.commitAnimations()
                                     
                                 }
                                 cell.addSubview(selectionView)
