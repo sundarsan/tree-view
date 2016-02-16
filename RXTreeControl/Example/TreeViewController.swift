@@ -170,6 +170,10 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
             
             
         }
+        
+        tableView.rx_viewWillDisplayCell.subscribeNext { (cell: UITableViewCell, destinationIndex: NSIndexPath) -> Void in
+            
+        }.addDisposableTo(disposeBag)
 
         
         
