@@ -173,17 +173,17 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
         
         tableView.rx_viewWillDisplayCell.subscribeNext { (cell: UITableViewCell, destinationIndex: NSIndexPath) -> Void in
            
-            let pulseAnimationCell:CABasicAnimation = CABasicAnimation(keyPath: "opacityCell");
-            pulseAnimationCell.duration =  10.0;
-            pulseAnimationCell.repeatDuration = 0.1
-            pulseAnimationCell.fromValue = NSNumber(float: 1.0);
-            pulseAnimationCell.toValue = NSNumber(float: 0.0);
-            pulseAnimationCell.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut);
-            pulseAnimationCell.autoreverses = true;
-            pulseAnimationCell.repeatCount = 30;
+//            let pulseAnimationCell:CABasicAnimation = CABasicAnimation(keyPath: "opacityCell");
+//            pulseAnimationCell.duration =  10.0;
+//            pulseAnimationCell.repeatDuration = 0.1
+//            pulseAnimationCell.fromValue = NSNumber(float: 1.0);
+//            pulseAnimationCell.toValue = NSNumber(float: 0.0);
+//            pulseAnimationCell.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut);
+//            pulseAnimationCell.autoreverses = true;
+//            pulseAnimationCell.repeatCount = 30;
             
             
-            cell.layer.addAnimation(pulseAnimationCell, forKey: "pulseAnimationCell")
+            //cell.layer.addAnimation(pulseAnimationCell, forKey: "pulseAnimationCell")
         }.addDisposableTo(disposeBag)
 
         
