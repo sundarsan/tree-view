@@ -377,7 +377,7 @@ public class RXReorderTableView: UITableView {
                                     reorderingState = .Submenu
                                     UIView.commitAnimations()
                                     
-                                    CATransaction.begin()
+                                  //  CATransaction.begin()
                                     
                                     let pulseAnimation:CABasicAnimation = CABasicAnimation(keyPath: "opacity");
                                     pulseAnimation.duration =  1.0;
@@ -389,23 +389,33 @@ public class RXReorderTableView: UITableView {
                                     pulseAnimation.repeatCount = 30;
                                     movedView.layer.addAnimation(pulseAnimation, forKey: "animateOpacity")
                                     
-                                    let pulseAnimationCell:CABasicAnimation = CABasicAnimation(keyPath: "opacityCell");
-                                    pulseAnimationCell.duration =  10.0;
-                                    pulseAnimationCell.repeatDuration = 0.1
-                                    pulseAnimationCell.fromValue = NSNumber(float: 1.0);
-                                    pulseAnimationCell.toValue = NSNumber(float: 0.0);
-                                    pulseAnimationCell.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut);
-                                    pulseAnimationCell.autoreverses = true;
-                                    pulseAnimationCell.repeatCount = 30;
+//                                    let pulseAnimationCell:CABasicAnimation = CABasicAnimation(keyPath: "opacityCell");
+//                                    pulseAnimationCell.duration =  10.0;
+//                                    pulseAnimationCell.repeatDuration = 0.1
+//                                    pulseAnimationCell.fromValue = NSNumber(float: 1.0);
+//                                    pulseAnimationCell.toValue = NSNumber(float: 0.0);
+//                                    pulseAnimationCell.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut);
+//                                    pulseAnimationCell.autoreverses = true;
+//                                    pulseAnimationCell.repeatCount = 30;
+//                                    
+//                                    
+//                                    cell.layer.addAnimation(pulseAnimationCell, forKey: "pulseAnimationCell")
                                     
-                                    
-                                    cell.layer.addAnimation(pulseAnimationCell, forKey: "pulseAnimationCell")
-                                    
-                                    CATransaction.setCompletionBlock({ () -> Void in
-                                       self.longPressReorderDelegate.tableView?(self, openSubAssetAtIndexPath: indexPath)
+                                    UIView.animateWithDuration(300, animations: { () -> Void in
+                                          cell.alpha = 0.5;
+                                        }, completion: { (finished) -> Void in
+                                            UIView.animateWithDuration(300, animations: { () -> Void in
+                                                 cell.alpha = 1.0;
+                                                }, completion: { (finished) -> Void in
+                                                    self.longPressReorderDelegate.tableView?(self, openSubAssetAtIndexPath: indexPath)
+                                            })
                                     })
                                     
-                                    CATransaction.flush()
+//                                    CATransaction.setCompletionBlock({ () -> Void in
+//                                      // self.longPressReorderDelegate.tableView?(self, openSubAssetAtIndexPath: indexPath)
+//                                    })
+//                                    
+//                                    CATransaction.flush()
         
                                     
                                 }else{
