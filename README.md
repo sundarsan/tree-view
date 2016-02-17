@@ -149,12 +149,13 @@ tableView.rx_dataSource.viewBlock =  { (cell:UITableViewCell, destinationIndex: 
  return view           
 }
 ```
+
 This listener called when cell will viewed 
 
 ``` swift
  tableView.rx_viewWillDisplayCell.subscribeNext { (cell: UITableViewCell, destinationIndex: NSIndexPath) -> Void in
-            
-        }.addDisposableTo(disposeBag)
+ 
+ }.addDisposableTo(disposeBag)
  ```
 ## Snapshots
 ![Solution](/tutorial/reordercontrol1.png)
