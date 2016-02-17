@@ -23,14 +23,14 @@ import UIKit
 
 public class  RXReorderTableViewController: UITableViewController, RXReorderTableViewDelegate {
     
-    public func selectionViewForTableView(tableView: UITableView,destinitionCell cell:UITableViewCell,toIndexRowPath destinationRowIndexPath: NSIndexPath) -> UIView{
+    public func selectionViewForTableView(tableView: UITableView, destinitionCell cell: UITableViewCell, toIndexRowPath destinationRowIndexPath: NSIndexPath) -> UIView {
         let view = UIView()
         view.backgroundColor = UIColor.blueColor()
         return view
     }
     
     
-    public var longPressreorderTableView: RXReorderTableView! { return tableView as! RXReorderTableView }
+    public var longPressreorderTableView: RXReorderTableView! { return tableView as? RXReorderTableView }
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -67,7 +67,7 @@ public class  RXReorderTableViewController: UITableViewController, RXReorderTabl
     }
     
     
-    public func tableView(tableView: UITableView, showDraggingView view: UIView, atIndexPath indexPath: NSIndexPath){
+    public func tableView(tableView: UITableView, showDraggingView view: UIView, atIndexPath indexPath: NSIndexPath) {
         // Empty implementation, just to simplify overriding (and to show up in code completion).
     }
     

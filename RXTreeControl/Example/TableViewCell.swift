@@ -25,7 +25,7 @@ class TableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var openButton: UIButton!
-    var delegate:RXReorderTableViewCellDelegate!
+    var delegate: RXReorderTableViewCellDelegate!
     
     override func awakeFromNib() {
         super.awakeFromNib()

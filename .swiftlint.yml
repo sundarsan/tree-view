@@ -1,0 +1,8 @@
+
+  # Find all the available rules by running:
+  # swiftlint rules
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Pods
+disabled_rules:
+  - trailing_whitespace
+line_length: 120

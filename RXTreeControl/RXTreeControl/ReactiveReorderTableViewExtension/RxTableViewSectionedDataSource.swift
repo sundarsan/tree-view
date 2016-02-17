@@ -45,7 +45,7 @@ public class RxTableViewSectionedReloadDataSource<S: SectionModelType> : RxTable
 }
 
 // objc monkey business
-public class _RxTableViewSectionedDataSource : NSObject
+public class _RxTableViewSectionedDataSource: NSObject
                                              , UITableViewDataSource {
     
     func _numberOfSectionsInTableView(tableView: UITableView) -> Int {

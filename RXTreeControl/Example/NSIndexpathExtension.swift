@@ -10,7 +10,7 @@ import Foundation
 
 extension NSIndexPath {
 
-    class func indexPathsFromSection(section:Int,indexesArray:[Int]) -> [NSIndexPath]{
+    class func indexPathsFromSection(section: Int, indexesArray: [Int]) -> [NSIndexPath] {
         var inexPaths = [NSIndexPath]()
         
         for index in indexesArray {
@@ -22,5 +22,4 @@ extension NSIndexPath {
         return inexPaths
     
     }
- 
 }

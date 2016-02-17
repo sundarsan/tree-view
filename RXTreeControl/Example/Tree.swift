@@ -23,7 +23,7 @@ import UIKit
 //fuv
 
 
- class Tree:NSObject, TreeProtocol {
-    var title : String!
-    var subtrees:[TreeProtocol]!
+ class Tree: NSObject, TreeProtocol {
+    var title: String!
+    var subtrees: [TreeProtocol]!
 }

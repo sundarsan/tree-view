@@ -38,28 +38,22 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-        let itemTrees:Variable  = Variable(treeController.treeArray as [TreeModelView])
-        
-        
-        
+      let itemTrees: Variable  = Variable(treeController.treeArray as [TreeModelView])
+
         itemTrees
             .bindTo(tableView.rx_itemsWithCellIdentifier("Cell0")) { (row, element, cell) in
-                let tcell = cell as! TableViewCell
-                tcell.titleLabel?.text = "\(element.treeObject.title ) @ Level \(element.level)"
+                let tcell = cell as? TableViewCell
+                tcell?.titleLabel?.text = "\(element.treeObject.title ) @ Level \(element.level)"
                 let colorRed = CGFloat(200 - element.level*10  ) / CGFloat(255.0)
                 let colorGreen = CGFloat(element.level*10 + 20) / CGFloat(255.0)
                 let colorBlue = CGFloat(100 - element.level*10 + 20) / CGFloat(255.0)
 
-                tcell.delegate = self.tableView.longPressReorderDelegate
-                tcell.backgroundColor =  UIColor(red: colorRed,
-                    green: colorGreen,
-                    blue: colorBlue,
-                    alpha: CGFloat(1.0)
+                tcell?.delegate = self.tableView.longPressReorderDelegate
+                tcell?.backgroundColor =  UIColor(red: colorRed, green: colorGreen, blue: colorBlue, alpha: CGFloat(1.0)
                 )
-                tcell.openButton.selected  = element.isTreeOpen
-                tcell.openButton.hidden = element.subobjects.count == 0
-                tcell.setNeedsLayout()
+                tcell?.openButton.selected  = element.isTreeOpen
+                tcell?.openButton.hidden = element.subobjects.count == 0
+                tcell?.setNeedsLayout()
             }
             .addDisposableTo(disposeBag)
         
@@ -147,14 +141,14 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
         }.addDisposableTo(disposeBag)
         
         
-        tableView.rx_changeOpenStateByCell(TreeModelView).subscribeNext { (cell,indexPath,value) -> Void in
+        tableView.rx_changeOpenStateByCell(TreeModelView).subscribeNext { (cell, indexPath, value) -> Void in
             let indexRows =  self.treeController.openOrCloseSubasset(value)
-            let indexesPaths = NSIndexPath.indexPathsFromSection(0,indexesArray:indexRows)
+            let indexesPaths = NSIndexPath.indexPathsFromSection(0, indexesArray:indexRows)
  
-            if value.isTreeOpen{
+            if value.isTreeOpen {
                 itemTrees.value = self.treeController.treeArray
                 self.tableView.reloadRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
-            }else{
+            }else {
                 self.tableView.reloadRowsAtIndexPaths(indexesPaths, withRowAnimation: .Automatic)
                 itemTrees.value = self.treeController.treeArray
             }
@@ -163,15 +157,16 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
 
         }.addDisposableTo(disposeBag)
         
-        tableView.rx_dataSource.viewBlock =  { (cell:UITableViewCell, destinationIndex: NSIndexPath) -> UIView in
-            let view = UIView(frame: CGRectMake(0,cell.frame.height - 2 ,self.tableView.frame.width,2))
-            view.backgroundColor = UIColor.blueColor();
+        tableView.rx_dataSource.viewBlock = { (cell: UITableViewCell, destinationIndex: NSIndexPath) -> UIView in
+            let view = UIView(frame: CGRectMake(0, cell.frame.height - 2, self.tableView.frame.width,2))
+            view.backgroundColor = UIColor.blueColor()
             return view
             
             
         }
         
-        tableView.rx_viewWillDisplayCell.subscribeNext { (cell: UITableViewCell, destinationIndex: NSIndexPath) -> Void in
+        tableView.rx_viewWillDisplayCell
+          .subscribeNext { (cell: UITableViewCell, destinationIndex: NSIndexPath) -> Void in
            
 //            let pulseAnimationCell:CABasicAnimation = CABasicAnimation(keyPath: "opacityCell");
 //            pulseAnimationCell.duration =  10.0;

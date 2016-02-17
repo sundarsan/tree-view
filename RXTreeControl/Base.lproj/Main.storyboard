@@ -30,12 +30,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="52"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cid-yk-HOG">
-                                                    <rect key="frame" x="27" y="15" width="449" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GSm-97-p1A">
                                                     <rect key="frame" x="552" y="9" width="29" height="34"/>
                                                     <constraints>
@@ -48,7 +42,14 @@
                                                         <action selector="openAction:" destination="1lD-Ks-LmY" eventType="touchUpInside" id="4F9-iP-nC7"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cid-yk-HOG">
+                                                    <rect key="frame" x="27" y="15" width="449" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="GSm-97-p1A" secondAttribute="trailing" constant="11" id="Fqk-Xi-Qp3"/>
                                                 <constraint firstItem="GSm-97-p1A" firstAttribute="top" secondItem="epX-XJ-2D7" secondAttribute="topMargin" constant="1" id="mx5-fa-9Rp"/>

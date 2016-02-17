@@ -22,19 +22,19 @@ import UIKit
 
 
 @objc protocol TreeProtocol {
-    var title : String!{get set}
-    var subtrees:[TreeProtocol]! {get set}
+    var title: String! {get set}
+    var subtrees: [TreeProtocol]! {get set}
 }
 
-class TreeModelView:NSObject {
+class TreeModelView: NSObject {
     
-    var parentObject:TreeModelView!
-    var treeObject :TreeProtocol!
-    var subobjects:[TreeModelView]!
-    var level:Int = 0
-    var isTreeOpen:Bool = false
+    var parentObject: TreeModelView!
+    var treeObject: TreeProtocol!
+    var subobjects: [TreeModelView]!
+    var level: Int = 0
+    var isTreeOpen: Bool = false
     
-    func setParentLevel(level:Int){
+    func setParentLevel(level: Int) {
         self.level = level + 1
 //        for subobject in self.subobjects{
 //            subobject.setParentLevel(self.level)
