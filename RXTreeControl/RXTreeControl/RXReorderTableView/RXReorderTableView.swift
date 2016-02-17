@@ -399,7 +399,7 @@ public class RXReorderTableView: UITableView {
                                     pulseAnimationCell.repeatCount = 30;
                                     
                                     
-                                    cell.layer.addAnimation(pulseAnimation, forKey: "pulseAnimationCell")
+                                    cell.layer.addAnimation(pulseAnimationCell, forKey: "pulseAnimationCell")
                                     
                                     CATransaction.setCompletionBlock({ () -> Void in
                                        self.longPressReorderDelegate.tableView?(self, openSubAssetAtIndexPath: indexPath)
