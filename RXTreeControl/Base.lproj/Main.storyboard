@@ -23,7 +23,7 @@
                                 <color key="separatorColor" red="0.95294117649999999" green="0.78823529410000004" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.95294117649999999" green="0.78823529410000004" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell0" rowHeight="52" id="1lD-Ks-LmY" customClass="TableViewCell" customModule="RXTreeControl" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell0" rowHeight="52" id="1lD-Ks-LmY" customClass="TableViewCell" customModule="RXTreeControl" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="600" height="52"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1lD-Ks-LmY" id="epX-XJ-2D7">
@@ -448,7 +448,7 @@
                         <constraints>
                             <constraint firstItem="BJ5-VK-e3W" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="9Nv-c2-pnW"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BJ5-VK-e3W" secondAttribute="trailing" constant="-20" id="Cjx-Ci-orh"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="BJ5-VK-e3W" secondAttribute="bottom" id="NF2-dH-VLN"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="BJ5-VK-e3W" secondAttribute="bottom" id="D2o-eO-8zR"/>
                             <constraint firstItem="BJ5-VK-e3W" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="QPu-Lu-SLv"/>
                         </constraints>
                     </view>

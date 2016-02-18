@@ -290,17 +290,7 @@ public class RXReorderTableView: UITableView {
     UIView.beginAnimations("ReorderMovedView", context: nil)
     view(view: movedView)
     UIView.commitAnimations()
-    
-    // Add  shadow to image and lower opacity if we moved vire.
-    movedView.layer.masksToBounds = false
-    movedView.layer.shadowColor = UIColor.blackColor().CGColor
-    movedView.layer.shadowOffset = CGSize.zero
-    movedView.layer.shadowRadius = 4.0
-    movedView.layer.shadowOpacity = 0.7
-    movedView.layer.opacity = 0.55
-    
-    
-    
+    movedView.addShadowOnView()
   }
   
   func endMoveAnimationMovedView(movedView: UIView, currentLocationIndexPath: NSIndexPath, animation: (() -> Void), complete:(() -> Void) ) {
@@ -378,27 +368,8 @@ public class RXReorderTableView: UITableView {
                   
                   CATransaction.begin()
                   
-                  let pulseAnimation: CABasicAnimation = CABasicAnimation(keyPath: "opacity")
-                  pulseAnimation.duration =  1.0
-                  pulseAnimation.repeatDuration = 0.5
-                  pulseAnimation.fromValue = NSNumber(float: 1.0)
-                  pulseAnimation.toValue = NSNumber(float: 0.0)
-                  pulseAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-                  pulseAnimation.autoreverses = true
-                  pulseAnimation.repeatCount = 30
-                  movedView.layer.addAnimation(pulseAnimation, forKey: "animateOpacity")
-                  
-                  let pulseAnimationCell: CABasicAnimation = CABasicAnimation(keyPath: "opacity")
-                  pulseAnimationCell.duration =  1.0
-                  pulseAnimationCell.repeatDuration = 0.1
-                  pulseAnimationCell.fromValue = (1.0)
-                  pulseAnimationCell.toValue = (0.0)
-                  pulseAnimationCell.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-                  pulseAnimationCell.autoreverses = true
-                  pulseAnimationCell.repeatCount = 30
-                  
-                  
-                  cell.layer.addAnimation(pulseAnimationCell, forKey: nil)
+                  movedView.addPulseAnimationDuration(key:"animateOpacity")
+                  cell.addPulseAnimationDuration()
                   
 
                   CATransaction.setCompletionBlock({ () -> Void in
@@ -411,7 +382,6 @@ public class RXReorderTableView: UITableView {
                   UIView.beginAnimations("Scale", context: nil)
                   movedView.transform = CGAffineTransformMakeScale(1.0, 1.0)
                   reorderingState = .Flat
-                  
                   longPressReorderDelegate.tableView?(self, closeSubAssetAtIndexPath: indexPath)
                   UIView.commitAnimations()
                   
@@ -433,16 +403,7 @@ public class RXReorderTableView: UITableView {
   }
   
   
-  //                                    UIView.animateWithDuration(300, animations: { () -> Void in
-  //                                          cell.alpha = 0.5
-  //                                        }, completion: { (finished) -> Void in
-  //                                            UIView.animateWithDuration(300, animations: { () -> Void in
-  //                                                 cell.alpha = 1.0
-  //                                                }, completion: { (finished) -> Void in
-  //                                                    self.longPressReorderDelegate.tableView?(self, openSubAssetAtIndexPath: indexPath)
-  //                                            })
-  //                                    })
-  
+
   
   internal func scrollTableWithCell(sender: CADisplayLink) {
     if let gesture = longPressGestureRecognizer {
@@ -451,23 +412,13 @@ public class RXReorderTableView: UITableView {
       
       if !(location.y.isNaN || location.x.isNaN) {
         
-        let yOffset = Double(contentOffset.y) + scrollRate * 10.0
-        var newOffset = CGPointMake(contentOffset.x, CGFloat(yOffset))
+
+        contentOffset = getContentOffsetLocation(location)
         
-        if newOffset.y < -contentInset.top {
-          newOffset.y = -contentInset.top
-        } else if (contentSize.height + contentInset.bottom) < frame.size.height {
-          newOffset = contentOffset
-        } else if newOffset.y > ((contentSize.height + contentInset.bottom) - frame.size.height) {
-          newOffset.y = (contentSize.height + contentInset.bottom) - frame.size.height
-        }
-        
-        contentOffset = newOffset
-        
-        if let draggingView = movedView {
-          if (location.y >= 0) && (location.y <= (contentSize.height + 50.0)) {
+        if let draggingView = movedView  where(location.y >= 0) && (location.y <= (contentSize.height + 50.0)) {
+      
             draggingView.center = CGPointMake(location.x, location.y)
-          }
+  
         }
         
         updateCurrentLocation(gesture)
@@ -475,5 +426,47 @@ public class RXReorderTableView: UITableView {
     }
   }
   
+  func getContentOffsetLocation(location:CGPoint) -> CGPoint{
+    
+      
+      let yOffset = Double(contentOffset.y) + scrollRate * 10.0
+      var newOffset = CGPointMake(contentOffset.x, CGFloat(yOffset))
+      
+      if newOffset.y < -contentInset.top {
+        newOffset.y = -contentInset.top
+      } else if (contentSize.height + contentInset.bottom) < frame.size.height {
+        newOffset = contentOffset
+      } else if newOffset.y > ((contentSize.height + contentInset.bottom) - frame.size.height) {
+        newOffset.y = (contentSize.height + contentInset.bottom) - frame.size.height
+      }
+      return newOffset
+  }
   
 }
+  
+extension UIView{
+  
+  func addPulseAnimationDuration(duration:CFTimeInterval = 1.0 ,repeatDuration:CFTimeInterval = 0.1,fromValue:Double = 0.0,toValue:Double = 1.0 ,timingFunction:String = kCAMediaTimingFunctionEaseInEaseOut,autoreverses :Bool = true,repeatCount:Float = 30,key:String? = nil){
+    let pulseAnimationCell: CABasicAnimation = CABasicAnimation(keyPath: "opacity")
+    pulseAnimationCell.duration =  duration
+    pulseAnimationCell.repeatDuration = repeatDuration
+    pulseAnimationCell.fromValue = (fromValue)
+    pulseAnimationCell.toValue = (toValue)
+    pulseAnimationCell.timingFunction = CAMediaTimingFunction(name: timingFunction)
+    pulseAnimationCell.autoreverses = autoreverses
+    pulseAnimationCell.repeatCount = repeatCount
+    
+    self.layer.addAnimation(pulseAnimationCell, forKey: key)
+    
+  }
+  
+  func addShadowOnView(){
+    self.layer.masksToBounds = false
+    self.layer.shadowColor = UIColor.blackColor().CGColor
+    self.layer.shadowOffset = CGSize.zero
+    self.layer.shadowRadius = 4.0
+    self.layer.shadowOpacity = 0.7
+    self.layer.opacity = 0.55
+  }
+}
+

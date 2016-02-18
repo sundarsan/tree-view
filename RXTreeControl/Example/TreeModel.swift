@@ -85,8 +85,24 @@ class TreeModel {
         
         dbAssetFourth.subtrees =  subassetsThird
         subassetsThird.append(dbAssetFifth)
-        
-        
+      
+      
+       let dbTreeNine = Tree()
+       dbTreeNine.title = "9"
+       treeArray.append(dbTreeNine)
+      
+        let dbTreeTen = Tree()
+        dbTreeTen.title = "10"
+        treeArray.append(dbTreeTen)
+      
+       let dbTreeEleven = Tree()
+       dbTreeEleven.title = "11"
+       treeArray.append(dbTreeEleven)
+      
+        let dbTreeTwelwe = Tree()
+        dbTreeTwelwe.title = "12"
+        treeArray.append(dbTreeTwelwe)
+      
         return treeArray
         
     }
