@@ -33,4 +33,24 @@ extension UIView{
     self.layer.shadowOpacity = 0.7
     self.layer.opacity = 0.55
   }
+  
+  func unscaleView(scaleWidth:CGFloat = 0.6,scaleHeight:CGFloat = 0.6){
+    UIView.beginAnimations("unscale", context: nil)
+    self.transform = CGAffineTransformMakeScale(scaleWidth, scaleHeight)
+    UIView.commitAnimations()
+  }
+  
+  func scaleView(scaleWidth:CGFloat = 0.6,scaleHeight:CGFloat = 0.6){
+    UIView.beginAnimations("scale", context: nil)
+    self.transform = CGAffineTransformMakeScale(scaleWidth, scaleHeight)
+    UIView.commitAnimations()
+  }
+  
+  func viewImage() -> UIImage {
+    UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, 0.0)
+    self.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+    let cellImage = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    return cellImage
+  }
 }
