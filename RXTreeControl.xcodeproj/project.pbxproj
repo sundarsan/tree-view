@@ -28,6 +28,7 @@
 		6AB502661C1FFCAA00ECADC3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AB502641C1FFCAA00ECADC3 /* LaunchScreen.storyboard */; };
 		6AB502711C1FFCAB00ECADC3 /* RXTreeControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB502701C1FFCAB00ECADC3 /* RXTreeControlTests.swift */; };
 		6AB5027C1C1FFCAB00ECADC3 /* RXTreeControlUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB5027B1C1FFCAB00ECADC3 /* RXTreeControlUITests.swift */; };
+		6AE9E0911C75F96000CF325E /* ReorderGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE9E0901C75F96000CF325E /* ReorderGestureHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		6AB502771C1FFCAB00ECADC3 /* RXTreeControlUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RXTreeControlUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AB5027B1C1FFCAB00ECADC3 /* RXTreeControlUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RXTreeControlUITests.swift; sourceTree = "<group>"; };
 		6AB5027D1C1FFCAB00ECADC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6AE9E0901C75F96000CF325E /* ReorderGestureHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReorderGestureHandler.swift; path = RXTreeControl/RXReorderTableView/ReorderGestureHandler.swift; sourceTree = "<group>"; };
 		8E120BEF621C780A490FF0AD /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0BE87E779AA888D54853D0C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -138,6 +140,7 @@
 			children = (
 				6A2D9ECB1C63516800AE0F21 /* RXReorderTableView.swift */,
 				6A2D9ECC1C63516800AE0F21 /* RXTableViewController.swift */,
+				6AE9E0901C75F96000CF325E /* ReorderGestureHandler.swift */,
 			);
 			name = ReorderTable;
 			sourceTree = "<group>";
@@ -462,6 +465,7 @@
 				6A2D9EEA1C6353AB00AE0F21 /* NSIndexpathExtension.swift in Sources */,
 				6A2D9EE81C63538800AE0F21 /* BaseViewController.swift in Sources */,
 				6A2D9ECD1C63516800AE0F21 /* RXReorderTableView.swift in Sources */,
+				6AE9E0911C75F96000CF325E /* ReorderGestureHandler.swift in Sources */,
 				6A2D9ED51C63518B00AE0F21 /* SectionModel.swift in Sources */,
 				6A2D9EDE1C63535A00AE0F21 /* TreeModelView.swift in Sources */,
 				6A2D9EE21C63536C00AE0F21 /* Tree.swift in Sources */,

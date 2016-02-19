@@ -150,11 +150,7 @@ public class RXReorderTableView: UITableView {
     let location = gesture.locationInView(self)
     let indexPath = indexPathForRowAtPoint(location)
     
-    let sections = numberOfSections
-    var rows = 0
-    for i in 0..<sections {
-      rows += numberOfRowsInSection(i)
-    }
+    let rows = countRows()
     
     
     if (rows == 0) ||
@@ -440,6 +436,19 @@ public class RXReorderTableView: UITableView {
         newOffset.y = (contentSize.height + contentInset.bottom) - frame.size.height
       }
       return newOffset
+  }
+  
+}
+
+extension RXReorderTableView{
+  
+  func countRows() -> Int {
+    let sections = numberOfSections
+    var rows = 0
+    for i in 0..<sections {
+      rows += numberOfRowsInSection(i)
+    }
+    return rows
   }
   
 }
