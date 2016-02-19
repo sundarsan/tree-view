@@ -8,7 +8,24 @@
 
 import UIKit
 
-class ReorderGestureHandler: NSObject {
+public class ReorderGestureHandler: NSObject {
+  
+  private var scrollRate = 0.0
+  
+  private var scrollDisplayLink: CADisplayLink?
+  
+  private var reorderingState: ReorderingState = .Flat
+  
+  private var longPressReorderDelegate: RXReorderTableViewDelegate!
+  
+  private var longPressReorderDatasource: RXReorderTableViewDatasource!
+  
+  
+//  public convenience init() {
+//    self.init()
+//  }
+
+  
   
   
   

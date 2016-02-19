@@ -91,21 +91,21 @@ public class RXReorderTableView: UITableView {
   
   public var longPressReorderDatasource: RXReorderTableViewDatasource!
   
-  private var longPressGestureRecognizer: UILongPressGestureRecognizer!
+  internal var longPressGestureRecognizer: UILongPressGestureRecognizer!
   
-  private var fromIndexPath: NSIndexPath?
+  internal var fromIndexPath: NSIndexPath?
   
-  private var currentLocationIndexPath: NSIndexPath?
+  internal var currentLocationIndexPath: NSIndexPath?
   
-  private var movedView: UIView?
+  internal var movedView: UIView?
   
-  private var selectionView: UIView?
+  internal var selectionView: UIView?
   
-  private var scrollRate = 0.0
+  internal var scrollRate = 0.0
   
-  private var scrollDisplayLink: CADisplayLink?
+  internal var scrollDisplayLink: CADisplayLink?
   
-  private var reorderingState: ReorderingState = .Flat
+  internal var reorderingState: ReorderingState = .Flat
   
   /** A Bool property that indicates whether long press to reorder is enabled. */
   public var longPressReorderEnabled: Bool {
@@ -231,92 +231,9 @@ public class RXReorderTableView: UITableView {
   }
   
   
+
   
-  func finishScrolingOperation() {
-    // remove scrolling CADisplayLink because scrolling operation was finshed
-    scrollDisplayLink?.invalidate()
-    scrollDisplayLink = nil
-    scrollRate = 0.0
-  }
-  
-  
-  func directionRate(location: CGPoint) -> Double {
-    
-    var rate = 0.0
-    
-    if let draggingView = movedView {
-      // Update position of the moved view,
-      if (location.y >= 0.0) && (location.y <= contentSize.height + 50.0) {
-        draggingView.center = CGPointMake(location.x, location.y)
-      }
-    }
-    
-    var rect = bounds
-    
-    rect.size.height -= contentInset.top
-    
-    // updateCurrentLocation(gesture)
-    
-    // Check if we should scroll, and in which direction.
-    let scrollZoneHeight = rect.size.height / 6.0
-    let bottomScrollBeginning = contentOffset.y + contentInset.top + rect.size.height - scrollZoneHeight
-    let topScrollBeginning = contentOffset.y + contentInset.top  + scrollZoneHeight
-    
-    //  bottom zone.
-    if location.y >= bottomScrollBeginning {
-      rate = Double(location.y - bottomScrollBeginning) / Double(scrollZoneHeight)
-    }
-      //  top zone.
-    else if location.y <= topScrollBeginning {
-      rate = Double(location.y - topScrollBeginning) / Double(scrollZoneHeight)
-    } else {
-      rate = 0.0
-    }
-    
-    return rate
-  }
-  
-  func beginAnimationCellImage(viewImage: UIImage, indexPath: NSIndexPath, location: CGPoint, view:((view: UIImageView) -> Void)) {
-    
-    let movedView = UIImageView(image:viewImage)
-    addSubview(movedView)
-    let rect = rectForRowAtIndexPath(indexPath)
-    movedView.frame = CGRectOffset(movedView.bounds, rect.origin.x, rect.origin.y)
-    
-    UIView.beginAnimations("ReorderMovedView", context: nil)
-    view(view: movedView)
-    UIView.commitAnimations()
-    movedView.addShadowOnView()
-  }
-  
-  func endMoveAnimationMovedView(movedView: UIView, currentLocationIndexPath: NSIndexPath, animation: (() -> Void), complete:(() -> Void) ) {
-    // Animate the drag view to the newly hovered cell.
-    selectionView?.removeFromSuperview()
-    selectionView = nil
-    
-    
-    UIView.animateWithDuration(0.3, animations: { [unowned self] in
-        
-        UIView.beginAnimations("Reorder-HideMovedView", context: nil)
-        animation()
-        UIView.commitAnimations()
-        let rect = self.rectForRowAtIndexPath(currentLocationIndexPath)
-        movedView.transform = CGAffineTransformIdentity
-        movedView.frame = CGRectOffset(movedView.bounds, rect.origin.x, rect.origin.y)
-        
-      }, completion: {  (finished: Bool) in
-        movedView.removeFromSuperview()
-        // Reload the rows that were affected just to be safe.
-        if let visibleRows = self.indexPathsForVisibleRows {
-          self.reloadRowsAtIndexPaths(visibleRows, withRowAnimation: .None)
-        }
-        
-        complete()
-    })
-  }
-  
-  
-  private func updateCurrentLocation(gesture: UILongPressGestureRecognizer) {
+   func updateCurrentLocation(gesture: UILongPressGestureRecognizer) {
     let location = gesture.locationInView(self)
     if var indexPath = indexPathForRowAtPoint(location) {
       
@@ -344,6 +261,7 @@ public class RXReorderTableView: UITableView {
                 .selectionViewForTableView?(self, destinitionCell: cell, toIndexRowPath: indexPath),
               movedView = self.movedView {
               self.selectionView = selectionView
+              
               if movedView.frame.origin.y <= 0 {
                 self.movedView?.removeFromSuperview()
                 self.movedView = nil
@@ -401,81 +319,10 @@ public class RXReorderTableView: UITableView {
   
 
   
-  internal func scrollTableWithCell(sender: CADisplayLink) {
-    if let gesture = longPressGestureRecognizer {
-      
-      let location = gesture.locationInView(self)
-      
-      if !(location.y.isNaN || location.x.isNaN) {
-        
 
-        contentOffset = getContentOffsetLocation(location)
-        
-        if let draggingView = movedView  where(location.y >= 0) && (location.y <= (contentSize.height + 50.0)) {
-      
-            draggingView.center = CGPointMake(location.x, location.y)
-  
-        }
-        
-        updateCurrentLocation(gesture)
-      }
-    }
-  }
-  
-  func getContentOffsetLocation(location:CGPoint) -> CGPoint{
-    
-      
-      let yOffset = Double(contentOffset.y) + scrollRate * 10.0
-      var newOffset = CGPointMake(contentOffset.x, CGFloat(yOffset))
-      
-      if newOffset.y < -contentInset.top {
-        newOffset.y = -contentInset.top
-      } else if (contentSize.height + contentInset.bottom) < frame.size.height {
-        newOffset = contentOffset
-      } else if newOffset.y > ((contentSize.height + contentInset.bottom) - frame.size.height) {
-        newOffset.y = (contentSize.height + contentInset.bottom) - frame.size.height
-      }
-      return newOffset
-  }
-  
 }
 
-extension RXReorderTableView{
+
   
-  func countRows() -> Int {
-    let sections = numberOfSections
-    var rows = 0
-    for i in 0..<sections {
-      rows += numberOfRowsInSection(i)
-    }
-    return rows
-  }
-  
-}
-  
-extension UIView{
-  
-  func addPulseAnimationDuration(duration:CFTimeInterval = 1.0 ,repeatDuration:CFTimeInterval = 0.1,fromValue:Double = 0.0,toValue:Double = 1.0 ,timingFunction:String = kCAMediaTimingFunctionEaseInEaseOut,autoreverses :Bool = true,repeatCount:Float = 30,key:String? = nil){
-    let pulseAnimationCell: CABasicAnimation = CABasicAnimation(keyPath: "opacity")
-    pulseAnimationCell.duration =  duration
-    pulseAnimationCell.repeatDuration = repeatDuration
-    pulseAnimationCell.fromValue = (fromValue)
-    pulseAnimationCell.toValue = (toValue)
-    pulseAnimationCell.timingFunction = CAMediaTimingFunction(name: timingFunction)
-    pulseAnimationCell.autoreverses = autoreverses
-    pulseAnimationCell.repeatCount = repeatCount
-    
-    self.layer.addAnimation(pulseAnimationCell, forKey: key)
-    
-  }
-  
-  func addShadowOnView(){
-    self.layer.masksToBounds = false
-    self.layer.shadowColor = UIColor.blackColor().CGColor
-    self.layer.shadowOffset = CGSize.zero
-    self.layer.shadowRadius = 4.0
-    self.layer.shadowOpacity = 0.7
-    self.layer.opacity = 0.55
-  }
-}
+
 
