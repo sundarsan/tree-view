@@ -210,8 +210,5 @@ extension RXReorderTableView {
         }
         return ControlEvent(events: source)
     }
-    
 
-    
-    
 }
