@@ -10,20 +10,191 @@ import UIKit
 
 public class ReorderGestureHandler: NSObject {
   
-  private var scrollRate = 0.0
-  
-  private var scrollDisplayLink: CADisplayLink?
-  
-  private var reorderingState: ReorderingState = .Flat
-  
-  private var longPressReorderDelegate: RXReorderTableViewDelegate!
-  
-  private var longPressReorderDatasource: RXReorderTableViewDatasource!
+//  private var scrollRate = 0.0
+//  
+//  private var scrollDisplayLink: CADisplayLink?
+//  
+//  private var reorderingState: ReorderingState = .Flat
   
   
-//  public convenience init() {
-//    self.init()
-//  }
+  private var tableView : RXReorderTableView!
+  private var scrollController:RXScrollController!
+  public init(tableView:RXReorderTableView) {
+      self.tableView = tableView
+      self.scrollController = RXScrollController(tableView: tableView)
+  }
+
+  internal func longPress(gesture: UILongPressGestureRecognizer) {
+    
+    let location = gesture.locationInView(tableView)
+    let indexPath = tableView.indexPathForRowAtPoint(location)
+    
+    let rows = tableView.countRows()
+    
+    let isStartMoving = (gesture.state == UIGestureRecognizerState.Began) && (indexPath == nil)
+    let isMoving = (gesture.state == UIGestureRecognizerState.Ended) && (tableView.currentLocationIndexPath == nil)
+    let isEndMoving = (gesture.state == UIGestureRecognizerState.Began) && !tableView.canMoveRowAt(indexPath: indexPath!)
+    
+    if (rows == 0) || isStartMoving || isMoving || isEndMoving{
+      tableView.cancelGesture()
+      return
+    }
+    
+    // Started.
+    if gesture.state == .Began {
+      self.longPressBegan(indexPath, location: location)
+    } else if gesture.state == .Changed {
+      // Dragging.
+      scrollController.scrollRate = scrollController.directionRate(location)
+      updateCurrentLocation(gesture)
+      
+    } else if gesture.state == .Ended {
+      //Dropped.
+      self.longPressEnded()
+    }
+    
+  }
+  
+  func updateCurrentLocation(gesture: UILongPressGestureRecognizer) {
+    let location = gesture.locationInView(tableView)
+    if var indexPath = tableView.indexPathForRowAtPoint(location) {
+      
+      if let iIndexPath = tableView.fromIndexPath,ip = tableView.delegate?
+        .tableView?(tableView, targetIndexPathForMoveFromRowAtIndexPath: iIndexPath, toProposedIndexPath: indexPath) {
+          indexPath = ip
+      }
+      
+      if let clIndexPath = tableView.currentLocationIndexPath {
+        let oldHeight = tableView.rectForRowAtIndexPath(clIndexPath).size.height
+        let newHeight = tableView.rectForRowAtIndexPath(indexPath).size.height
+        
+        if ((indexPath != clIndexPath) &&
+          (gesture.locationInView(tableView.cellForRowAtIndexPath(indexPath)).y > (newHeight - oldHeight))) &&
+          tableView.canMoveRowAt(indexPath: indexPath) {
+            tableView.beginUpdates()
+            tableView.selectionView?.removeFromSuperview()
+            tableView.selectionView = nil
+            if let cell =
+              tableView.cellForRowAtIndexPath(indexPath),
+              selectionView =  tableView.longPressReorderDatasource?
+                .selectionViewForTableView?(tableView, destinitionCell: cell, toIndexRowPath: indexPath),
+              movedView = tableView.movedView {
+                tableView.selectionView = selectionView
+                
+                if movedView.frame.origin.y <= 0 {
+                  tableView.clearMovedView()
+                }else if  movedView.frame.origin.y  < 30 {
+                  tableView.selectionView?.frame.origin.y = 0
+                  cell.addSubview(selectionView)
+                  
+                  tableView.longPressReorderDelegate?.tableView?(tableView, movingRowAtIndexPath: clIndexPath, toRootRowPath: indexPath)
+                }else {
+                  
+                  if movedView.frame.origin.x > 20 {
+                    
+                    selectionView.frame.origin.x = 30
+                    movedView.unscaleView()
+                    
+                    tableView.reorderingState = .Submenu
+                    CATransaction.begin()
+                    movedView.addPulseAnimationDuration(key:"animateOpacity")
+                    // cell.addPulseAnimationDuration()
+                    CATransaction.setCompletionBlock({ () -> Void in
+                      self.tableView.longPressReorderDelegate.tableView?(self.tableView, openSubAssetAtIndexPath: indexPath)
+                    })
+                    
+                    CATransaction.flush()
+                  }else {
+                    selectionView.frame.origin.x = 0
+                    movedView.scaleView()
+                    tableView.reorderingState = .Flat
+                    tableView.longPressReorderDelegate.tableView?(tableView, closeSubAssetAtIndexPath: indexPath)
+                    
+                    
+                  }
+                  cell.addSubview(selectionView)
+                }
+            }
+            tableView.currentLocationIndexPath = indexPath
+            self.reorderRowByState(tableView.reorderingState , clIndexPath: clIndexPath, indexPath: indexPath)
+            
+            tableView.endUpdates()
+        }
+      }
+    }
+  }
+  
+  
+  func longPressBegan(indexPath:NSIndexPath?,location:CGPoint){
+    if let indexPath = indexPath, var cell = tableView.cellForRowAtIndexPath (indexPath) {
+      
+      cell.setSelected(false, animated: false)
+      cell.setHighlighted(false, animated: false)
+      
+      // Create the view that will be dragged around the screen.
+      if tableView.movedView == nil {
+        
+        if let draggingCell = tableView.longPressReorderDelegate?.tableView?(self.tableView, movedCell: cell, atIndexPath: indexPath) {
+          cell = draggingCell
+        }
+        
+        tableView.beginAnimationCellImage(cell.viewImage(), indexPath:indexPath, location: location, view: {[unowned self] (view) -> Void in
+          self.tableView.longPressReorderDelegate?.tableView?(self.tableView, showMovedView: view, atIndexPath: indexPath)
+          self.tableView.movedView = view
+          
+          })
+        
+      }
+      
+      tableView.currentLocationIndexPath = indexPath
+      tableView.fromIndexPath = indexPath
+      
+      // Enable scrolling for cell.
+      scrollController.scrollDisplayLink = CADisplayLink(target: scrollController, selector: "scrollTableWithCell:")
+      scrollController.scrollDisplayLink?.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSDefaultRunLoopMode)
+    }
+    
+  }
+  
+  func longPressEnded(){
+    scrollController.finishScrolingOperation()
+    
+    if let draggingView = tableView.movedView, currentLocationIndexPath = tableView.currentLocationIndexPath {
+      tableView.endMoveAnimationMovedView(draggingView, currentLocationIndexPath: currentLocationIndexPath, animation: { [unowned self] () in
+        
+        self.tableView.longPressReorderDelegate?.tableView?(self.tableView, hideMovedView: draggingView, toIndexPath: currentLocationIndexPath)
+        }, complete: {[unowned self]() in
+          self.tableView.clearMovedView()
+          self.tableView.currentLocationIndexPath = nil
+          
+          
+          if self.tableView.fromIndexPath != currentLocationIndexPath {
+            switch(self.tableView.reorderingState) {
+            case .Flat:
+              self.tableView.longPressReorderDelegate?.tableView!(self.tableView, movedRowAtIndexPath: self.tableView.fromIndexPath!, toIndexRowPath: currentLocationIndexPath)
+              break
+              
+            case .Submenu:
+              self.tableView.longPressReorderDelegate?.tableView?(self.tableView, movingSubRowAtIndexPath: self.tableView.fromIndexPath!, toIndexSubRowPath: currentLocationIndexPath)
+            case .Root:
+              self.tableView.longPressReorderDelegate?.tableView!(self.tableView, movedRowAtIndexPath: self.tableView.fromIndexPath!, toRootRowPath: currentLocationIndexPath)
+              break
+            }
+          }
+          
+          
+        })
+    }
+    
+  }
+  
+  func reorderRowByState(type:ReorderingState,clIndexPath: NSIndexPath,  indexPath:NSIndexPath){
+    if type == .Flat {
+      tableView.dataSource?.tableView?(tableView, moveRowAtIndexPath: clIndexPath, toIndexPath: indexPath)
+    }else if (type == .Submenu) {
+      tableView.longPressReorderDelegate.tableView?(tableView, movingSubRowAtIndexPath: clIndexPath, toIndexSubRowPath: indexPath)
+    }
+  }
 
   
   

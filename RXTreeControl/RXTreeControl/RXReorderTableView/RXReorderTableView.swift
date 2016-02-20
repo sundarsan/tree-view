@@ -47,11 +47,10 @@ public class RXReorderTableView: UITableView {
   
   internal var selectionView: UIView?
   
-  internal var scrollRate = 0.0
-  
-  internal var scrollDisplayLink: CADisplayLink?
   
   internal var reorderingState: ReorderingState = .Flat
+  
+  var getureHandler :ReorderGestureHandler!
   
   /** A Bool property that indicates whether long press to reorder is enabled. */
   public var longPressReorderEnabled: Bool {
@@ -78,7 +77,8 @@ public class RXReorderTableView: UITableView {
   }
   
   private func initialize() {
-    longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "longPress:")
+    self.getureHandler = ReorderGestureHandler(tableView: self)
+    longPressGestureRecognizer = UILongPressGestureRecognizer(target: self.getureHandler, action: "longPress:")
     addGestureRecognizer(longPressGestureRecognizer)
   }
   
@@ -92,6 +92,10 @@ public class RXReorderTableView: UITableView {
     self.movedView = nil
   }
 
+  func cancelGesture() {
+    longPressGestureRecognizer.enabled = false
+    longPressGestureRecognizer.enabled = true
+  }
 }
 
 
