@@ -26,11 +26,12 @@ public class ReorderGestureHandler: NSObject {
     let indexPath = tableView.indexPathForRowAtPoint(location)
     let rows = tableView.countRows()
     
-    let isStartMoving = (gesture.state == UIGestureRecognizerState.Began) && (indexPath == nil)
-    let isMoving = (gesture.state == UIGestureRecognizerState.Ended) && (tableView.currentLocationIndexPath == nil)
-    let isEndMoving = (gesture.state == UIGestureRecognizerState.Began) && !tableView.canMoveRowAt(indexPath: indexPath!)
+    let isStartMoving = gesture.state == UIGestureRecognizerState.Began && indexPath == nil
+    let isMoving = gesture.state == UIGestureRecognizerState.Ended && tableView.currentLocationIndexPath == nil
+    let isEndMoving = gesture.state == UIGestureRecognizerState.Began && !tableView.canMoveRowAt(indexPath: indexPath!)
+    let isTouch =  isStartMoving || isMoving || isEndMoving
     
-    if (rows == 0) || isStartMoving || isMoving || isEndMoving{
+    if (rows == 0) || isTouch{
       tableView.cancelGesture()
       return
     }
@@ -71,26 +72,9 @@ public class ReorderGestureHandler: NSObject {
               selectionView =  tableView.longPressReorderDatasource?
                 .selectionViewForTableView?(tableView, destinitionCell: cell, toIndexRowPath: indexPath),
               movedView = tableView.movedView {
-                tableView.selectionView = selectionView
-                
-                if movedView.frame.origin.y <= 0 {
-                  tableView.clearMovedView()
-                }else if  movedView.frame.origin.y  < 30 {
-                  tableView.selectionView?.frame.origin.y = 0
-                  cell.addSubview(selectionView)
-                  
-                  tableView.longPressReorderDelegate?.tableView?(tableView, movingRowAtIndexPath: clIndexPath, toRootRowPath: indexPath)
-                }else {
-                  
-                  if movedView.frame.origin.x > 20 {
-                    self.movingInSubusset(movedView, selectionView: selectionView, indexPath: indexPath)
-                
-                  }else {
-                     self.movingToAsset(movedView,selectionView: selectionView, indexPath:  indexPath)
-                  }
-                  cell.addSubview(selectionView)
-                }
-            }
+                self.selectionHiglighting(movedView, selectionView: selectionView, indexPath: indexPath, clIndexPath: clIndexPath, cell: cell)
+          
+              }
             tableView.currentLocationIndexPath = indexPath
             self.reorderRowByState(tableView.reorderingState , clIndexPath: clIndexPath, indexPath: indexPath)
             tableView.endUpdates()
@@ -99,6 +83,32 @@ public class ReorderGestureHandler: NSObject {
     }
   }
   
+  func selectionHiglighting(movedView:UIView,selectionView:UIView,indexPath:NSIndexPath,clIndexPath:NSIndexPath,cell:UITableViewCell){
+    tableView.selectionView = selectionView
+    
+    if movedView.frame.origin.y <= 0 {
+      tableView.clearMovedView()
+    }else if  movedView.frame.origin.y  < 30 {
+     self.movingToRootAsset(movedView, selectionView: selectionView, indexPath: indexPath, fromPath: clIndexPath, cell: cell)
+    }else {
+      
+      if movedView.frame.origin.x > 20 {
+        self.movingInSubusset(movedView, selectionView: selectionView, indexPath: indexPath)
+        
+      }else {
+        self.movingToAsset(movedView,selectionView: selectionView, indexPath:  indexPath)
+      }
+      cell.addSubview(selectionView)
+    }
+
+  }
+  
+  func movingToRootAsset(movedView:UIView,selectionView:UIView,indexPath:NSIndexPath,fromPath:NSIndexPath,cell:UITableViewCell){
+    tableView.selectionView?.frame.origin.y = 0
+    cell.addSubview(selectionView)
+    tableView.reorderingState = .Root
+    tableView.longPressReorderDelegate?.tableView?(tableView, movingRowAtIndexPath: fromPath, toRootRowPath: indexPath)
+  }
   
   func movingToAsset(movedView:UIView,selectionView:UIView,indexPath:NSIndexPath){
     selectionView.frame.origin.x = 0
