@@ -25,9 +25,9 @@
 		6A2D9EEA1C6353AB00AE0F21 /* NSIndexpathExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2D9EE91C6353AB00AE0F21 /* NSIndexpathExtension.swift */; };
 		6A36A8701C771C050065F878 /* RXReorderTableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A36A86F1C771C040065F878 /* RXReorderTableViewExtension.swift */; };
 		6A36A8721C771E680065F878 /* RXReorderViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A36A8711C771E680065F878 /* RXReorderViewExtension.swift */; };
-		6A36A8761C77224D0065F878 /* RXReorderTableViewAnimateExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A36A8751C77224D0065F878 /* RXReorderTableViewAnimateExtenstion.swift */; };
 		6A36A8781C77616F0065F878 /* RXReorderTableViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A36A8771C77616F0065F878 /* RXReorderTableViewProtocol.swift */; };
 		6A36A87A1C7874310065F878 /* RXScrollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A36A8791C7874310065F878 /* RXScrollController.swift */; };
+		6A36A87C1C7891B10065F878 /* MovingViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A36A87B1C7891B10065F878 /* MovingViewAnimator.swift */; };
 		6AB502611C1FFCAA00ECADC3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AB5025F1C1FFCAA00ECADC3 /* Main.storyboard */; };
 		6AB502631C1FFCAA00ECADC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AB502621C1FFCAA00ECADC3 /* Assets.xcassets */; };
 		6AB502661C1FFCAA00ECADC3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AB502641C1FFCAA00ECADC3 /* LaunchScreen.storyboard */; };
@@ -72,9 +72,9 @@
 		6A2D9EE91C6353AB00AE0F21 /* NSIndexpathExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSIndexpathExtension.swift; path = Example/NSIndexpathExtension.swift; sourceTree = "<group>"; };
 		6A36A86F1C771C040065F878 /* RXReorderTableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RXReorderTableViewExtension.swift; path = RXTreeControl/RXReorderTableView/RXReorderTableViewExtension.swift; sourceTree = "<group>"; };
 		6A36A8711C771E680065F878 /* RXReorderViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RXReorderViewExtension.swift; sourceTree = "<group>"; };
-		6A36A8751C77224D0065F878 /* RXReorderTableViewAnimateExtenstion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RXReorderTableViewAnimateExtenstion.swift; sourceTree = "<group>"; };
 		6A36A8771C77616F0065F878 /* RXReorderTableViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RXReorderTableViewProtocol.swift; sourceTree = "<group>"; };
 		6A36A8791C7874310065F878 /* RXScrollController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RXScrollController.swift; sourceTree = "<group>"; };
+		6A36A87B1C7891B10065F878 /* MovingViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovingViewAnimator.swift; path = RXTreeControl/RXReorderTableView/MovingViewAnimator.swift; sourceTree = "<group>"; };
 		6AB502581C1FFCAA00ECADC3 /* RXTreeControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RXTreeControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AB502601C1FFCAA00ECADC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6AB502621C1FFCAA00ECADC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -149,13 +149,13 @@
 			isa = PBXGroup;
 			children = (
 				6A2D9ECB1C63516800AE0F21 /* RXReorderTableView.swift */,
-				6A2D9ECC1C63516800AE0F21 /* RXTableViewController.swift */,
 				6AE9E0901C75F96000CF325E /* ReorderGestureHandler.swift */,
-				6A36A86F1C771C040065F878 /* RXReorderTableViewExtension.swift */,
-				6A36A8711C771E680065F878 /* RXReorderViewExtension.swift */,
 				6A36A8791C7874310065F878 /* RXScrollController.swift */,
-				6A36A8751C77224D0065F878 /* RXReorderTableViewAnimateExtenstion.swift */,
+				6A36A8711C771E680065F878 /* RXReorderViewExtension.swift */,
+				6A36A87B1C7891B10065F878 /* MovingViewAnimator.swift */,
 				6A36A8771C77616F0065F878 /* RXReorderTableViewProtocol.swift */,
+				6A36A86F1C771C040065F878 /* RXReorderTableViewExtension.swift */,
+				6A2D9ECC1C63516800AE0F21 /* RXTableViewController.swift */,
 			);
 			name = ReorderTable;
 			sourceTree = "<group>";
@@ -486,13 +486,13 @@
 				6AE9E0911C75F96000CF325E /* ReorderGestureHandler.swift in Sources */,
 				6A2D9ED51C63518B00AE0F21 /* SectionModel.swift in Sources */,
 				6A2D9EDE1C63535A00AE0F21 /* TreeModelView.swift in Sources */,
-				6A36A8761C77224D0065F878 /* RXReorderTableViewAnimateExtenstion.swift in Sources */,
 				6A2D9EE21C63536C00AE0F21 /* Tree.swift in Sources */,
 				6A2D9ED61C63518B00AE0F21 /* SectionModelType.swift in Sources */,
 				6A2D9EE11C63536C00AE0F21 /* TreeModel.swift in Sources */,
 				6A2D9ED31C63518B00AE0F21 /* ExtensionTableView.swift in Sources */,
 				6A36A87A1C7874310065F878 /* RXScrollController.swift in Sources */,
 				6A2D9ECE1C63516800AE0F21 /* RXTableViewController.swift in Sources */,
+				6A36A87C1C7891B10065F878 /* MovingViewAnimator.swift in Sources */,
 				6A2D9EE71C63538800AE0F21 /* AppDelegate.swift in Sources */,
 				6A2D9EDA1C6352B900AE0F21 /* TreeContoller.swift in Sources */,
 			);

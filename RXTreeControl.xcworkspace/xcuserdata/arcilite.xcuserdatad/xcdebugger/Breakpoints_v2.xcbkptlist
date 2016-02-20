@@ -560,27 +560,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RXTreeControl/RXTreeControl/RXReorderTableView/ReorderGestureHandler.swift"
-            timestampString = "477658061.948894"
+            timestampString = "477667927.276291"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
-            landmarkName = "longPressEnded()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RXTreeControl/RXTreeControl/RXReorderTableView/ReorderGestureHandler.swift"
-            timestampString = "477658061.948894"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
             landmarkName = "longPressEnded()"
             landmarkType = "5">
          </BreakpointContent>
@@ -674,54 +658,6 @@
                   startingLineNumber = "0"
                   endingLineNumber = "0"
                   offsetFromSymbolStart = "12">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RXTreeControl/RXTreeControl/RXReorderTableView/ReorderGestureHandler.swift"
-            timestampString = "477662869.656554"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "218"
-            endingLineNumber = "218"
-            landmarkName = "endMoveAnimationMovedView(_:currentLocationIndexPath:animation:complete:)"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "RXTreeControl.ReorderGestureHandler.endMoveAnimationMovedView (RXTreeControl.ReorderGestureHandler)(__ObjC.UIView, currentLocationIndexPath : __ObjC.NSIndexPath, animation : () -&gt; (), complete : () -&gt; ()) -&gt; ()"
-                  moduleName = "RXTreeControl"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/arcilite/tree-view/RXTreeControl/RXTreeControl/RXReorderTableView/ReorderGestureHandler.swift"
-                  timestampString = "477662928.219598"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "218"
-                  endingLineNumber = "218"
-                  offsetFromSymbolStart = "615">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "RXTreeControl.ReorderGestureHandler.(endMoveAnimationMovedView (RXTreeControl.ReorderGestureHandler) -&gt; (__ObjC.UIView, currentLocationIndexPath : __ObjC.NSIndexPath, animation : () -&gt; (), complete : () -&gt; ()) -&gt; ()).(closure #1)"
-                  moduleName = "RXTreeControl"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/arcilite/tree-view/RXTreeControl/RXTreeControl/RXReorderTableView/ReorderGestureHandler.swift"
-                  timestampString = "477662928.219795"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "220"
-                  endingLineNumber = "220"
-                  offsetFromSymbolStart = "27">
                </Location>
             </Locations>
          </BreakpointContent>

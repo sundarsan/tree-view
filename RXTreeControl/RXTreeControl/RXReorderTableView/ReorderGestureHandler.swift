@@ -10,25 +10,20 @@ import UIKit
 
 public class ReorderGestureHandler: NSObject {
   
-//  private var scrollRate = 0.0
-//  
-//  private var scrollDisplayLink: CADisplayLink?
-//  
-//  private var reorderingState: ReorderingState = .Flat
-  
-  
   private var tableView : RXReorderTableView!
   private var scrollController:RXScrollController!
+  private var movingViewAnimator:MovingViewAnimator!
+  
   public init(tableView:RXReorderTableView) {
       self.tableView = tableView
       self.scrollController = RXScrollController(tableView: tableView)
+      self.movingViewAnimator = MovingViewAnimator(tableView: tableView)
   }
 
   internal func longPress(gesture: UILongPressGestureRecognizer) {
     
     let location = gesture.locationInView(tableView)
     let indexPath = tableView.indexPathForRowAtPoint(location)
-    
     let rows = tableView.countRows()
     
     let isStartMoving = (gesture.state == UIGestureRecognizerState.Began) && (indexPath == nil)
@@ -91,26 +86,10 @@ public class ReorderGestureHandler: NSObject {
                 }else {
                   
                   if movedView.frame.origin.x > 20 {
-                    
-                    selectionView.frame.origin.x = 30
-                    movedView.unscaleView()
-                    
-                    tableView.reorderingState = .Submenu
-                    CATransaction.begin()
-                    movedView.addPulseAnimationDuration(key:"animateOpacity")
-                    // cell.addPulseAnimationDuration()
-                    CATransaction.setCompletionBlock({ () -> Void in
-                      self.tableView.longPressReorderDelegate.tableView?(self.tableView, openSubAssetAtIndexPath: indexPath)
-                    })
-                    
-                    CATransaction.flush()
+                    self.movingInSubusset(movedView, selectionView: selectionView, indexPath: indexPath)
+                
                   }else {
-                    selectionView.frame.origin.x = 0
-                    movedView.scaleView()
-                    tableView.reorderingState = .Flat
-                    tableView.longPressReorderDelegate.tableView?(tableView, closeSubAssetAtIndexPath: indexPath)
-                    
-                    
+                     self.movingToAsset(movedView,selectionView: selectionView, indexPath:  indexPath)
                   }
                   cell.addSubview(selectionView)
                 }
@@ -124,6 +103,28 @@ public class ReorderGestureHandler: NSObject {
     }
   }
   
+  func movingToAsset(movedView:UIView,selectionView:UIView,indexPath:NSIndexPath){
+    selectionView.frame.origin.x = 0
+    movedView.scaleView()
+    tableView.reorderingState = .Flat
+    tableView.longPressReorderDelegate.tableView?(tableView, closeSubAssetAtIndexPath: indexPath)
+    
+  }
+  
+  func  movingInSubusset(movedView:UIView,selectionView:UIView,indexPath:NSIndexPath){
+    selectionView.frame.origin.x = 30
+    movedView.unscaleView()
+    
+    tableView.reorderingState = .Submenu
+    CATransaction.begin()
+    movedView.addPulseAnimationDuration(key:"animateOpacity")
+    // cell.addPulseAnimationDuration()
+    CATransaction.setCompletionBlock({ () -> Void in
+      self.tableView.longPressReorderDelegate.tableView?(self.tableView, openSubAssetAtIndexPath: indexPath)
+    })
+    
+    CATransaction.flush()
+  }
   
   func longPressBegan(indexPath:NSIndexPath?,location:CGPoint){
     if let indexPath = indexPath, var cell = tableView.cellForRowAtIndexPath (indexPath) {
@@ -138,7 +139,7 @@ public class ReorderGestureHandler: NSObject {
           cell = draggingCell
         }
         
-        self.beginAnimationCellImage(cell.viewImage(), indexPath:indexPath, location: location, view: {[unowned self] (view) -> Void in
+        movingViewAnimator.beginAnimationCellImage(cell.viewImage(), indexPath:indexPath, location: location, view: {[unowned self] (view) -> Void in
           self.tableView.longPressReorderDelegate?.tableView?(self.tableView, showMovedView: view, atIndexPath: indexPath)
           self.tableView.movedView = view
           
@@ -148,44 +149,49 @@ public class ReorderGestureHandler: NSObject {
       
       tableView.currentLocationIndexPath = indexPath
       tableView.fromIndexPath = indexPath
-      
-      // Enable scrolling for cell.
-      scrollController.scrollDisplayLink = CADisplayLink(target: scrollController, selector: "scrollTableWithCell:")
-      scrollController.scrollDisplayLink?.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSDefaultRunLoopMode)
+      self.startScrolingForCell()
+     
     }
     
+  }
+  
+  func startScrolingForCell (){
+    // Enable scrolling for cell.
+    scrollController.scrollDisplayLink = CADisplayLink(target: scrollController, selector: "scrollTableWithCell:")
+    scrollController.scrollDisplayLink?.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSDefaultRunLoopMode)
   }
   
   func longPressEnded(){
     scrollController.finishScrolingOperation()
     
     if let draggingView = tableView.movedView, currentLocationIndexPath = tableView.currentLocationIndexPath {
-      self.endMoveAnimationMovedView(draggingView, currentLocationIndexPath: currentLocationIndexPath, animation: { [unowned self] () in
+      movingViewAnimator.endMoveAnimationMovedView(draggingView, currentLocationIndexPath: currentLocationIndexPath, animation: { [unowned self] () in
         
         self.tableView.longPressReorderDelegate?.tableView?(self.tableView, hideMovedView: draggingView, toIndexPath: currentLocationIndexPath)
         }, complete: {[unowned self]() in
           self.tableView.clearMovedView()
           self.tableView.currentLocationIndexPath = nil
-          
-          
-          if self.tableView.fromIndexPath != currentLocationIndexPath {
-            switch(self.tableView.reorderingState) {
-            case .Flat:
-              self.tableView.longPressReorderDelegate?.tableView!(self.tableView, movedRowAtIndexPath: self.tableView.fromIndexPath!, toIndexRowPath: currentLocationIndexPath)
-              break
-              
-            case .Submenu:
-              self.tableView.longPressReorderDelegate?.tableView?(self.tableView, movingSubRowAtIndexPath: self.tableView.fromIndexPath!, toIndexSubRowPath: currentLocationIndexPath)
-            case .Root:
-              self.tableView.longPressReorderDelegate?.tableView!(self.tableView, movedRowAtIndexPath: self.tableView.fromIndexPath!, toRootRowPath: currentLocationIndexPath)
-              break
-            }
-          }
-          
+          self.didFinishMovedViewAnimation(currentLocationIndexPath)
           
         })
     }
     
+  }
+  
+  func didFinishMovedViewAnimation(currentLocationIndexPath:NSIndexPath){
+    if self.tableView.fromIndexPath != currentLocationIndexPath {
+      switch(self.tableView.reorderingState) {
+      case .Flat:
+        self.tableView.longPressReorderDelegate?.tableView!(self.tableView, movedRowAtIndexPath: self.tableView.fromIndexPath!, toIndexRowPath: currentLocationIndexPath)
+        break
+        
+      case .Submenu:
+        self.tableView.longPressReorderDelegate?.tableView?(self.tableView, movingSubRowAtIndexPath: self.tableView.fromIndexPath!, toIndexSubRowPath: currentLocationIndexPath)
+      case .Root:
+        self.tableView.longPressReorderDelegate?.tableView!(self.tableView, movedRowAtIndexPath: self.tableView.fromIndexPath!, toRootRowPath: currentLocationIndexPath)
+        break
+      }
+    }
   }
   
   func reorderRowByState(type:ReorderingState,clIndexPath: NSIndexPath,  indexPath:NSIndexPath){
@@ -196,46 +202,4 @@ public class ReorderGestureHandler: NSObject {
     }
   }
 
-  func beginAnimationCellImage(viewImage: UIImage, indexPath: NSIndexPath, location: CGPoint, view:((view: UIImageView) -> Void)) {
-    
-    let movedView = UIImageView(image:viewImage)
-     tableView.addSubview(movedView)
-    let rect =  tableView.rectForRowAtIndexPath(indexPath)
-    movedView.frame = CGRectOffset(movedView.bounds, rect.origin.x, rect.origin.y)
-    
-    UIView.beginAnimations("ReorderMovedView", context: nil)
-    view(view: movedView)
-    UIView.commitAnimations()
-    movedView.addShadowOnView()
-  }
-  
-  func endMoveAnimationMovedView(movedView: UIView, currentLocationIndexPath: NSIndexPath, animation: (() -> Void), complete:(() -> Void) ) {
-    // Animate the drag view to the newly hovered cell.
-    tableView.selectionView?.removeFromSuperview()
-    tableView.selectionView = nil
-    
-    
-    UIView.animateWithDuration(0.3, animations: { [unowned self] in
-      
-      UIView.beginAnimations("Reorder-HideMovedView", context: nil)
-      animation()
-      UIView.commitAnimations()
-      let rect =  self.tableView.rectForRowAtIndexPath(currentLocationIndexPath)
-      movedView.transform = CGAffineTransformIdentity
-      movedView.frame = CGRectOffset(movedView.bounds, rect.origin.x, rect.origin.y)
-      
-      }, completion: {  (finished: Bool) in
-        movedView.removeFromSuperview()
-        // Reload the rows that were affected just to be safe.
-        if let visibleRows =  self.tableView.indexPathsForVisibleRows {
-           self.tableView.reloadRowsAtIndexPaths(visibleRows, withRowAnimation: .None)
-        }
-        
-        complete()
-    })
-  }
-  
-  
-  
-  
 }
