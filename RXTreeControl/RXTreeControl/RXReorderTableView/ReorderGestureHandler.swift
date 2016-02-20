@@ -34,7 +34,6 @@ public class ReorderGestureHandler: NSObject {
       tableView.cancelGesture()
       return
     }
-    
     // Started.
     if gesture.state == .Began {
       self.longPressBegan(indexPath, location: location)
@@ -150,7 +149,6 @@ public class ReorderGestureHandler: NSObject {
       tableView.currentLocationIndexPath = indexPath
       tableView.fromIndexPath = indexPath
       self.startScrolingForCell()
-     
     }
     
   }
@@ -163,7 +161,6 @@ public class ReorderGestureHandler: NSObject {
   
   func longPressEnded(){
     scrollController.finishScrolingOperation()
-    
     if let draggingView = tableView.movedView, currentLocationIndexPath = tableView.currentLocationIndexPath {
       movingViewAnimator.endMoveAnimationMovedView(draggingView, currentLocationIndexPath: currentLocationIndexPath, animation: { [unowned self] () in
         
@@ -201,5 +198,4 @@ public class ReorderGestureHandler: NSObject {
       tableView.longPressReorderDelegate.tableView?(tableView, movingSubRowAtIndexPath: clIndexPath, toIndexSubRowPath: indexPath)
     }
   }
-
 }
