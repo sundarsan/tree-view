@@ -89,7 +89,10 @@ public class ReorderGestureHandler: NSObject {
     if movedView.frame.origin.y <= 0 {
       tableView.clearMovedView()
     }else if  movedView.frame.origin.y  < 30 {
-     self.movingToRootAsset(movedView, selectionView: selectionView, indexPath: indexPath, fromPath: clIndexPath, cell: cell)
+      tableView.selectionView?.frame.origin.y = 0
+      cell.addSubview(selectionView)
+      tableView.reorderingState = .Root
+      tableView.longPressReorderDelegate?.tableView?(tableView, movingRowAtIndexPath: clIndexPath, toRootRowPath: indexPath)
     }else {
       if movedView.frame.origin.x > 20 {
         self.movingInSubusset(movedView, selectionView: selectionView, indexPath: indexPath)
@@ -102,12 +105,12 @@ public class ReorderGestureHandler: NSObject {
 
   }
   
-  func movingToRootAsset(movedView:UIView,selectionView:UIView,indexPath:NSIndexPath,fromPath:NSIndexPath,cell:UITableViewCell){
-    tableView.selectionView?.frame.origin.y = 0
-    cell.addSubview(selectionView)
-    tableView.reorderingState = .Root
-    tableView.longPressReorderDelegate?.tableView?(tableView, movingRowAtIndexPath: fromPath, toRootRowPath: indexPath)
-  }
+//  func movingToRootAsset(movedView:UIView,selectionView:UIView,indexPath:NSIndexPath,fromPath:NSIndexPath,cell:UITableViewCell){
+//    tableView.selectionView?.frame.origin.y = 0
+//    cell.addSubview(selectionView)
+//    tableView.reorderingState = .Root
+//    tableView.longPressReorderDelegate?.tableView?(tableView, movingRowAtIndexPath: fromPath, toRootRowPath: indexPath)
+//  }
   
   func movingToAsset(movedView:UIView,selectionView:UIView,indexPath:NSIndexPath){
     selectionView.frame.origin.x = 0
@@ -131,13 +134,11 @@ public class ReorderGestureHandler: NSObject {
   
   func longPressBegan(indexPath:NSIndexPath?,location:CGPoint){
     if let indexPath = indexPath, var cell = tableView.cellForRowAtIndexPath (indexPath) {
-      
       cell.setSelected(false, animated: false)
       cell.setHighlighted(false, animated: false)
      
       if let draggingCell = tableView.longPressReorderDelegate?.tableView?(self.tableView, movedCell: cell, atIndexPath: indexPath) {
         cell = draggingCell
-        
       }
       // Create the view that will be dragged around the screen.
      if tableView.movedView == nil {
@@ -152,7 +153,6 @@ public class ReorderGestureHandler: NSObject {
     }
     
   }
-  
   func startScrolingForCell (){
     // Enable scrolling for cell.
     scrollController.scrollDisplayLink = CADisplayLink(target: scrollController, selector: "scrollTableWithCell:")
