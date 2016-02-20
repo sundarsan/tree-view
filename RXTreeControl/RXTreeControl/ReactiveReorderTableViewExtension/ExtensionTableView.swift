@@ -72,12 +72,7 @@ public class RxReorderTableViewDelegateProxy: RxTableViewDelegateProxy,
         super.setCurrentDelegate(delegate, toObject: object)
       
     }
-    
-  
-    
-    /**
-     Typed parent object.
-     */
+
 }
     
 extension RXReorderTableView {
@@ -91,124 +86,102 @@ extension RXReorderTableView {
         return RxReorderTableViewDelegateProxy(parentObject: self)
     }
 
-    
-
-     public override  var rx_dataSource: RxReorderTableViewDataSourceProxy {
-         return  proxyForObject(RxReorderTableViewDataSourceProxy.self, self)//RxReorderTableViewDataSourceProxy(parentObject: self)
-     }
+    public override  var rx_dataSource: RxReorderTableViewDataSourceProxy {
+         return  proxyForObject(RxReorderTableViewDataSourceProxy.self, self)
+    }
 
     public override var rx_delegate: DelegateProxy {
-        return proxyForObject(RxReorderTableViewDelegateProxy.self, self)//RxReorderTableViewDelegateProxy(parentObject: self)//
+        return proxyForObject(RxReorderTableViewDelegateProxy.self, self)
     }
 
     
     public var rx_itemSubRowOpen: ControlEvent<ItemSubRowEvent> {
-        let source: Observable<ItemSubRowEvent> = rx_delegate.observe("tableView:openSubAssetAtIndexPath:")
-            .map { arguments in
-                return ((arguments[1] as? NSIndexPath))!
+        let sourceSubRowOpen: Observable<ItemSubRowEvent> = rx_delegate.observe("tableView:openSubAssetAtIndexPath:")
+            .map { subRowOpenArguments in
+                return ((subRowOpenArguments[1] as? NSIndexPath))!
         }
       
-        return ControlEvent(events: source)
-    }
-    
-  
-    
-    public var rx_itemSubRowClosed: ControlEvent<ItemSubRowEvent> {
-        let source: Observable<ItemSubRowEvent> = rx_delegate.observe("tableView:closeSubAssetAtIndexPath:")
-            .map { arguments in
-                return ((arguments[1] as? NSIndexPath))!
-        }
-        
-        return ControlEvent(events: source)
-    }
-    
-    
-    
-    public var rx_itemRowMoved: ControlEvent<ItemMovedEvent> {
-        let source: Observable<ItemMovedEvent> = rx_delegate.observe("tableView:movedRowAtIndexPath:toIndexRowPath:")
-            .map { arguments in
-                return ((arguments[1] as? NSIndexPath)!, (arguments[2] as? NSIndexPath)!)
-        }
-        
-        return ControlEvent(events: source)
-    }
-    
-    /*
-    Reactive wrapper for `delegate` message `tableView:movedRowAtIndexPath:toIndexPath:`.
-    */
-    
-    public var rx_itemSubRowMovedToRoot: ControlEvent<ItemMovedEvent> {
-        let source: Observable<ItemMovedEvent> = rx_delegate.observe("tableView:movedRowAtIndexPath:toRootRowPath:")
-            .map { arguments in
-                return ((arguments[1] as? NSIndexPath)!, (arguments[2] as? NSIndexPath)!)
-        }
-        
-        return ControlEvent(events: source)
+        return ControlEvent(events: sourceSubRowOpen)
     }
 
-    
-    
-    /*
-    func tableView(tableView: UITableView,
-       movedSubRowAtIndexPath sourceIndexPath: NSIndexPath, 
-      toIndexSubRowPath destinationSubRowIndexPath: NSIndexPath)
-    */
-    
-    
-    public var rx_itemSubRowMoved: ControlEvent<ItemMovedEvent> {
-      
-        let source: Observable <ItemMovedEvent> =
-        rx_delegate.observe("tableView:movedSubRowAtIndexPath:toIndexSubRowPath:")
+    public var rx_itemSubRowClosed: ControlEvent<ItemSubRowEvent> {
+        let sourceSubRowClosed: Observable<ItemSubRowEvent> = rx_delegate.observe("tableView:closeSubAssetAtIndexPath:")
             .map { arguments in
-              
-            return ((arguments[1] as? NSIndexPath)!, (arguments[2] as? NSIndexPath)!)
+                return ((arguments[1] as? NSIndexPath))!
         }
         
-        return ControlEvent(events: source)
+        return ControlEvent(events: sourceSubRowClosed)
     }
-    
-    
-    /*
-    Reactive wrapper for `delegate` message  func tableView(tableView: UITableView, moveSubRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexSubRowPath destinationSubRowIndexPath: NSIndexPath).
-    */
-    
-    public var rx_itemSubRowMove: ControlEvent<ItemMovedEvent> {
-        let source: Observable<ItemMovedEvent> = rx_delegate.observe("tableView:movingSubRowAtIndexPath:toIndexSubRowPath:")
+
+    public var rx_itemRowMoved: ControlEvent<ItemMovedEvent> {
+        let sourceRowMoved: Observable<ItemMovedEvent> = rx_delegate.observe("tableView:movedRowAtIndexPath:toIndexRowPath:")
             .map { arguments in
                 return ((arguments[1] as? NSIndexPath)!, (arguments[2] as? NSIndexPath)!)
         }
         
-        return ControlEvent(events: source)
+        return ControlEvent(events: sourceRowMoved)
     }
-    // func tableView(tableView: UITableView, moveSubRowAtIndexPath sourceIndexPath: NSIndexPath, toRootRowPath destinationSubRowIndexPath: NSIndexPath)
-    public var rx_itemMoveToRoot: ControlEvent<ItemMovedEvent> {
-        let source: Observable<ItemMovedEvent> = rx_delegate.observe("tableView:movingRowAtIndexPath:toRootRowPath:")
+    
+
+    public var rx_itemSubRowMovedToRoot: ControlEvent<ItemMovedEvent> {
+        let sourceSubRowMovedToRoot: Observable<ItemMovedEvent> = rx_delegate.observe("tableView:movedRowAtIndexPath:toRootRowPath:")
             .map { arguments in
-                return ((arguments[1] as? NSIndexPath)!, (arguments[2] as? NSIndexPath)! ) //; (a[3] as! UIView)
+                return ((arguments[1] as? NSIndexPath)!, (arguments[2] as? NSIndexPath)!)
         }
-               return ControlEvent(events: source)
+        
+        return ControlEvent(events: sourceSubRowMovedToRoot)
+    }
+
+
+    public var rx_itemSubRowMoved: ControlEvent<ItemMovedEvent> {
+      
+        let sourceSubRowMoved: Observable <ItemMovedEvent> =
+        rx_delegate.observe("tableView:movedSubRowAtIndexPath:toIndexSubRowPath:")
+            .map { subRowMovedArguments in
+              
+            return ((subRowMovedArguments[1] as? NSIndexPath)!, (subRowMovedArguments[2] as? NSIndexPath)!)
+        }
+        
+        return ControlEvent(events: sourceSubRowMoved)
+    }
+
+    public var rx_itemSubRowMove: ControlEvent<ItemMovedEvent> {
+        let sourceSubRowMove: Observable<ItemMovedEvent> = rx_delegate.observe("tableView:movingSubRowAtIndexPath:toIndexSubRowPath:")
+            .map { subRowMoveArguments in
+                return ((subRowMoveArguments[1] as? NSIndexPath)!, (subRowMoveArguments[2] as? NSIndexPath)!)
+        }
+        
+        return ControlEvent(events: sourceSubRowMove)
+    }
+
+    public var rx_itemMoveToRoot: ControlEvent<ItemMovedEvent> {
+        let sourceMoveToRoot: Observable<ItemMovedEvent> = rx_delegate.observe("tableView:movingRowAtIndexPath:toRootRowPath:")
+            .map { arguments in
+                return ((arguments[1] as? NSIndexPath)!, (arguments[2] as? NSIndexPath)! )
+         }
+               return ControlEvent(events: sourceMoveToRoot)
     }
     
  
     public func rx_changeOpenStateByCell <T>(modelType: T.Type) -> ControlEvent<(UITableViewCell,NSIndexPath?,T)> {
        
-        let source: Observable<(UITableViewCell,NSIndexPath?,T)> = rx_delegate.observe("changeOpenStateByCell:")
-            .map { arguments in
-                let indexPath = self.indexPathForCell((arguments[0] as? UITableViewCell)!)!
+        let sourceOpenState: Observable<(UITableViewCell,NSIndexPath?,T)> = rx_delegate.observe("changeOpenStateByCell:")
+            .map { argumentsOpenState in
+                let indexPath = self.indexPathForCell((argumentsOpenState[0] as? UITableViewCell)!)!
                 //let object = just(try self.rx_modelAtIndexPath(indexPath))
-                return ((arguments[0] as? UITableViewCell)!,self.indexPathForCell((arguments[0] as? UITableViewCell)!), try self.rx_modelAtIndexPath(indexPath) )
+                return ((argumentsOpenState[0] as? UITableViewCell)!,self.indexPathForCell((argumentsOpenState[0] as? UITableViewCell)!), try self.rx_modelAtIndexPath(indexPath) )
         }
         
-        return ControlEvent(events: source)
+        return ControlEvent(events: sourceOpenState)
     }
     
     
     public var rx_viewWillDisplayCell: ControlEvent<ItemWillViewCellBlock> {
-        let source: Observable<ItemWillViewCellBlock> = rx_delegate.observe("tableView:willDisplayCell:forRowAtIndexPath:")
-            .map { arguments in
-                return ((arguments[1] as? UITableViewCell)!, (arguments[2] as? NSIndexPath)! )
+        let sourceDisplayCell: Observable<ItemWillViewCellBlock> = rx_delegate.observe("tableView:willDisplayCell:forRowAtIndexPath:")
+            .map { argumentsDisplayCell in
+                return ((argumentsDisplayCell[1] as? UITableViewCell)!, (argumentsDisplayCell[2] as? NSIndexPath)! )
         }
-        return ControlEvent(events: source)
+        return ControlEvent(events: sourceDisplayCell)
     }
 
 }
