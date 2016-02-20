@@ -34,19 +34,18 @@ public class ReorderGestureHandler: NSObject {
       tableView.cancelGesture()
       return
     }
-    // Started.
-    if gesture.state == .Began {
+    
+    switch(gesture.state){
+    case .Began:
       self.longPressBegan(indexPath, location: location)
-    } else if gesture.state == .Changed {
-      // Dragging.
+    case .Changed:
       scrollController.scrollRate = scrollController.directionRate(location)
       updateCurrentLocation(gesture)
-      
-    } else if gesture.state == .Ended {
-      //Dropped.
+    case .Ended:
       self.longPressEnded()
+    default:
+      break;
     }
-    
   }
   
   func updateCurrentLocation(gesture: UILongPressGestureRecognizer) {
@@ -95,19 +94,18 @@ public class ReorderGestureHandler: NSObject {
             }
             tableView.currentLocationIndexPath = indexPath
             self.reorderRowByState(tableView.reorderingState , clIndexPath: clIndexPath, indexPath: indexPath)
-            
             tableView.endUpdates()
         }
       }
     }
   }
   
+  
   func movingToAsset(movedView:UIView,selectionView:UIView,indexPath:NSIndexPath){
     selectionView.frame.origin.x = 0
     movedView.scaleView()
     tableView.reorderingState = .Flat
     tableView.longPressReorderDelegate.tableView?(tableView, closeSubAssetAtIndexPath: indexPath)
-    
   }
   
   func  movingInSubusset(movedView:UIView,selectionView:UIView,indexPath:NSIndexPath){
@@ -145,7 +143,6 @@ public class ReorderGestureHandler: NSObject {
           })
         
       }
-      
       tableView.currentLocationIndexPath = indexPath
       tableView.fromIndexPath = indexPath
       self.startScrolingForCell()
@@ -181,7 +178,6 @@ public class ReorderGestureHandler: NSObject {
       case .Flat:
         self.tableView.longPressReorderDelegate?.tableView!(self.tableView, movedRowAtIndexPath: self.tableView.fromIndexPath!, toIndexRowPath: currentLocationIndexPath)
         break
-        
       case .Submenu:
         self.tableView.longPressReorderDelegate?.tableView?(self.tableView, movingSubRowAtIndexPath: self.tableView.fromIndexPath!, toIndexSubRowPath: currentLocationIndexPath)
       case .Root:

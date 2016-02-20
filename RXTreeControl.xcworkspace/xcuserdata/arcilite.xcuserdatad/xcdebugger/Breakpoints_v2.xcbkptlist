@@ -560,11 +560,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RXTreeControl/RXTreeControl/RXReorderTableView/ReorderGestureHandler.swift"
-            timestampString = "477667927.276291"
+            timestampString = "477669273.190543"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
             landmarkName = "longPressEnded()"
             landmarkType = "5">
          </BreakpointContent>
