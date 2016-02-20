@@ -91,7 +91,6 @@ public class ReorderGestureHandler: NSObject {
     }else if  movedView.frame.origin.y  < 30 {
      self.movingToRootAsset(movedView, selectionView: selectionView, indexPath: indexPath, fromPath: clIndexPath, cell: cell)
     }else {
-      
       if movedView.frame.origin.x > 20 {
         self.movingInSubusset(movedView, selectionView: selectionView, indexPath: indexPath)
         
@@ -120,7 +119,6 @@ public class ReorderGestureHandler: NSObject {
   func  movingInSubusset(movedView:UIView,selectionView:UIView,indexPath:NSIndexPath){
     selectionView.frame.origin.x = 30
     movedView.unscaleView()
-    
     tableView.reorderingState = .Submenu
     CATransaction.begin()
     //movedView.addPulseAnimationDuration(key:"animateOpacity")
@@ -128,7 +126,6 @@ public class ReorderGestureHandler: NSObject {
     CATransaction.setCompletionBlock({ () -> Void in
       self.tableView.longPressReorderDelegate.tableView?(self.tableView, openSubAssetAtIndexPath: indexPath)
     })
-    
     CATransaction.flush()
   }
   
@@ -144,11 +141,9 @@ public class ReorderGestureHandler: NSObject {
       }
       // Create the view that will be dragged around the screen.
      if tableView.movedView == nil {
-      
       movingViewAnimator.beginAnimationCellImage(cell.viewImage(), indexPath:indexPath, location: location, view: {[unowned self] (view) -> Void in
         self.tableView.longPressReorderDelegate?.tableView?(self.tableView, showMovedView: view, atIndexPath: indexPath)
         self.tableView.movedView = view
-        
         })
       }
       tableView.currentLocationIndexPath = indexPath
@@ -168,7 +163,6 @@ public class ReorderGestureHandler: NSObject {
     scrollController.finishScrolingOperation()
     if let draggingView = tableView.movedView, currentLocationIndexPath = tableView.currentLocationIndexPath {
       movingViewAnimator.endMoveAnimationMovedView(draggingView, currentLocationIndexPath: currentLocationIndexPath, animation: { [unowned self] () in
-        
         self.tableView.longPressReorderDelegate?.tableView?(self.tableView, hideMovedView: draggingView, toIndexPath: currentLocationIndexPath)
         }, complete: {[unowned self]() in
           self.tableView.clearMovedView()
