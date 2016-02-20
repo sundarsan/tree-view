@@ -60,10 +60,9 @@ public class ReorderGestureHandler: NSObject {
       if let clIndexPath = tableView.currentLocationIndexPath {
         let oldHeight = tableView.rectForRowAtIndexPath(clIndexPath).size.height
         let newHeight = tableView.rectForRowAtIndexPath(indexPath).size.height
-        
-        if ((indexPath != clIndexPath) &&
-          (gesture.locationInView(tableView.cellForRowAtIndexPath(indexPath)).y > (newHeight - oldHeight))) &&
-          tableView.canMoveRowAt(indexPath: indexPath) {
+        let isCurentIndexPath = indexPath != clIndexPath
+        let isChnageCell = gesture.locationInView(tableView.cellForRowAtIndexPath(indexPath)).y > (newHeight - oldHeight)
+        if isCurentIndexPath && isChnageCell && tableView.canMoveRowAt(indexPath: indexPath) {
             tableView.beginUpdates()
             tableView.selectionView?.removeFromSuperview()
             tableView.selectionView = nil
@@ -114,7 +113,7 @@ public class ReorderGestureHandler: NSObject {
     
     tableView.reorderingState = .Submenu
     CATransaction.begin()
-    movedView.addPulseAnimationDuration(key:"animateOpacity")
+    //movedView.addPulseAnimationDuration(key:"animateOpacity")
     // cell.addPulseAnimationDuration()
     CATransaction.setCompletionBlock({ () -> Void in
       self.tableView.longPressReorderDelegate.tableView?(self.tableView, openSubAssetAtIndexPath: indexPath)
@@ -128,20 +127,19 @@ public class ReorderGestureHandler: NSObject {
       
       cell.setSelected(false, animated: false)
       cell.setHighlighted(false, animated: false)
-      
+     
+      if let draggingCell = tableView.longPressReorderDelegate?.tableView?(self.tableView, movedCell: cell, atIndexPath: indexPath) {
+        cell = draggingCell
+        
+      }
       // Create the view that will be dragged around the screen.
-      if tableView.movedView == nil {
+     if tableView.movedView == nil {
+      
+      movingViewAnimator.beginAnimationCellImage(cell.viewImage(), indexPath:indexPath, location: location, view: {[unowned self] (view) -> Void in
+        self.tableView.longPressReorderDelegate?.tableView?(self.tableView, showMovedView: view, atIndexPath: indexPath)
+        self.tableView.movedView = view
         
-        if let draggingCell = tableView.longPressReorderDelegate?.tableView?(self.tableView, movedCell: cell, atIndexPath: indexPath) {
-          cell = draggingCell
-        }
-        
-        movingViewAnimator.beginAnimationCellImage(cell.viewImage(), indexPath:indexPath, location: location, view: {[unowned self] (view) -> Void in
-          self.tableView.longPressReorderDelegate?.tableView?(self.tableView, showMovedView: view, atIndexPath: indexPath)
-          self.tableView.movedView = view
-          
-          })
-        
+        })
       }
       tableView.currentLocationIndexPath = indexPath
       tableView.fromIndexPath = indexPath
