@@ -34,13 +34,13 @@ extension UIView{
     self.layer.opacity = 0.55
   }
   
-  func unscaleView(scaleWidth:CGFloat = 0.6,scaleHeight:CGFloat = 0.6){
+  func unscaleView(scaleWidth:CGFloat = 0.6 ,scaleHeight:CGFloat = 0.6){
     UIView.beginAnimations("unscale", context: nil)
     self.transform = CGAffineTransformMakeScale(scaleWidth, scaleHeight)
     UIView.commitAnimations()
   }
   
-  func scaleView(scaleWidth:CGFloat = 0.6,scaleHeight:CGFloat = 0.6){
+  func scaleView(scaleWidth:CGFloat = 1.0, scaleHeight:CGFloat = 1.0){
     UIView.beginAnimations("scale", context: nil)
     self.transform = CGAffineTransformMakeScale(scaleWidth, scaleHeight)
     UIView.commitAnimations()
