@@ -115,8 +115,8 @@ extension RXReorderTableView {
 
     public var rx_itemRowMoved: ControlEvent<ItemMovedEvent> {
         let sourceRowMoved: Observable<ItemMovedEvent> = rx_delegate.observe("tableView:movedRowAtIndexPath:toIndexRowPath:")
-            .map { arguments in
-                return ((arguments[1] as? NSIndexPath)!, (arguments[2] as? NSIndexPath)!)
+            .map { argumentseRowMoved in
+                return ((argumentseRowMoved[1] as? NSIndexPath)!, (argumentseRowMoved[2] as? NSIndexPath)!)
         }
         
         return ControlEvent(events: sourceRowMoved)
@@ -125,8 +125,8 @@ extension RXReorderTableView {
 
     public var rx_itemSubRowMovedToRoot: ControlEvent<ItemMovedEvent> {
         let sourceSubRowMovedToRoot: Observable<ItemMovedEvent> = rx_delegate.observe("tableView:movedRowAtIndexPath:toRootRowPath:")
-            .map { arguments in
-                return ((arguments[1] as? NSIndexPath)!, (arguments[2] as? NSIndexPath)!)
+            .map { argumentsSubRowMoved in
+                return ((argumentsSubRowMoved[1] as? NSIndexPath)!, (argumentsSubRowMoved[2] as? NSIndexPath)!)
         }
         
         return ControlEvent(events: sourceSubRowMovedToRoot)
@@ -156,8 +156,8 @@ extension RXReorderTableView {
 
     public var rx_itemMoveToRoot: ControlEvent<ItemMovedEvent> {
         let sourceMoveToRoot: Observable<ItemMovedEvent> = rx_delegate.observe("tableView:movingRowAtIndexPath:toRootRowPath:")
-            .map { arguments in
-                return ((arguments[1] as? NSIndexPath)!, (arguments[2] as? NSIndexPath)! )
+            .map { argumentsMoveToRoot in
+                return ((argumentsMoveToRoot[1] as? NSIndexPath)!, (argumentsMoveToRoot[2] as? NSIndexPath)! )
          }
                return ControlEvent(events: sourceMoveToRoot)
     }
