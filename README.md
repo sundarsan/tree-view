@@ -1,5 +1,3 @@
-#RXTreeControl
-
 # RXTreeControl
 [![CocoaPods](https://img.shields.io/cocoapods/p/RXTreeControl.svg)](https://cocoapods.org/pods/RXTreeControl)
 [![CocoaPods](https://img.shields.io/cocoapods/v/RXTreeControl.svg)](http://cocoapods.org/pods/RXTreeControl)
