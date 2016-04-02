@@ -48,7 +48,7 @@ class RXScrollController:NSObject{
     
     // Check if we should scroll, and in which direction.
     let scrollZoneHeight = rect.size.height / 6.0
-    let bottomScrollBeginning = tableView.contentOffset.y + tableView.contentInset.top + rect.size.height - scrollZoneHeight
+    let bottomScrollBeginning = tableView.contentOffset.y + tableView.contentInset.top + rect.size.height - scrollZoneHeight                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
     let topScrollBeginning = tableView.contentOffset.y + tableView.contentInset.top  + scrollZoneHeight
     
     //  bottom zone.

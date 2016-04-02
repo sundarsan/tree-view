@@ -57,7 +57,6 @@ public class ReorderGestureHandler: NSObject {
         .tableView?(tableView, targetIndexPathForMoveFromRowAtIndexPath: iIndexPath, toProposedIndexPath: indexPath) {
           indexPath = ip
       }
-      
       if let clIndexPath = tableView.currentLocationIndexPath {
         let oldHeight = tableView.rectForRowAtIndexPath(clIndexPath).size.height
         let newHeight = tableView.rectForRowAtIndexPath(indexPath).size.height
