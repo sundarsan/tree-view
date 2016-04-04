@@ -29,8 +29,49 @@ class TableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.titleLabel.font = UIFont(name: "Hero", size: 18)
+      
+      
+      let colorRed = CGFloat(240 ) / CGFloat(255.0)
+      let colorGreen = CGFloat(170 ) / CGFloat(255.0)
+      let colorBlue = CGFloat( 103) / CGFloat(255.0)
+
+      self.titleLabel.textColor =   UIColor(red: colorRed, green: colorGreen, blue: colorBlue, alpha: CGFloat(1.0)
+      )
+
         // Initialization code
     }
+  
+  
+  func setOpenedMode(isOpen:Bool){
+    if isOpen{
+      openedMode()
+    }else{
+      closedMode()
+    }
+  }
+  
+  
+  private func openedMode(){
+    let colorRed = CGFloat(240 ) / CGFloat(255.0)
+    let colorGreen = CGFloat(170 ) / CGFloat(255.0)
+    let colorBlue = CGFloat( 103) / CGFloat(255.0)
+    
+    self.titleLabel.textColor =   UIColor(red: colorRed, green: colorGreen, blue: colorBlue, alpha: CGFloat(1.0)
+    )
+
+  }
+  
+  private func closedMode(){
+    
+    let colorRed = CGFloat(158 ) / CGFloat(255.0)
+    let colorGreen = CGFloat(139 ) / CGFloat(255.0)
+    let colorBlue = CGFloat( 131) / CGFloat(255.0)
+    
+    self.titleLabel.textColor =   UIColor(red: colorRed, green: colorGreen, blue: colorBlue, alpha: CGFloat(1.0)
+    )
+    
+  }
 
     @IBAction func openAction(sender: AnyObject) {
        delegate?.changeOpenStateByCell!(self)

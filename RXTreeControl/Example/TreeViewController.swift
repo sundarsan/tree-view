@@ -43,14 +43,17 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
         itemTrees
             .bindTo(tableView.rx_itemsWithCellIdentifier("Cell0")) { (row, element, cell) in
                 let tcell = cell as? TableViewCell
-                tcell?.titleLabel?.text = "\(element.treeObject.title ) @ Level \(element.level)"
-                let colorRed = CGFloat(200 - element.level*10  ) / CGFloat(255.0)
-                let colorGreen = CGFloat(element.level*10 + 20) / CGFloat(255.0)
-                let colorBlue = CGFloat(100 - element.level*10 + 20) / CGFloat(255.0)
-
-                tcell?.delegate = self.tableView.longPressReorderDelegate
+                tcell?.titleLabel?.text = "\(element.treeObject.title )"
+                let colorRed = CGFloat(251 - element.level*2  ) / CGFloat(255.0)
+                let colorGreen = CGFloat(248 - element.level*2) / CGFloat(255.0)
+                let colorBlue = CGFloat( 246 - element.level*2) / CGFloat(255.0)
                 tcell?.backgroundColor =  UIColor(red: colorRed, green: colorGreen, blue: colorBlue, alpha: CGFloat(1.0)
                 )
+
+                tcell?.delegate = self.tableView.longPressReorderDelegate
+              
+                tcell?.setOpenedMode(element.isTreeOpen)
+              
                 tcell?.openButton.selected  = element.isTreeOpen
                 tcell?.openButton.hidden = element.subobjects.count == 0
                 tcell?.setNeedsLayout()
@@ -159,7 +162,7 @@ class TreeViewController: BaseViewController,RXReorderTableViewDelegate,RXReorde
         
         tableView.rx_dataSource.viewBlock = { (cell: UITableViewCell, destinationIndex: NSIndexPath) -> UIView in
             let view = UIView(frame: CGRectMake(0, cell.frame.height - 2, self.tableView.frame.width,2))
-            view.backgroundColor = UIColor.blueColor()
+            view.backgroundColor = rgb(234,colorGreen: 133,colorBlue: 49) //234 133 49
             return view
             
             

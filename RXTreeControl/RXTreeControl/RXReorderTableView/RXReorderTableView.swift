@@ -24,6 +24,15 @@
 
 import UIKit
 
+
+public func rgb(colorRed:Int,colorGreen:Int,colorBlue:Int,alpha :Int = 1) -> UIColor{
+  let colorRed = CGFloat(colorRed ) / CGFloat(255.0)
+  let colorGreen = CGFloat(colorGreen ) / CGFloat(255.0)
+  let colorBlue = CGFloat( colorBlue) / CGFloat(255.0)
+  
+ return UIColor(red: colorRed, green: colorGreen, blue: colorBlue, alpha: CGFloat(alpha))
+}
+
 enum ReorderingState {
   case Flat
   case Submenu

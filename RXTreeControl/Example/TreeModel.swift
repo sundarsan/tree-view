@@ -34,20 +34,20 @@ class TreeModel {
         var treeArray = [Tree]()
         
         let dbTreeFirst = Tree()
-        dbTreeFirst.title = "1"
+        dbTreeFirst.title = "Summer 2015"
       
         treeArray.append(dbTreeFirst)
         
         var subassetsFirst = [Tree]()
         
         let dbAssetSecond = Tree()
-        dbAssetSecond.title = "2"
+        dbAssetSecond.title = "June"
        
         subassetsFirst.append(dbAssetSecond)
         
         var subassetsSecond = [Tree]()
         let dbAssetThird = Tree()
-        dbAssetThird.title = "3"
+        dbAssetThird.title = "July"
         
         subassetsSecond.append(dbAssetThird)
         
@@ -58,50 +58,50 @@ class TreeModel {
         
         
         let dbAssetFourth = Tree()
-        dbAssetFourth.title = "4"
+        dbAssetFourth.title = "Friends"
        
         treeArray.append(dbAssetFourth)
         var subassetsThird = [Tree]()
         
         let dbAssetFifth = Tree()
-        dbAssetFifth.title = "5"
+        dbAssetFifth.title = "Work"
      
         subassetsThird.append(dbAssetFifth)
         
         let dbAssetSix =  Tree()
-        dbAssetSix.title = "6"
+        dbAssetSix.title = "Sunday Tasks"
         
         let dbAssetSeven =  Tree()
-        dbAssetSeven.title = "7"
+        dbAssetSeven.title = "Adventuers & Travels"
         dbAssetSix.subtrees = []
         dbAssetSix.subtrees.append(dbAssetSeven)
        
-        let dbAssetEight =  Tree()
-        dbAssetEight.title = "8"
-        dbAssetSeven.subtrees = []
-        dbAssetSeven.subtrees.append(dbAssetEight)
-       
-        subassetsThird.append(dbAssetSix)
-        
-        dbAssetFourth.subtrees =  subassetsThird
-        subassetsThird.append(dbAssetFifth)
+//        let dbAssetEight =  Tree()
+//        dbAssetEight.title = "8"
+//        dbAssetSeven.subtrees = []
+//        dbAssetSeven.subtrees.append(dbAssetEight)
+//       
+//        subassetsThird.append(dbAssetSix)
+//        
+//        dbAssetFourth.subtrees =  subassetsThird
+//        subassetsThird.append(dbAssetFifth)
       
-      
-       let dbTreeNine = Tree()
-       dbTreeNine.title = "9"
-       treeArray.append(dbTreeNine)
-      
-        let dbTreeTen = Tree()
-        dbTreeTen.title = "10"
-        treeArray.append(dbTreeTen)
-      
-       let dbTreeEleven = Tree()
-       dbTreeEleven.title = "11"
-       treeArray.append(dbTreeEleven)
-      
-        let dbTreeTwelwe = Tree()
-        dbTreeTwelwe.title = "12"
-        treeArray.append(dbTreeTwelwe)
+//      
+//       let dbTreeNine = Tree()
+//       dbTreeNine.title = "9"
+//       treeArray.append(dbTreeNine)
+//      
+//        let dbTreeTen = Tree()
+//        dbTreeTen.title = "10"
+//        treeArray.append(dbTreeTen)
+//      
+//       let dbTreeEleven = Tree()
+//       dbTreeEleven.title = "11"
+//       treeArray.append(dbTreeEleven)
+//      
+//        let dbTreeTwelwe = Tree()
+//        dbTreeTwelwe.title = "12"
+//        treeArray.append(dbTreeTwelwe)
       
         return treeArray
         
