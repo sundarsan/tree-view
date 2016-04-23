@@ -87,12 +87,12 @@ public class RXReorderTableView: UITableView {
   
   private func initialize() {
     self.getureHandler = ReorderGestureHandler(tableView: self)
-    longPressGestureRecognizer = UILongPressGestureRecognizer(target: self.getureHandler, action: "longPress:")
+    longPressGestureRecognizer = UILongPressGestureRecognizer(target: self.getureHandler, action: Selector("longPress:"))
     addGestureRecognizer(longPressGestureRecognizer)
   }
   
   func canMoveRowAt(indexPath indexPath: NSIndexPath) -> Bool {
-    return (dataSource?.respondsToSelector("tableView:canMoveRowAtIndexPath:") == false) || (dataSource?.tableView?(self, canMoveRowAtIndexPath: indexPath) == true)
+    return (dataSource?.respondsToSelector(#selector(UITableViewDataSource.tableView(_:canMoveRowAtIndexPath:))) == false) || (dataSource?.tableView?(self, canMoveRowAtIndexPath: indexPath) == true)
   }
   
  

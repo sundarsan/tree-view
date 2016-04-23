@@ -154,7 +154,7 @@ public class ReorderGestureHandler: NSObject {
   }
   func startScrolingForCell (){
     // Enable scrolling for cell.
-    scrollController.scrollDisplayLink = CADisplayLink(target: scrollController, selector: "scrollTableWithCell:")
+    scrollController.scrollDisplayLink = CADisplayLink(target: scrollController, selector: Selector("scrollTableWithCell:"))
     scrollController.scrollDisplayLink?.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSDefaultRunLoopMode)
   }
   

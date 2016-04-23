@@ -162,7 +162,7 @@ class TreeController {
             if let index = self.treeArray.indexOf(asset) {
                 self.treeArray.insertContentsOf(asset.subobjects, at: index+1)
                 let startIndex = index+1
-                for var idx = startIndex; idx < asset.subobjects.count+startIndex; idx++ {
+                for idx in startIndex ..< asset.subobjects.count+startIndex {
                    indexes.append(idx)
                 }
                 

@@ -505,6 +505,38 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "31"
             endingLineNumber = "31">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RXTreeControl.RxReorderTableViewDataSourceProxy.__deallocating_deinit"
+                  moduleName = "RXTreeControl"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/arcilite/tree-view/RXTreeControl/RXTreeControl/ReactiveReorderTableViewExtension/ExtensionTableView.swift"
+                  timestampString = "482217611.404028"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RXTreeControl.RxReorderTableViewDataSourceProxy.__ivar_destroyer"
+                  moduleName = "RXTreeControl"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/arcilite/tree-view/RXTreeControl/RXTreeControl/ReactiveReorderTableViewExtension/ExtensionTableView.swift"
+                  timestampString = "482217611.404247"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -588,30 +620,30 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "RXTreeControl.RXReorderTableView.init (RXTreeControl.RXReorderTableView.Type)(frame : __C.CGRect, style : __C.UITableViewStyle) -&gt; RXTreeControl.RXReorderTableView"
+                  symbolName = "RXTreeControl.RXReorderTableView.init (frame : __C.CGRect, style : __C.UITableViewStyle) -&gt; RXTreeControl.RXReorderTableView"
                   moduleName = "RXTreeControl"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/arcilite/tree-view/RXTreeControl/RXTreeControl/RXReorderTableView/RXReorderTableView.swift"
-                  timestampString = "477662928.21706"
+                  timestampString = "482217611.405471"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
                   offsetFromSymbolStart = "219">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "RXTreeControl.RXReorderTableView.init (RXTreeControl.RXReorderTableView.Type)(coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;RXTreeControl.RXReorderTableView&gt;"
+                  symbolName = "RXTreeControl.RXReorderTableView.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;RXTreeControl.RXReorderTableView&gt;"
                   moduleName = "RXTreeControl"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/arcilite/tree-view/RXTreeControl/RXTreeControl/RXReorderTableView/RXReorderTableView.swift"
-                  timestampString = "477662928.217275"
+                  timestampString = "482217611.405577"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
                   offsetFromSymbolStart = "180">
                </Location>
                <Location
@@ -622,12 +654,12 @@
                   moduleName = "RXTreeControl"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/arcilite/tree-view/RXTreeControl/RXTreeControl/RXReorderTableView/RXReorderTableView.swift"
-                  timestampString = "477662928.217454"
+                  timestampString = "482217611.405674"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "8">
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
+                  offsetFromSymbolStart = "18">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -637,29 +669,30 @@
                   moduleName = "RXTreeControl"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/arcilite/tree-view/RXTreeControl/RXTreeControl/RXReorderTableView/RXReorderTableView.swift"
-                  timestampString = "477662928.217632"
+                  timestampString = "482217611.405785"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "7">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "RXTreeControl.RXReorderTableView.reorderingState.materializeForSet : RXTreeControl.ReorderingState"
-                  moduleName = "RXTreeControl"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/arcilite/tree-view/RXTreeControl/RXTreeControl/RXReorderTableView/RXReorderTableView.swift"
-                  timestampString = "477662928.217808"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "12">
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
+                  offsetFromSymbolStart = "26">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RXTreeControl/RXTreeControl/ReactiveReorderTableViewExtension/ExtensionTableView.swift"
+            timestampString = "482217516.01918"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "RXReorderTableView"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
